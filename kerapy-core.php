@@ -9,4 +9,10 @@
  * License: GPL2
  * Text Domain: kerapy-core
  * Domain Path: /languages
- */
+*/
+
+function crb_load() {
+    require_once( 'vendor/autoload.php' );
+    \Carbon_Fields\Carbon_Fields::boot();
+}
+add_action( 'after_setup_theme', 'crb_load' );
