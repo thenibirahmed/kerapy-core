@@ -1,4 +1,5 @@
 <?php 
+
 /**
  * Plugin Name: Kerapy Core
  * Plugin URI: https://kerapy.com
@@ -29,6 +30,7 @@ final class Kerapy_Core {
     public function __construct() {
         add_action( 'plugins_loaded', array( $this, 'init' ) );
         add_action( 'after_setup_theme', array($this, 'crb_load') );
+        add_action( 'widgets_init', array($this, 'load_widgets') );
     }
 
     function crb_load() {
@@ -37,6 +39,10 @@ final class Kerapy_Core {
 
     public function init() {
         do_action( 'kerapy_core_loaded' );
+    }
+
+    public function load_widgets() {
+        new Kerapy\Core\KerapyCoreWidgets();
     }
 
     private function define_constants() {
