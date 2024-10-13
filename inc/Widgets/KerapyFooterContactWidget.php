@@ -28,9 +28,9 @@ class KerapyFooterContactWidget extends Widget {
     function front_end( $args, $instance ) {
         echo $args['before_title'] . $instance['kerapy_footer_contact_widget_title'] . $args['after_title']; ?>
             <ul class="list-unstyled">
-                <?php foreach($instance['kerapy_footer_contact_widget_contacts'] as $link) : ?>
+                <?php foreach($instance['kerapy_footer_contact_widget_contacts'] as $contact) : ?>
                     <li class="mb-3 footer-list-item">
-                        <a href="<?php echo $link['kerapy_footer_contact_widget_link'] ?>" class="text-white"><span><i class="<?php echo $link['kerapy_footer_contact_widget_icon'] ?> pe-3"></i></span><?php echo $link['kerapy_footer_contact_widget_contact'] ?></a>
+                        <a href="<?php echo $contact['kerapy_footer_contact_widget_link'] ?>" class="text-white"><span><i class="<?php echo $contact['kerapy_footer_contact_widget_icon'] ?> pe-3"></i></span><?php echo $contact['kerapy_footer_contact_widget_contact'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
