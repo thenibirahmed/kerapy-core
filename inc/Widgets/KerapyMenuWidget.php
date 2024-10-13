@@ -26,7 +26,12 @@ class KerapyMenuWidget extends Widget {
     }
     
     function front_end( $args, $instance ) {
-        echo $args['before_title'] . $instance['title'] . $args['after_title'];
-        echo '<p>' . $instance['content'] . '</p>';
+        echo $args['before_title'] . $instance['kerapy_menu_widget_title'] . $args['after_title']; ?>
+        <ul class="list-unstyled">
+            <?php foreach($instance['kerapy_menu_widget_links'] as $link) : ?>
+                <li class="mb-3 footer-list-item"><a href="<?php echo $link['kerapy_menu_widget_link'] ?>" class="text-white"><?php echo $link['kerapy_menu_widget_link_title'] ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php
     }
 }
