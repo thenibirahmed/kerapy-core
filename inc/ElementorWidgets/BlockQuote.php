@@ -9,7 +9,7 @@ class BlockQuote extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return 'Block Quote';
+        return __('Block Quote', 'kerapy-core');
     }
 
     public function get_icon() {

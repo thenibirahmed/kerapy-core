@@ -202,7 +202,28 @@ final class ElementorInit {
 	 */
 	public function init() {
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
+        add_action( 'elementor/elements/categories_registered', [$this, 'add_elementor_widget_categories'] );
 	}
+
+    /**
+     * Add Elementor Widget Categories
+     *
+     * Add custom categories to Elementor widgets.
+     *
+     * Fired by `elementor/elements/categories_registered` action hook.
+     *
+     * @param \Elementor\Elements_Manager $elements_manager Elementor elements manager.
+     */
+    function add_elementor_widget_categories( $elements_manager ) {
+
+        $elements_manager->add_category(
+            'kerapy-elements',
+            [
+                'title' => esc_html__( 'Keray Elements', 'kerapy-core' ),
+                'icon' => 'fa fa-plug',
+            ]
+        );
+    }
 
 	/**
 	 * Register Widgets
@@ -218,5 +239,4 @@ final class ElementorInit {
 		$widgets_manager->register( new BlockQuote() );
 		// $widgets_manager->register( new Widget_2() );
 	}
-
 }
