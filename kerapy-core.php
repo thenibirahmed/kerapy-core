@@ -14,6 +14,8 @@
 
 require_once( 'vendor/autoload.php' );
 
+use Kerapy\Core\ElementorInit;
+
 final class Kerapy_Core {
 
     private static $instance;
@@ -39,6 +41,8 @@ final class Kerapy_Core {
 
     public function init() {
         do_action( 'kerapy_core_loaded' );
+        
+        ElementorInit::instance();
     }
 
     public function load_widgets() {
