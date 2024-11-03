@@ -43,6 +43,11 @@ final class Kerapy_Core {
         do_action( 'kerapy_core_loaded' );
         
         ElementorInit::instance();
+
+        if ( ! class_exists( 'ReduxFramework' ) && file_exists( KERAPY_CORE_PATH . '/lib/redux-framework/redux-core/framework.php' ) ) {
+            require_once( KERAPY_CORE_PATH . '/lib/redux-framework/redux-core/framework.php' );
+            require_once( KERAPY_CORE_PATH . '/lib/redux-framework/kerapy-options.php' );
+        }
     }
 
     public function load_widgets() {
