@@ -54,23 +54,73 @@ class BlockQuote extends \Elementor\Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'style_section',
+            'style_blockquote_heading',
             [
-                'label' => __( 'Style', 'kerapy-core' ),
+                'label' => __( 'BlockQuote Heading', 'kerapy-core' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'heading_typography',
+				'selector' => '{{WRAPPER}} .kerapy-blockquote h3',
+			]
+		);
+
         $this->add_control(
-            'quote_heading_color',
+            'heading_color',
             [
                 'label' => __( 'Heading Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .kerapy-blockquote h3' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'style_blockquote_content',
+            [
+                'label' => __( 'BlockQuote Content', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'content_typography',
+				'selector' => '{{WRAPPER}} .kerapy-blockquote p',
+			]
+		);
+
+        $this->add_control(
+            'content_color',
+            [
+                'label' => __( 'Content Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .kerapy-blockquote p' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'quote_border_color',
+            [
+                'label' => __( 'Border Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .kerapy-blockquote p' => 'border-left: 2px solid {{VALUE}}',
                 ],
             ]
         );
+
+        $this->end_controls_section();
     }
 
     protected function render() {
