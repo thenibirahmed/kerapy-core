@@ -52,6 +52,25 @@ class BlockQuote extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => __( 'Style', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'quote_heading_color',
+            [
+                'label' => __( 'Heading Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .kerapy-blockquote p' => 'border-left: 2px solid {{VALUE}}',
+                ],
+            ]
+        );
     }
 
     protected function render() {
