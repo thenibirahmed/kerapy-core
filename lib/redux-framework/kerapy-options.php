@@ -231,10 +231,19 @@ Redux::set_args( $opt_name, $args );
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'            => esc_html__( 'Basic Fields', 'your-textdomain-here' ),
+		'title'            => esc_html__( 'Site Setup', 'kerapy-options' ),
 		'id'               => 'basic',
-		'desc'             => esc_html__( 'These are really basic fields!', 'your-textdomain-here' ),
-		'customizer_width' => '400px',
+		'desc'             => esc_html__( 'These are really basic fields!', 'kerapy-options' ),
 		'icon'             => 'el el-home',
+		'fields'           => array(
+			array(
+				'id'       => 'opt-text',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Text Field', 'kerapy-options' ),
+				'subtitle' => esc_html__( 'Subtitle', 'kerapy-options' ),
+				'desc'     => esc_html__( 'Field Description', 'kerapy-options' ),
+				'default'  => 'Default Text',
+			),
+		),
 	)
 );
