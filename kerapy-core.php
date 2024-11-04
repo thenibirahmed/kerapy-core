@@ -48,6 +48,8 @@ final class Kerapy_Core {
             require_once( KERAPY_CORE_PATH . '/lib/redux-framework/redux-core/framework.php' );
             require_once( KERAPY_CORE_PATH . '/lib/redux-framework/kerapy-options.php' );
         }
+
+        require_once( KERAPY_CORE_PATH . '/lib/tgm/kerapy-tgm.php' );
     }
 
     public function load_widgets() {
