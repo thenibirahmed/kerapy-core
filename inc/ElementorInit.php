@@ -2,8 +2,6 @@
 
 namespace Kerapy\Core;
 
-use Kerapy\Core\ElementorWidgets\BlockQuote;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -236,7 +234,18 @@ final class ElementorInit {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		$widgets_manager->register( new BlockQuote() );
-		// $widgets_manager->register( new Widget_2() );
+		$widgets = array( 'SecTitle', 'ServicePost', 'OurTeam', 'ChooseUslist', 'Alltestimonial' );
+
+		foreach( $widgets as $widget ) {
+        
+			require_once( __DIR__ . "/ElementorWidgets/$widget.php" );
+ 
+			// Use the full namespace for the widget class
+			$classname = "\\Kerapy\\Core\\ElementorWidgets\\$widget";
+ 
+			// Register the widget with Elementor
+			$widgets_manager->register( new $classname() ); 
+	  }
+
 	}
 }

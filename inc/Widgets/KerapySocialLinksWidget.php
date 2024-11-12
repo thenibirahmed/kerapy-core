@@ -10,7 +10,6 @@ class KerapySocialLinksWidget extends Widget {
     function __construct() {
         $this->setup( 'kerapy_foooter_social_link', 'Kerapy Social Link', 'Displays social links with title/text', array(
             Field::make( 'complex', 'kerapy_foooter_social_links', 'Links' )
-                ->set_layout( 'tabbed-horizontal' )
                 ->add_fields( array(
                     Field::make( 'text', 'kerapy_foooter_social_link_link', 'Link' ),
                     Field::make( 'text', 'kerapy_foooter_social_link_icon', 'Icon' ),

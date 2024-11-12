@@ -226,24 +226,84 @@ Redux::set_args( $opt_name, $args );
 /*
  * ---> START SECTIONS
  */
-
+global $kerapy_theme_options;
 // -> START Basic Fields
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'            => esc_html__( 'Site Setup', 'kerapy-options' ),
+		'title'            => esc_html__( 'General Settings', 'kerapy-core' ),
 		'id'               => 'basic',
-		'desc'             => esc_html__( 'These are really basic fields!', 'kerapy-options' ),
+		'desc'             => esc_html__( 'These are site general settings.', 'kerapy-core' ),
 		'icon'             => 'el el-home',
 		'fields'           => array(
 			array(
-				'id'       => 'opt-text',
+				'id'       => 'kerapy-logo',
+				'type'     => 'media',
+				'title'    => esc_html__( 'Site Logo', 'kerapy-core' ),
+				'url'			=> false
+			),
+			array(
+				'id'       => 'pagination_type',
+				'type'     => 'select',
+				'title'    => esc_html__('Pagination Type', 'kerapy-core'), 
+				'subtitle' => esc_html__('No validation can be done on this field type', 'kerapy-core'),
+				'desc'     => esc_html__('This is the description field, again good for additional info.', 'kerapy-core'),
+				// Must provide key => value pairs for select options
+				'options'  => array(
+					'button' => 'Load More Button',
+					'number' => 'Page Number',
+				),
+				'default'  => 'button',
+			), 
+		),
+	)
+);
+// header options
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Header Settings', 'kerapy-core' ),
+		'id'               => 'header_opt',
+		'desc'             => esc_html__( 'These are header general settings.', 'kerapy-core' ),
+		'icon'             => 'el el-home',
+		'fields'           => array(
+			array(
+				'id'       => 'kerapy-logo',
+				'type'     => 'media',
+				'title'    => esc_html__( 'Site Logo', 'kerapy-core' ),
+				'url'			=> false
+			),
+			array(
+				'id'       => 'h-btn-text',
 				'type'     => 'text',
-				'title'    => esc_html__( 'Text Field', 'kerapy-options' ),
-				'subtitle' => esc_html__( 'Subtitle', 'kerapy-options' ),
-				'desc'     => esc_html__( 'Field Description', 'kerapy-options' ),
-				'default'  => 'Default Text',
+				'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
+				'default'  => 'Contact Us',
+			),
+			array(
+				'id'       => 'h-btn-link',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Button link', 'kerapy-core' ),
+				'default'  => '#',
 			),
 		),
 	)
 );
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Related Post ', 'kerapy-core' ),
+		'id'               => 'relatedpost_opt',
+		'desc'             => esc_html__( 'These are related post settings.', 'kerapy-core' ),
+		'icon'             => 'el el-home',
+		'fields'           => array(
+			array(
+				'id'       => 'related_title',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Section Title', 'kerapy-core' ),
+				'default'  => 'Related Post',
+			),
+		),
+	)
+);
+
+
