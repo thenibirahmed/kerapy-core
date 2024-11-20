@@ -1,18 +1,17 @@
 
 <div class="text-center text-md-start">
-    <h5 class="text-black-50" >"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, We were happy that we found the best"</h5>
+<h5 class="text-black-50" >
+    <?php echo esc_html($item['content']);?>
+</h5>
     <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between mt-4">
-        <div>
-            <h6>
-            <?php echo carbon_get_the_post_meta( 'client_name' ); ?>
-                
+        <div class="testi-name">
+            <h6 class="all-heading-color">
+                <?php echo esc_html($item['author']);?>
             </h6>
-            <p>Co-Founder, Elegant</p>
-            <p><?php echo carbon_get_the_post_meta('client_name'); ?></p>
-            <?php 
-                $image = carbon_get_the_post_meta('avater');
-                echo wp_get_attachment_image( $image, 'thumbnail', false, ['class' => 'rounded-full'] )
-            ?>
+            <p>
+            <?php echo esc_html($item['designation']);?>
+            </p>
         </div>
+        <div></div>
     </div>
 </div>

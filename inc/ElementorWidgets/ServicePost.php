@@ -1,109 +1,131 @@
 <?php
+
 namespace Kerapy\Core\ElementorWidgets;
 
-use Elementor\WP_Query;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\WP_Query;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; 
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class ServicePost  extends \Elementor\Widget_Base{
-    public function get_name() {
-		return 'service post';
-	}
-    public function get_title() {
-		return esc_html__( 'Service Post', 'kerapy' );
-	}
-    public function get_icon() {
-		return 'eicon-parallax';
-	}
-    public function get_categories() {
-		return [ 'kerapy_element' ];
-	}
-    public function get_keywords() {
-		return [ 'service', 'kerapy', 'post'];
-	}
-    protected function register_controls() {
+
+class ServicePost extends Widget_Base{
+
+    public function get_name(){
+        return 'kp-service';
+    }
+
+    public function get_title(){
+        return 'Kerapy Services';
+    }
+
+    public function get_icon(){
+        return 'eicon-post';
+    }
+
+    public function get_categories(){
+        return [ 'kerapy-elements' ];
+    }
+
+    public function get_keywords(){
+        return [ 'service', 'kerapy-core','post' ];
+    }
+
+    protected function _register_controls(){
+
         $this->start_controls_section(
-			'content',
+			'content_section',
 			[
-				'label' => esc_html__( 'Content', 'kerapy' ),
+				'label' => esc_html__( 'Content', 'kerapy-core' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+        $this->add_control(
+			'tmcard',
+			[
+				'label' => esc_html__( 'Services Post Style', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'servicepost1',
+				'options' => [
+					'servicepost1' => esc_html__( 'Style One', 'kerapy-core' ),
+					'servicepost2' => esc_html__( 'Style Two', 'kerapy-core' ),
+				],
 			]
 		);
         $this->add_control(
 			'items_to_display',
 			[
-				'label' => esc_html__( 'Items to display', 'kerapy' ),
+				'label' => esc_html__( 'Items to display', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-                'default' => 4
+				'default' => 3,
 			]
 		);
-        $this->end_controls_section(); 
-    } 
-    protected function render() {
-		$settings = $this->get_settings_for_display();
+        $this->end_controls_section();
+
+    }
+    protected function render(){
+        $settings = $this->get_settings_for_display();
         $args = array(
             'post_type'     => 'service',
-            'posts_per_page' => $settings[ 'items_to_display' ],
-			'paged'			=> get_query_var('paged') ? get_query_var('paged') : 1
+            'posts_per_page' => $settings[ 'items_to_display' ]
         );
-        $custom_query = new \WP_Query($args);
+        $serices = new \WP_Query($args);
 
-        if( $custom_query -> have_posts() ) {
-        ?>
-            <div class="row service-carousel owl-carousel">
-                <?php
-                    while($custom_query -> have_posts()){
-						$custom_query -> the_post();
+        if( $serices -> have_posts() ) {
+            if($settings['tmcard'] == 'servicepost1' ){
                 ?>
-                <div class="col">
-                    <div class="text-decoration-none">
-                        <div class="card h-100 border-0">
-                            <?php the_post_thumbnail('medium-large', array(
-								'class' => 'card-img-top img-fluid rounded-0'
-							));
-							?>
-                            <div class="card-body p-0">
-                                <h5 class="card-title pt-4"><?php the_title();?></h5>
-                                <p class="card-text"><?php the_content(); ?></p>
-                            </div>
-                        </div>
+                    <div class="row service-carousel owl-carousel">
+                        <?php
+                            while($serices -> have_posts()) : $serices -> the_post();
+                            include( "all-services/{$settings['tmcard']}.php" );
+                        ?>
+                        <?php endwhile; wp_reset_postdata(); ?>
                     </div>
-                </div>
-                <?php
-					}
-					wp_reset_postdata(); 
+                    
+                <?php   
+            }
+            if($settings['tmcard'] == 'servicepost2' ){
                 ?>
-            </div>
-            <script>
-            jQuery(document).ready(function ($) {
-                $(".service-carousel").owlCarousel({
-                    loop: true,
-                    margin: 20,
-                    autoplay: true,
-                    autoplayTimeout: 2000,
-                    autoplayHoverPause: true,
-                    nav: false,
-                    dots: true,
-                    responsive:{
-                        0:{
-                            items:1
-                        },
-                        600:{
-                            items:2
-                        },
-                        1000:{
-                            items:3
-                        }
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 justify-content-center">
+                        <?php
+                            while($serices -> have_posts()) : $serices -> the_post();
+                            include( "all-services/{$settings['tmcard']}.php" );
+                        ?>
+                        <?php endwhile; wp_reset_postdata(); ?>
+                    </div>
+                    
+                <?php   
+            }
+            
+
+        ?>
+        <script>
+        jQuery(document).ready(function ($) {
+            $(".service-carousel").owlCarousel({
+                loop: true,
+                margin: 20,
+                autoplay: false,
+                autoHeight:true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                nav: false,
+                dots: true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },
+                    1000:{
+                        items:3
                     }
-                });
+                }
             });
-        </script>
-            <?php
+        });
+    </script>
+
+        <?php
         }
-		
-	}      
+    }    
 }

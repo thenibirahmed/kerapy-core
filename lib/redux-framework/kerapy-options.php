@@ -257,53 +257,404 @@ Redux::set_section(
 			), 
 		),
 	)
-);
-// header options
+);  
+// header options settings
 Redux::set_section(
 	$opt_name,
 	array(
 		'title'            => esc_html__( 'Header Settings', 'kerapy-core' ),
 		'id'               => 'header_opt',
 		'desc'             => esc_html__( 'These are header general settings.', 'kerapy-core' ),
-		'icon'             => 'el el-home',
+		'icon'             => 'el el-road',
 		'fields'           => array(
+			array(
+				'id'       => 'header_layout',
+				'type'     => 'select',
+				'title'    => esc_html__( 'Header Layout', 'kerapy-core' ),
+				'options'  => array(
+					'layout1' => 'Layout 1',
+					'customlayout' => 'Custom Template',
+				),
+			),
 			array(
 				'id'       => 'kerapy-logo',
 				'type'     => 'media',
 				'title'    => esc_html__( 'Site Logo', 'kerapy-core' ),
 				'url'			=> false
 			),
-			array(
-				'id'       => 'h-btn-text',
-				'type'     => 'text',
-				'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
-				'default'  => 'Contact Us',
-			),
-			array(
-				'id'       => 'h-btn-link',
-				'type'     => 'text',
-				'title'    => esc_html__( 'Button link', 'kerapy-core' ),
-				'default'  => '#',
-			),
 		),
 	)
 );
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-btn-text',
+	'type'     => 'text',
+	'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
+	'default'  => 'Contact Us',
+) );
+
+Redux::set_field( $opt_name, 'header_opt', array(
+		'id'       => 'h-btn-color',
+        'type'     => 'link_color',
+        'title'    => esc_html__('Button Text Color', 'kerapy-core'),
+        'default'  => array(
+            'regular'  => '#212529',
+            'hover'    => '#fff',  
+        )
+) );
+Redux::set_field( $opt_name, 'header_opt', array(
+		'id'       => 'h-btn-bg',
+        'type'     => 'link_color',
+        'title'    => esc_html__('Button BG Color', 'kerapy-core'),
+        'default'  => array(
+            'regular'  => 'transparent',
+            'hover'    => '#212529',  
+        )
+) );
+Redux::set_field($opt_name, 'header_opt', array(
+    'id'       => 'h-btn-border',
+    'type'     => 'border',
+    'title'    => esc_html__('Button Border', 'kerapy-core'),
+    'default'  => array(
+        'border-color'  => '#212529',
+        'border-style'  => 'solid',  
+        'border-top'    => '1px',    
+        'border-right'  => '1px',    
+        'border-bottom' => '1px',    
+        'border-left'   => '1px',    
+    ),
+));
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-btn-radius',
+	'type'     => 'text',
+	'title'    => esc_html__('Button Border Radius', 'kerapy-core'),
+	'default'  => '99999' ,
+	'validate' => array( 'numeric', 'not_empty' ),
+	'description' => __( 'Enter a numeric value for border radius in pixels (px).', 'kerapy-core' ),
+) );
+Redux::set_field( $opt_name, 'header_opt', array(
+    'id'          => 'h-btn-typography',
+    'type'        => 'typography', 
+    'title'       => esc_html__('Button Text Typography', 'kerapy-core'),
+	'google'      => true, 
+    'font-backup' => true,
+    'output'      => array('h2.site-description'),
+    'units'       =>'px',
+    'default'     => array(
+        'color'       => '#212529', 
+        'font-style'  => '400', 
+        'font-family' => 'Inter, sans-serif', 
+        'google'      => true,
+        'font-size'   => '16px', 
+        'line-height' => '24px'
+    ),
+) );
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-btn-link',
+	'type'     => 'text',
+	'title'    => esc_html__( 'Button link', 'kerapy-core' ),
+	'default'  => '#',
+) );
+
+
+// blog options settings
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'            => esc_html__( 'Related Post ', 'kerapy-core' ),
-		'id'               => 'relatedpost_opt',
-		'desc'             => esc_html__( 'These are related post settings.', 'kerapy-core' ),
-		'icon'             => 'el el-home',
+		'title'            => esc_html__( 'Blog Settings', 'kerapy-core' ),
+		'id'               => 'blog_opt',
+		'desc'             => esc_html__( 'These are site blog settings.', 'kerapy-core' ),
+		'icon'             => 'el el-pencil',
 		'fields'           => array(
 			array(
-				'id'       => 'related_title',
-				'type'     => 'text',
-				'title'    => esc_html__( 'Section Title', 'kerapy-core' ),
-				'default'  => 'Related Post',
+				'id'       => 'pagination_type',
+				'type'     => 'select',
+				'title'    => esc_html__('Pagination Type', 'kerapy-core'), 
+				'options'  => array(
+					'button' => 'Load More Button',
+					'number' => 'Page Number',
+				),
+				'default'  => 'button',
 			),
+			array(
+				'id'       => 'featured_image_visibility',
+				'type'     => 'switch', 
+				'title'    => esc_html__('Featured Image Visibilaty', 'kerapy-core'),
+				'default'  => true,
+				'on' => 'Show',
+    			'off' => 'Hide',
+			), 
+			array(
+				'id'       => 'category_visibility',
+				'type'     => 'switch', 
+				'title'    => esc_html__('Category Visibilaty', 'kerapy-core'),
+				'default'  => true,
+				'on' => 'Show',
+    			'off' => 'Hide',
+			), 
+			array(
+				'id'       => 'date_visibility',
+				'type'     => 'switch', 
+				'title'    => esc_html__('Date Visibilaty', 'kerapy-core'),
+				'default'  => true,
+				'on' => 'Show',
+    			'off' => 'Hide',
+			), 
+			array(
+				'id'       => 'excerpt_visibility',
+				'type'     => 'switch', 
+				'title'    => esc_html__('Excerpt Visibilaty', 'kerapy-core'),
+				'default'  => true,
+				'on' => 'Show',
+    			'off' => 'Hide',
+			), 
+			array(
+				'id'       => 'excerpt_length',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Excerpt Length', 'kerapy-core' ),
+				'default'  => '10',
+				'validate' => array( 'numeric', 'not_empty' )
+			), 
+			
 		),
 	)
 );
+
+
+// styles settings
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Styles ', 'kerapy-core' ),
+		'id'               => 'styles_opt',
+		'desc'             => esc_html__( 'These are styles settings.', 'kerapy-core' ),
+		'icon'             => 'el el-file',
+		'fields'           => array(
+			array(
+			'id'       => 'primary_color',
+			'type'     => 'color',
+			'title'    => esc_html__('Primary Color', 'kerapy-core'), 
+			'default'  => '#00DCC2',
+			'validate' => 'color',
+			),
+			array(
+			'id'       => 'heading_color',
+			'type'     => 'color',
+			'title'    => esc_html__('Heading Color', 'kerapy-core'), 
+			'default'  => '#000',
+			'validate' => 'color',
+			),
+			
+		),
+	)
+);
+
+
+// footer settings
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Footer Settings ', 'kerapy-core' ),
+		'id'               => 'footer_opt',
+		'desc'             => esc_html__( 'These are footer settings.', 'kerapy-core' ),
+		'icon'             => 'el el-th-list',
+		'fields'           => array(
+			array(
+				'id'       => 'footer_layout',
+				'type'     => 'select',
+				'title'    => esc_html__( 'Footer Layout', 'kerapy-core' ),
+				'options'  => array(
+					'layout1' => 'Layout 1',
+					'customlayout' => 'Custom ',
+				),
+			),
+			array(
+				'id'       => 'footer_bg_color',
+				'type'     => 'color',
+				'title'    => esc_html__('Footer Background Color', 'kerapy-core'), 
+				'default'  => '#091D2D',
+				'validate' => 'color',
+			),
+			
+		),
+	)
+);
+Redux::set_field( $opt_name, 'footer_opt', array(
+    'id'          => 'footer-title-typography',
+    'type'        => 'typography', 
+    'title'       => esc_html__('Footer Heading Typography', 'kerapy-core'),
+	'google'      => true, 
+    'font-backup' => true,
+    'output'      => array('h2.site-description'),
+    'units'       =>'px',
+    'default'     => array(
+        'color'       => '#fff', 
+        'font-style'  => '400', 
+        'font-family' => 'Inter, sans-serif', 
+        'google'      => true,
+        'font-size'   => '16px', 
+        'line-height' => '24px'
+    ),
+) );
+Redux::set_field( $opt_name, 'footer_opt', array(
+    'id'          => 'footer-content-typography',
+    'type'        => 'typography', 
+    'title'       => esc_html__('Footer Content Typography', 'kerapy-core'),
+	'google'      => true, 
+    'font-backup' => true,
+    'output'      => array('h2.site-description'),
+    'units'       =>'px',
+    'default'     => array(
+        'color'       => '#fff', 
+        'font-style'  => '400', 
+        'font-family' => 'Inter, sans-serif', 
+        'google'      => true,
+        'font-size'   => '16px', 
+        'line-height' => '24px'
+    ),
+) );
+
+$menus = wp_get_nav_menus();
+$menu_options = array();
+
+foreach ($menus as $menu) {
+    $menu_options[$menu->term_id] = $menu->name;
+}
+Redux::set_field( $opt_name, 'footer_opt', array(
+		'id'       => 'footer_menu',
+		'type'     => 'select',
+		'title'    => esc_html__('Footer Bottom Menu', 'kerapy-core'),
+		'subtitle' => esc_html__('Choose a footer menu from the list.', 'kerapy-core'),
+		'options'  => $menu_options,
+		'default'  => key($menu_options), // Set the first menu as default if available
+	)
+ );
+Redux::set_field( $opt_name, 'footer_opt', array(
+	'id'       => 'footer_right_copyright',
+	'type'     => 'text',
+	'title'    => esc_html__('Footer Copyright Text', 'kerapy-core'),
+	'default'  => '2024 Elegance In Code. All right reserved.',
+),
+ );
+
+
+
+
+
+
+// maintenance mode settings
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Maintenance Mode ', 'kerapy-core' ),
+		'id'               => 'maintenance_mode_opt',
+		'desc'             => esc_html__( 'These are maintenance mode settings.', 'kerapy-core' ),
+		'icon'             => 'el el-cogs',
+		'fields'           => array(
+			array(
+				'id'       => 'maintenance_mode',
+				'type'     => 'switch', 
+				'title'    => esc_html__('Maintenance Mode', 'kerapy-core'),
+				'default'  => false,
+				'on' => 'On',
+    			'off' => 'Off',
+			), 
+			
+
+		),
+	)
+);
+
+
+// custom scripts
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Custom Scripts ', 'kerapy-core' ),
+		'id'               => 'custom_scripts_opt',
+		'desc'             => esc_html__( 'These are custom scripts settings.', 'kerapy-core' ),
+		'icon'             => 'el el-css',
+		'fields'           => array(
+			//  custom css
+			array(
+				'id'       => 'css_on_header',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom CSS On Header', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your CSS code here.', 'your-project-name'),
+				'mode'     => 'css',
+				'theme'    => 'monokai',
+				'default'  => "/* Example CSS for header */\n.selector {\n    margin: 0 auto;\n    background-color: #f8f8f8;\n    padding: 20px;\n}"
+			), 
+			array(
+				'id'       => 'css_on_body_start',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom CSS On Body Start', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your CSS code here.', 'your-project-name'),
+				'mode'     => 'css',
+				'theme'    => 'monokai',
+				'default'  => "/* Example CSS for header */\n.selector {\n    margin: 0 auto;\n    background-color: #f8f8f8;\n    padding: 20px;\n}"
+			), 
+			array(
+				'id'       => 'css_on_body_end',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom CSS On Body End', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your CSS code here.', 'your-project-name'),
+				'mode'     => 'css',
+				'theme'    => 'monokai',
+				'default'  => "/* Example CSS for header */\n.selector {\n    margin: 0 auto;\n    background-color: #f8f8f8;\n    padding: 20px;\n}"
+			), 
+			// custom scripts
+			array(
+				'id'       => 'js_on_header',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom js On Header', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your js code here.', 'your-project-name'),
+				'mode'     => 'javascript',
+				'theme'    => 'monokai',
+				'default'  => "/* Example JavaScript for header */\nconsole.log('Header script loaded');"
+			), 
+			array(
+				'id'       => 'js_on_body_start',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom js On Body Start', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your js code here.', 'your-project-name'),
+				'mode'     => 'javascript',
+				'theme'    => 'monokai',
+				'default'  => "/* Example JavaScript for header */\nconsole.log('Header script loaded');"
+			), 
+			array(
+				'id'       => 'js_on_body_end',
+				'type'     => 'ace_editor',
+				'title'    => esc_html__('Custom js On Body End', 'your-project-name'),
+				'subtitle' => esc_html__('Paste your js code here.', 'your-project-name'),
+				'mode'     => 'javascript',
+				'theme'    => 'monokai',
+				'default'  => "/* Example JavaScript for header */\nconsole.log('Header script loaded');"
+			), 
+
+		),
+	)
+);
+
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Related Post Settings', 'kerapy-core' ),
+		'id'               => 'relatedposts_opt',
+		'desc'             => esc_html__( 'These are related post settings.', 'kerapy-core' ),
+		'icon'             => 'el el-pencil',
+		'fields'           => array(
+			array(
+				'id'       => 'relate_post_title',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Related Post Title', 'kerapy-core' ),
+				'default'  => 'Related Posts',
+			),
+			
+
+		),
+	)
+);
+
+
 
 

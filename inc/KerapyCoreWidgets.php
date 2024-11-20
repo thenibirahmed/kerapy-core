@@ -8,5 +8,6 @@ class KerapyCoreWidgets {
         register_widget( 'Kerapy\Core\Widgets\KerapyMenuWidget' );   
         register_widget( 'Kerapy\Core\Widgets\KerapyFooterContactWidget' );    
         register_widget( 'Kerapy\Core\Widgets\KerapySocialLinksWidget' );    
+        register_widget( 'Kerapy\Core\Widgets\KerapyNewsletter' );    
     }
 }

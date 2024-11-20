@@ -234,11 +234,11 @@ final class ElementorInit {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		$widgets = array( 'SecTitle', 'ServicePost', 'OurTeam', 'ChooseUslist', 'Alltestimonial' );
+		$widgets = array( 'SectionTitle', 'ServicePost', 'Teamsection', 'Kerapylist', 'Alltestimonial', 'Stepsprocess', 'Accordion', 'BlogPost', 'Counter', 'Heppycustomers', 'Kerapyvideo' );
 
 		foreach( $widgets as $widget ) {
         
-			require_once( __DIR__ . "/ElementorWidgets/$widget.php" );
+			// require_once( __DIR__ . "/ElementorWidgets/$widget.php" );
  
 			// Use the full namespace for the widget class
 			$classname = "\\Kerapy\\Core\\ElementorWidgets\\$widget";

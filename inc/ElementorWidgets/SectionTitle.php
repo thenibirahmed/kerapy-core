@@ -9,46 +9,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; 
 }
 
-class SecTitle extends \Elementor\Widget_Base{
+class SectionTitle extends \Elementor\Widget_Base{
     public function get_name() {
-		return 'sec-title';
+		return 'kp-sec-title';
 	}
     public function get_title() {
-		return esc_html__( 'Section Title', 'kerapy' );
+		return esc_html__( 'Kerapy Section Title', 'kerapy-core' );
 	}
     public function get_icon() {
 		return 'eicon-heading';
 	}
     public function get_categories() {
-		return [ 'kerapy_element' ];
+		return [ 'kerapy-elements' ];
 	}
     public function get_keywords() {
-		return [ 'heading', 'kerapy', 'title','section-title' ];
+		return [ 'heading', 'kerapy-core', 'title','section-title' ];
 	}
     protected function register_controls() {
         $this->start_controls_section(
 			'content',
 			[
-				'label' => esc_html__( 'Content', 'kerapy' ),
+				'label' => esc_html__( 'Content', 'kerapy-core' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
         );
 		$this->add_control(
-			'tmcard',
+			'seccard',
 			[
-				'label' => esc_html__( 'Testimonial Card Style', 'kerapy' ),
+				'label' => esc_html__( 'Section Title Style', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'testimonial1',
+				'default' => 'section1',
 				'options' => [
-					'testimonial1' => esc_html__( 'Style One', 'kerapy' ),
-					'testimonial2' => esc_html__( 'Style Two', 'kerapy' ),
+					'section1' => esc_html__( 'Style One', 'kerapy-core' ),
+					'section2' => esc_html__( 'Style Two', 'kerapy-core' ),
 				],
 			]
 		);
 		$this->add_control(
 			'sec_icon',
 			[
-				'label' => esc_html__( 'Icon', 'kerapy' ),
+				'label' => esc_html__( 'Icon', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => [
 					'value' => 'fas fa-circle',
@@ -71,10 +71,10 @@ class SecTitle extends \Elementor\Widget_Base{
 		$this->add_control(
 			'section_title',
 			[
-				'label' => esc_html__( 'Sub Heading', 'kerapy' ),
+				'label' => esc_html__( 'Sub Heading', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Section title', 'kerapy' ),
-				'placeholder' => esc_html__( 'Type your title here', 'kerapy' ),
+				'default' => esc_html__( 'Section title', 'kerapy-core' ),
+				'placeholder' => esc_html__( 'Type your title here', 'kerapy-core' ),
 			]
 		);
 		
@@ -83,24 +83,24 @@ class SecTitle extends \Elementor\Widget_Base{
     protected function render() {
 		$settings = $this->get_settings_for_display();
 		?>
-		<?php if($settings['tmcard'] == 'testimonial1' ){ ?>
+		<?php if($settings['seccard'] == 'section1' ){ ?>
 		 <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
-			<div class="my-icon-wrapper">
+			<div class="my-icon-wrapper sectionicon">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 			</div>
 			<div class="divider"></div>
 			<?php 
 				if($settings['section_title']){
 			?>
-			<h6 class="sub-head mb-0 text-uppercase">
+			<h6 class="sub-head mb-0">
 				<?php echo esc_html($settings['section_title']); ?>
 			</h6>
 			<?php } ?>
 		</div>
 		<?php } ?>
-		<?php if($settings['tmcard'] == 'testimonial2' ){ ?>
+		<?php if($settings['seccard'] == 'section2' ){ ?>
 			<div class="d-flex align-items-center gap-2">
-				<div>
+				<div class="my-icon-wrapper sectionicon">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</div>
 				<div class="divider"></div>
@@ -110,7 +110,7 @@ class SecTitle extends \Elementor\Widget_Base{
 					</h6>
 				</div>
 				<div class="divider"></div>
-				<div>
+				<div class="my-icon-wrapper sectionicon">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</div>
 			</div>
