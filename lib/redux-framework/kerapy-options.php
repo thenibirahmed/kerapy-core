@@ -227,37 +227,8 @@ Redux::set_args( $opt_name, $args );
  * ---> START SECTIONS
  */
 global $kerapy_theme_options;
-// -> START Basic Fields
-Redux::set_section(
-	$opt_name,
-	array(
-		'title'            => esc_html__( 'General Settings', 'kerapy-core' ),
-		'id'               => 'basic',
-		'desc'             => esc_html__( 'These are site general settings.', 'kerapy-core' ),
-		'icon'             => 'el el-home',
-		'fields'           => array(
-			array(
-				'id'       => 'kerapy-logo',
-				'type'     => 'media',
-				'title'    => esc_html__( 'Site Logo', 'kerapy-core' ),
-				'url'			=> false
-			),
-			array(
-				'id'       => 'pagination_type',
-				'type'     => 'select',
-				'title'    => esc_html__('Pagination Type', 'kerapy-core'), 
-				'subtitle' => esc_html__('No validation can be done on this field type', 'kerapy-core'),
-				'desc'     => esc_html__('This is the description field, again good for additional info.', 'kerapy-core'),
-				// Must provide key => value pairs for select options
-				'options'  => array(
-					'button' => 'Load More Button',
-					'number' => 'Page Number',
-				),
-				'default'  => 'button',
-			), 
-		),
-	)
-);  
+
+ 
 // header options settings
 Redux::set_section(
 	$opt_name,
@@ -291,25 +262,13 @@ Redux::set_field( $opt_name, 'header_opt', array(
 	'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
 	'default'  => 'Contact Us',
 ) );
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-btn-link',
+	'type'     => 'text',
+	'title'    => esc_html__( 'Button link', 'kerapy-core' ),
+	'default'  => '#',
+) );
 
-Redux::set_field( $opt_name, 'header_opt', array(
-		'id'       => 'h-btn-color',
-        'type'     => 'link_color',
-        'title'    => esc_html__('Button Text Color', 'kerapy-core'),
-        'default'  => array(
-            'regular'  => '#212529',
-            'hover'    => '#fff',  
-        )
-) );
-Redux::set_field( $opt_name, 'header_opt', array(
-		'id'       => 'h-btn-bg',
-        'type'     => 'link_color',
-        'title'    => esc_html__('Button BG Color', 'kerapy-core'),
-        'default'  => array(
-            'regular'  => 'transparent',
-            'hover'    => '#212529',  
-        )
-) );
 Redux::set_field($opt_name, 'header_opt', array(
     'id'       => 'h-btn-border',
     'type'     => 'border',
@@ -348,11 +307,23 @@ Redux::set_field( $opt_name, 'header_opt', array(
         'line-height' => '24px'
     ),
 ) );
+
 Redux::set_field( $opt_name, 'header_opt', array(
-	'id'       => 'h-btn-link',
-	'type'     => 'text',
-	'title'    => esc_html__( 'Button link', 'kerapy-core' ),
-	'default'  => '#',
+	'id'       => 'btn-hover',
+    'type'     => 'color',
+    'title'    => esc_html__('Button Hover Color', 'kerapy-core'), 
+    'default'  => '#212529',
+    'validate' => 'color',
+) );
+
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-btn-bg',
+	'type'     => 'link_color',
+	'title'    => esc_html__('Button BG Color', 'kerapy-core'),
+	'default'  => array(
+		'regular'  => 'transparent',
+		'hover'    => '#212529',  
+	)
 ) );
 
 
@@ -414,7 +385,12 @@ Redux::set_section(
 				'default'  => '10',
 				'validate' => array( 'numeric', 'not_empty' )
 			), 
-			
+			array(
+				'id'       => 'relate_post_title',
+				'type'     => 'text',
+				'title'    => esc_html__( 'Related Post Title', 'kerapy-core' ),
+				'default'  => 'Related Posts',
+			),
 		),
 	)
 );
@@ -635,25 +611,7 @@ Redux::set_section(
 	)
 );
 
-Redux::set_section(
-	$opt_name,
-	array(
-		'title'            => esc_html__( 'Related Post Settings', 'kerapy-core' ),
-		'id'               => 'relatedposts_opt',
-		'desc'             => esc_html__( 'These are related post settings.', 'kerapy-core' ),
-		'icon'             => 'el el-pencil',
-		'fields'           => array(
-			array(
-				'id'       => 'relate_post_title',
-				'type'     => 'text',
-				'title'    => esc_html__( 'Related Post Title', 'kerapy-core' ),
-				'default'  => 'Related Posts',
-			),
-			
 
-		),
-	)
-);
 
 
 
