@@ -5,7 +5,7 @@
  *
  * @package ReduxFramework/Extentions
  * @class Redux_Extension_Customizer
- * @version 4.4.11
+ * @version 4.5.1
  * @noinspection PhpIgnoredClassAliasDeclaration
  */
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.4.11';
+		public static string $version = '4.5.1';
 
 		/**
 		 * Set the name of the field.  Ideally, this will also be your extension's name.
@@ -237,12 +237,12 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 
 				if ( ! file_exists( $upload_dir . $option['type'] . '.php' ) ) {
 					if ( ! is_dir( $upload_dir ) ) {
-						$this->parent->filesystem->execute( 'mkdir', $upload_dir );
+						Redux_Core::$filesystem->execute( 'mkdir', $upload_dir );
 					}
 
 					$template = str_replace( '{{type}}', $option['type'], '<?php' . PHP_EOL . '   class Redux_Customizer_Control_{{type}} extends Redux_Customizer_Control {' . PHP_EOL . '     public $type = "redux-{{type}}";' . PHP_EOL . '   }' );
 
-					$this->parent->filesystem->execute( 'put_contents', $upload_dir . $option['type'] . '.php', array( 'content' => $template ) );
+					Redux_Core::$filesystem->execute( 'put_contents', $upload_dir . $option['type'] . '.php', array( 'content' => $template ) );
 				}
 
 				if ( file_exists( $upload_dir . $option['type'] . '.php' ) ) {
@@ -721,7 +721,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 					$this->parent->options_class->set( $this->parent->options );
 					if ( $compiler ) {
 						// Have to set this to stop the output of the CSS and typography stuff.
-						$this->parent->no_output = true;
+						Redux_Core::$no_output = true;
 						$this->parent->output_class->enqueue();
 
 						// phpcs:ignore WordPress.NamingConventions.ValidHookName
@@ -750,7 +750,7 @@ if ( ! class_exists( 'Redux_Extension_Customizer', false ) ) {
 				'opt_name'       => $this->parent->args['opt_name'],
 				'field'          => $this->parent->options,
 				'defaults'       => $this->parent->options_defaults,
-				'folds'          => $this->parent->folds,
+				'folds'          => Redux_Core::$folds,
 			);
 
 			// Values used by the javascript.

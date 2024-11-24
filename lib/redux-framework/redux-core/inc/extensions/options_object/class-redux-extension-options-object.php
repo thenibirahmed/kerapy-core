@@ -25,7 +25,7 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '4.0.0';
+		public static string $version = '4.0.0';
 
 		/**
 		 * Set the name of the field.  Ideally, this will also be your extension's name.
@@ -33,14 +33,14 @@ if ( ! class_exists( 'Redux_Extension_Options_Object', false ) ) {
 		 *
 		 * @var string
 		 */
-		private $field_name = 'options_object';
+		private string $field_name = 'options_object';
 
 		/**
 		 * Is field bit.
 		 *
 		 * @var bool
 		 */
-		public $is_field = false;
+		public bool $is_field = false;
 
 		/**
 		 * Class Constructor. Defines the args for the extensions class
