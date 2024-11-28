@@ -98,7 +98,7 @@ $args = array(
 	'admin_bar'                 => true,
 
 	// Icon for the admin bar menu.
-	'admin_bar_icon'            => 'dashicons-portfolio',
+	'admin_bar_icon'            => 'dashicons-screenoptions',
 
 	// Priority for the admin bar menu.
 	'admin_bar_priority'        => 50,
@@ -128,7 +128,7 @@ $args = array(
 	'page_permissions'          => 'manage_options',
 
 	// Specify a custom URL to an icon.
-	'menu_icon'                 => '',
+	'menu_icon'                 => 'dashicons-screenoptions',
 
 	// Force your panel to always open to a specific tab (by id).
 	'last_tab'                  => '',
