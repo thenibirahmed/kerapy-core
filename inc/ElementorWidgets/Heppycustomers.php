@@ -20,7 +20,7 @@ class Heppycustomers extends Widget_Base{
 	}
 
     public function get_icon(){
-        return 'eicon-review';
+        return 'eicon-heading';
     }
 
     public function get_categories(){
@@ -40,54 +40,42 @@ class Heppycustomers extends Widget_Base{
 			]
 		);
         $this->add_control(
-			'content',
+			'title',
+			[
+				'label' => esc_html__( 'Heading Content', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Happy Customers', 'kerapy-core' ),
+				'placeholder' => esc_html__( 'Type your title here', 'kerapy-core' ),
+			]
+		);
+        $this->add_control(
+			'description',
+			[
+				'label' => esc_html__( 'Description', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 10,
+				'default' => esc_html__( 'Are you tired of battling stubborn breakouts and blemishes? Welcome to Therapy', 'kerapy-core' ),
+				'placeholder' => esc_html__( 'Type your description here', 'kerapy-core' ),
+			]
+		);
+
+        $this->end_controls_section();
+        $this->start_controls_section(
+			'style_section',
 			[
 				'label' => esc_html__( 'Content', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::WYSIWYG,
-                'default' => esc_html__( 'Type your content here', 'kerapy-core' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
-		);
-        
-		$this->add_control(
-			'img_list',
-			[
-				'label' => esc_html__( 'Image', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::REPEATER,
-				'fields' => [
-                    [
-                        'name'	=> 'image',
-						'label'	=> esc_html__( 'Image', 'kerapy-core' ),
-						'type' => \Elementor\Controls_Manager::MEDIA,
-                        'default' => [
-                        'url' => \Elementor\Utils::get_placeholder_image_src(),
-                        ],
-                    ]
-                    
-				],
-                'default' => [
-					[
-						'image' => 'url',
-					],
-				],
-				'title_field' => '{{{ image }}}',
-			]
+            
 		);
         $this->add_control(
-			'number',
+			'border-color',
 			[
-				'label' => esc_html__( 'Number', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( '1050+', 'kerapy-core' ),
-				'placeholder' => esc_html__( 'Type your title here', 'kerapy-core' ),
-			]
-		);
-        $this->add_control(
-			'review',
-			[
-				'label' => esc_html__( 'Review Text', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Reviews From Clients', 'kerapy-core' ),
-				'placeholder' => esc_html__( 'Type your title here', 'kerapy-core' ),
+				'label' => esc_html__( 'Border Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .happy-customers-desc ' => 'border-color: {{VALUE}}',
+				],
 			]
 		);
 
@@ -96,40 +84,27 @@ class Heppycustomers extends Widget_Base{
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
-		$image = $settings['img_list'];
 		?>
         <div class="mb-4 mb-lg-0">
             <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
-                    <div class="pb-2 d-flex flex-column gap-2">
-                        <?php echo wp_kses_post($settings['content']) ; ?>
-                    </div>
-                <div class="d-flex gap-2 gap-xl-4 align-items-center justify-content-center justify-content-md-start">
-                    <div class="d-flex align-items-center">
-                    <?php foreach( $image as $img){ ?>
-                        <?php  
-                        $id = $img['image']['id']; 
-                        $url = $img['image']['url'];
-                        if($id){
-                            echo wp_get_attachment_image( $id, 'thumbnail', false, array(
-                                'class' => 'img-fluid review-img '
-                            ));
-                        }else{
-                            echo '<img class="img-fluid review-img" src="'.$url.'">';
-                        } 
-                    ?>
-                        <?php } ?>
-                    </div>
-                    <div>
-                        <h6 class="d-flex flex-row gap-1 review-text all-heading-color">
-                        <span class="hero-head">
-                            <?php echo esc_html($settings['number']);?>
-                        </span>
-                        <?php echo esc_html($settings['review']);?>
-                        </h6>
-                    </div>
+                <div class="happy-customers-content d-flex flex-column gap-2">
+                <h3 class="all-heading-color"><?php echo $settings['title']; ?></h3>
+                <p class="happy-customers-desc"><?php echo $settings['description']; ?></p>
                 </div>
             </div>
         </div>
 		<?php
+    }
+    protected function content_template() {
+        ?>
+        <div class="mb-4 mb-lg-0">
+            <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
+                <div class="happy-customers-content d-flex flex-column gap-2">
+                    <h3 class="all-heading-color">{{{ settings.title }}}</h3>
+                    <p class="happy-customers-desc">{{{ settings.description }}}</p>
+                </div>
+            </div>
+        </div>
+        <?php 
     }
 }

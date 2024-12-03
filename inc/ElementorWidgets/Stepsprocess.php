@@ -63,6 +63,16 @@ class Stepsprocess extends \Elementor\Widget_Base{
                 'title_field' => '{{{ title }}}',
 			]
 		);
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'style_section',
+			[
+				'label' => esc_html__( 'Content', 'kerapy-core' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+            
+		);
         $this->add_control(
 			'icon_color',
 			[
@@ -101,4 +111,17 @@ class Stepsprocess extends \Elementor\Widget_Base{
         </div>
         <?php
 	}      
+    protected function content_template() {
+		?>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-3 g-md-4 g-lg-5 justify-content-center increment">
+            <# _.each( settings.work_process, function( process ) { #>
+            <div class="box">
+                <div class="circle"></div>
+                <h6 class="py-md-3 all-heading-color">{{{ process.title }}}</h6>
+                <p>{{{ process.desc }}}</p>
+            </div>
+            <# }); #>
+        </div>
+        <?php
+	}     
 }

@@ -91,4 +91,26 @@ class Accordion extends \Elementor\Widget_Base{
         </div>
         <?php
 	}      
+    protected function content_template() {
+		?>
+        <div class="">
+            <div class="accordion">
+                <# _.each( settings.accordion, function( accordion, index ) { #>
+                <div class="accordion-item border-0 mb-3">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-light all-heading-color" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ index }}" aria-expanded="{{ index === 0 ? 'true' : 'false' }}" aria-controls="panelsStayOpen-collapse{{ index }}">
+                        {{{ accordion.title }}}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse{{ index }}" class="accordion-collapse collapse <# if ( index === 0 ) { #>show<# } #>">
+                        <div class="accordion-body bg-light">
+                            {{{ accordion.content }}}
+                        </div>
+                    </div>
+                </div>
+                <# }); #>
+            </div>
+        </div>
+        <?php
+	}           
 }

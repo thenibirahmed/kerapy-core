@@ -241,7 +241,7 @@ final class ElementorInit {
      */
     public function register_widgets( $widgets_manager ) {
 
-        $widgets = array( 'SectionTitle', 'ServicePost', 'Teamsection', 'Kerapylist', 'Alltestimonial', 'Stepsprocess', 'Accordion', 'BlogPost', 'Counter', 'Heppycustomers', 'Kerapyvideo' );
+		$widgets = array( 'SectionTitle', 'ServicePost', 'Teamsection', 'Kerapylist', 'Alltestimonial', 'Stepsprocess', 'Accordion', 'BlogPost', 'Counter', 'Heppycustomers', 'Kerapyvideo', 'Clientreviews' );
 
         foreach ( $widgets as $widget ) {
             $classname = "\\Kerapy\\Core\\ElementorWidgets\\$widget";

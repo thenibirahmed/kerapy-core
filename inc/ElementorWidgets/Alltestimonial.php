@@ -157,4 +157,85 @@ class Alltestimonial extends Widget_Base{
 
         <?php
     }    
+    protected function content_template() {
+        ?>
+        <# if (settings.tmcard === 'testimonial1') { #>
+            <div class="testimonial-slider">
+                <div class="bg-light p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
+                    <# _.each(settings.list, function(item) { #>
+                        <div class="text-center text-md-start">
+                            <h5 class="text-black-50">
+                                {{{ item.content }}}
+                            </h5>
+                            <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between mt-4">
+                                <div class="testi-name">
+                                    <h6 class="all-heading-color">
+                                        {{{ item.author }}}
+                                    </h6>
+                                    <p>
+                                        {{{ item.designation }}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <# }); #>
+                </div>
+            </div>
+        <# } else if (settings.tmcard === 'testimonial2') { #>
+            <div class="testimonial-box">
+                <div class="bg-light p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
+                    <# _.each(settings.list, function(item) { #>
+                        <div class="row testimonial-section mx-auto bg-white p-1 p-md-5">
+                            <div class="col-12 col-md-6">
+                                <div>
+                                    <div class="tesimonial2-icon pb-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m7 6l1-2H6C3.79 4 2 6.79 2 9v7h7V9H5c0-3 2-3 2-3m7 3c0-3 2-3 2-3l1-2h-2c-2.21 0-4 2.79-4 5v7h7V9z"/></svg>
+                                    </div>
+                                    <h5 class="text-black-50">
+                                        {{{ item.content }}}
+                                    </h5>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="mt-2 mt-md-4 author-name">
+                                            <h6 class="all-heading-color">
+                                                {{{ item.author }}}
+                                            </h6>
+                                            <p>
+                                                {{{ item.designation }}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 pt-2 pt-md-0">
+                                <# if (item.img && item.img.url) { #>
+                                    <img class="img-fluid tesimonial2-img" src="{{ item.img.url }}" alt="{{ item.author }}">
+                                <# } #>
+                            </div>
+                        </div>
+                    <# }); #>
+                </div>
+            </div>
+        <# } #>
+        <script>
+            jQuery(document).ready(function($) {
+                $(".owl-testimonial-slider").owlCarousel({
+                    loop: true,
+                    margin: 20,
+                    autoplay: false,
+                    autoHeight:true,
+                    autoplayTimeout: 2500,
+                    autoplayHoverPause: true,
+                    nav: true,
+                    dots: false,
+                    responsive: {
+                        0: { items: 1 },
+                        600: { items: 1 },
+                        1000: { items: 1 }
+                    }
+                });
+            });
+        </script>
+        <?php
+    }
+      
 }

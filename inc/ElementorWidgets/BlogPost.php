@@ -68,4 +68,5 @@ class BlogPost extends Widget_Base{
         $settings = $this->get_settings_for_display();
         include( "blog/{$settings['layout']}.php" );
     }     
+        
 }

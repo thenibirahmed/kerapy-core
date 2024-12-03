@@ -31,67 +31,145 @@ class Counter extends \Elementor\Widget_Base {
             ]
         );
         $this->add_control(
-            'counter_list',
-            [
-                'label' => esc_html__( 'Conter List', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => [
-                    [
-                        'name' => 'item_title',
-                        'label' => esc_html__( 'Item Title', 'kerapy-core' ),
-                        'type' => \Elementor\Controls_Manager::TEXT,
-                        'default' => esc_html__( 'Buildings Worldwide' , 'kerapy-core' ),
-                        'label_block' => true,
-                    ],
-                    [
-                        'name' => 'max-num-of-count',
-                        'label' => esc_html__( 'Price', 'kerapy-core' ),
-                        'type' => \Elementor\Controls_Manager::NUMBER,
-                        'min' => 1,
-                        'max' => 1000,
-                        'step' => 0.1,
-                        'default' => 400,
-                    ],
-                    [
-                        'name' => 'item_icon',
-                        'label' => esc_html__( 'Item Icon', 'kerapy-core' ),
-                        'type' => \Elementor\Controls_Manager::TEXT,
-                        'default' => esc_html__( '+' , 'kerapy-core' ),
-                        'label_block' => true,
-                    ],
-                ],
-                'default' => [
-                    [
-                        'item_title' => esc_html__( 'Buildings Worldwide', 'kerapy-core' ),
-                        'max-num-of-count' => esc_html__( '400', 'kerapy-core' ),
-                    ],
-                    [
-                        'item_title' => esc_html__( 'Years of Expertise', 'kerapy-core' ),
-                        'max-num-of-count' => esc_html__( '10', 'kerapy-core' ),
-                    ],
-                ]
-            ]
-        );
+			'item_title',
+			[
+				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Years of Experience' , 'kerapy-core' ),
+                'label_block' => true,
+			]
+		);
+        $this->add_control(
+			'max-num-of-count',
+			[
+				'label' => esc_html__( 'Price', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 1000,
+                'step' => 0.1,
+                'default' => 12,
+			]
+		);
+        $this->add_control(
+			'item_title2',
+			[
+				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Happy Customers' , 'kerapy-core' ),
+                'label_block' => true,
+			]
+		);
+        $this->add_control(
+			'max-num-of-count2',
+			[
+				'label' => esc_html__( 'Price', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 1000,
+                'step' => 0.1,
+                'default' => 1500,
+			]
+		);
+        $this->add_control(
+			'item_title3',
+			[
+				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Certified Therapy' , 'kerapy-core' ),
+                'label_block' => true,
+			]
+		);
+        $this->add_control(
+			'max-num-of-count3',
+			[
+				'label' => esc_html__( 'Price', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 1000,
+                'step' => 0.1,
+                'default' => 20,
+			]
+		);
+        $this->add_control(
+			'item_title4',
+			[
+				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Therapy Sessions' , 'kerapy-core' ),
+                'label_block' => true,
+			]
+		);
+        $this->add_control(
+			'max-num-of-count4',
+			[
+				'label' => esc_html__( 'Price', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 12000,
+                'step' => 0.1,
+                'default' => 400,
+			]
+		);
+        
       $this->end_controls_section();
     }
     protected function render() {
       $settings = $this->get_settings_for_display();
     ?>
-        <div class="row">
-            <?php foreach ($settings['counter_list'] as $counter) : ?>
+            <div class="row">
+                <?php if ( !empty($settings['max-num-of-count']) && !empty($settings['item_title']) ) : ?>
                 <div class="col-md-6 ">
                     <div class="bg-white p-4 text-cente mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($counter['max-num-of-count']); ?></div>
+                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count']); ?></div>
                         <span class="all-heading-color">+</span>
                     </div>
                     <p class="pt-3">
-                        <?php echo esc_html($counter['item_title']);?>
+                        <?php echo esc_html($settings['item_title']);?>
                     </p>
                     </div>
                 </div>
-                <?php endforeach; ?>
-        </div>
+                <?php endif; ?>
+                <?php if ( !empty($settings['max-num-of-count2']) && !empty($settings['item_title2']) ) : ?>
+                <div class="col-md-6 ">
+                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count2']); ?></div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        <?php echo esc_html($settings['item_title2']);?>
+                    </p>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if ( !empty($settings['max-num-of-count3']) && !empty($settings['item_title3']) ) : ?>
+                <div class="col-md-6 ">
+                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count3']); ?></div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        <?php echo esc_html($settings['item_title3']);?>
+                    </p>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if ( !empty($settings['max-num-of-count4']) && !empty($settings['item_title4']) ) : ?>
+                <div class="col-md-6 ">
+                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count4']); ?></div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        <?php echo esc_html($settings['item_title4']);?>
+                    </p>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
         <script>
             // Function to animate the counter
             jQuery(document).ready(function($){
@@ -109,6 +187,80 @@ class Counter extends \Elementor\Widget_Base {
             });
         </script>
     <?php
+    }
+    protected function content_template() {
+        ?>
+        <div class="row">
+            <# if ( settings['max-num-of-count'] && settings['item_title'] ) { #>
+            <div class="col-md-6">
+                <div class="bg-white p-4 text-center mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count'] }}}</div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        {{{ settings['item_title'] }}}
+                    </p>
+                </div>
+            </div>
+            <# } #>
+            <# if ( settings['max-num-of-count2'] && settings['item_title2'] ) { #>
+            <div class="col-md-6">
+                <div class="bg-white p-4 text-center mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count2'] }}}</div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        {{{ settings['item_title2'] }}}
+                    </p>
+                </div>
+            </div>
+            <# } #>
+            <# if ( settings['max-num-of-count3'] && settings['item_title3'] ) { #>
+            <div class="col-md-6">
+                <div class="bg-white p-4 text-center mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count3'] }}}</div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        {{{ settings['item_title3'] }}}
+                    </p>
+                </div>
+            </div>
+            <# } #>
+            <# if ( settings['max-num-of-count4'] && settings['item_title4'] ) { #>
+            <div class="col-md-6">
+                <div class="bg-white p-4 text-center mb-4 counter-sec">
+                    <div class="counter-plus d-flex">
+                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count4'] }}}</div>
+                        <span class="all-heading-color">+</span>
+                    </div>
+                    <p class="pt-3">
+                        {{{ settings['item_title4'] }}}
+                    </p>
+                </div>
+            </div>
+            <# } #>
+        </div>
+        <script>
+            // Function to animate the counter
+            jQuery(document).ready(function($){
+                $('.stat-number').each(function () {
+                    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                    }, {
+                        duration: 5000,
+                        step: function (func) {
+                            $(this).text(parseFloat(func).toFixed(size));
+                        }
+                    });
+                });
+            });
+        </script>
+        <?php
     }
 }
 ?>

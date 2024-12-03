@@ -128,4 +128,5 @@ class ServicePost extends Widget_Base{
         <?php
         }
     }    
+    
 }

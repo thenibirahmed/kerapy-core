@@ -101,7 +101,7 @@ class Teamsection extends Widget_Base{
                                 'class' => 'img-fluid team-img'
                             ));
                         }else{
-                            echo '<img class="w-full" src="'.$url.'">';
+                            echo '<img class="img-fluid team-img" src="'.$url.'">';
                         } 
                     ?> 
                     <h5 class="mt-3 all-heading-color">
@@ -115,5 +115,31 @@ class Teamsection extends Widget_Base{
 				<?php } ?>
         </div>
 		<?php
+    }
+    protected function content_template() {
+        ?>
+        <#
+        var teamList = settings.team_list;
+        #>
+        <div class="row gx-3 gy-4 justify-content-center">
+            <# _.each( teamList, function( item ) { #>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="p-2 p-md-3 p-lg-4 text-center d-flex flex-column align-items-center justify-content-center w-full">
+                        <# if ( item.image.url ) { #>
+                            <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
+                        <# } else { #>
+                            <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
+                        <# } #>
+                        <h5 class="mt-3 all-heading-color">
+                            {{{ item.author }}}
+                        </h5>
+                        <p>
+                            {{{ item.disi }}}
+                        </p>
+                    </div>
+                </div>
+            <# }); #>
+        </div>
+        <?php
     }
 }

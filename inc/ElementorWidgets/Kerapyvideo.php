@@ -45,6 +45,7 @@ class Kerapyvideo extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
+					// 'url' => get_template_directory_uri() . '/assets/images/About_v1_banner.jpg',
 				],
 			]
 		);
@@ -106,5 +107,27 @@ class Kerapyvideo extends \Elementor\Widget_Base {
             </div>
             <?php
         }
+    }
+    protected function content_template() {
+        ?>
+        <#
+        var imgUrl = settings.image.url ? settings.image.url : '';
+        var videoUrl = settings.video ? settings.video : '';
+        #>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="video-wrapper position-relative">
+                    <# if ( imgUrl ) { #>
+                        <img class="img-fluid video-img" src="{{ imgUrl }}" alt="Video Thumbnail">
+                    <# } #>
+                    <a href="{{ videoUrl }}" class="play-btn" target="_blank">
+                        <div class="circle-overlay">
+                            <i class="fas fa-play play-icon"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 }

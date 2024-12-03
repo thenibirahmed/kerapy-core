@@ -51,19 +51,19 @@ class SectionTitle extends \Elementor\Widget_Base{
 				'label' => esc_html__( 'Icon', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::ICONS,
 				'default' => [
-					'value' => 'fas fa-circle',
+					'value' => 'fas fa-star', // Changed to the star icon
 					'library' => 'fa-solid',
 				],
 				'recommended' => [
 					'fa-solid' => [
-						'circle',
-						'dot-circle',
-						'square-full',
+						'star',
+						'star-half-alt',
+						'star-of-david',
 					],
 					'fa-regular' => [
-						'circle',
-						'dot-circle',
-						'square-full',
+						'star',
+						'star-half-alt',
+						'star-of-david',
 					],
 				],
 			]
@@ -117,4 +117,54 @@ class SectionTitle extends \Elementor\Widget_Base{
 		<?php } ?>
 		<?php
 	}      
+    protected function content_template() {
+        ?>
+        <#
+        var sectionStyle = settings.seccard;
+        var icon = settings.sec_icon;
+        var title = settings.section_title;
+        #>
+        
+        <# if (sectionStyle === 'section1') { #>
+            <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
+                <div class="my-icon-wrapper sectionicon">
+                    <#
+                        var iconHTML = elementor.helpers.renderIcon( view, icon, { 'aria-hidden': true } );
+                        print(iconHTML);
+                    #>
+                </div>
+                <div class="divider"></div>
+                <# if (title) { #>
+                    <h6 class="sub-head mb-0">
+                        {{{ title }}}
+                    </h6>
+                <# } #>
+            </div>
+        <# } #>
+
+        <# if (sectionStyle === 'section2') { #>
+            <div class="d-flex align-items-center gap-2">
+                <div class="my-icon-wrapper sectionicon">
+                    <#
+                        var iconHTML = elementor.helpers.renderIcon( view, icon, { 'aria-hidden': true } );
+                        print(iconHTML);
+                    #>
+                </div>
+                <div class="divider"></div>
+                <div>
+                    <h6 class="sub-head">
+                        {{{ title }}}
+                    </h6>
+                </div>
+                <div class="divider"></div>
+                <div class="my-icon-wrapper sectionicon">
+                    <#
+                        var iconHTML = elementor.helpers.renderIcon( view, icon, { 'aria-hidden': true } );
+                        print(iconHTML);
+                    #>
+                </div>
+            </div>
+        <# } #>
+        <?php
+    }     
 }
