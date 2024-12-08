@@ -64,7 +64,7 @@ class Stepsprocess extends \Elementor\Widget_Base{
 			]
 		);
         $this->end_controls_section();
-
+		// style tab
         $this->start_controls_section(
 			'style_section',
 			[
@@ -73,26 +73,89 @@ class Stepsprocess extends \Elementor\Widget_Base{
 			]
             
 		);
-        $this->add_control(
-			'icon_color',
+		$this->add_control(
+			'circle_color',
 			[
-				'label' => esc_html__( 'Icon Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Number Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} i' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .circle' => 'color: {{VALUE}} ',
 				],
+                
 			]
 		);
-        $this->add_control(
-			'text_color',
+		$this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'circle_typography',
+                'label' => esc_html__( 'Number Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .circle',
+            ]
+        );
+		$this->add_control(
+			'circle_bg_color',
 			[
-				'label' => esc_html__( 'Text Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Circle Background Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#0052A8',
 				'selectors' => [
-					'{{WRAPPER}} p, h6 ' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .circle' => 'background-color: {{VALUE}} ',
 				],
+                
 			]
 		);
+		$this->add_control(
+			'circle_divider_color',
+			[
+				'label' => esc_html__( 'Divider Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#0052A8',
+				'selectors' => [
+					'{{WRAPPER}} .box::before' => 'background-color: {{VALUE}} ',
+				],
+                
+			]
+		);
+		$this->add_control(
+			'title_color',
+			[
+				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .sp_card_tilte' => 'color: {{VALUE}} ',
+				],
+                
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'label' => esc_html__( 'Title Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .sp_card_tilte',
+            ]
+        );
+		$this->add_control(
+			'description_color',
+			[
+				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#fff',
+				'selectors' => [
+					'{{WRAPPER}} .sp-desc' => 'color: {{VALUE}} ',
+				],
+                
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'description_typography',
+                'label' => esc_html__( 'Description Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .sp-desc',
+            ]
+        );
         $this->end_controls_section();
     }
     protected function render() {
@@ -104,24 +167,22 @@ class Stepsprocess extends \Elementor\Widget_Base{
             ?>
             <div class="box">
                 <div class="circle"></div>
-                <h6 class="py-md-3 all-heading-color"><?php echo esc_html($process['title']);?></h6>
-                <p><?php echo esc_html($process['desc']); ?></p>
+                <h6 class="py-md-3 sp_card_tilte"><?php echo esc_html($process['title']);?></h6>
+                <p class="sp-desc"><?php echo esc_html($process['desc']); ?></p>
             </div>
             <?php } ?>
         </div>
         <?php
 	}      
-    protected function content_template() {
-		?>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-3 g-md-4 g-lg-5 justify-content-center increment">
-            <# _.each( settings.work_process, function( process ) { #>
-            <div class="box">
-                <div class="circle"></div>
-                <h6 class="py-md-3 all-heading-color">{{{ process.title }}}</h6>
-                <p>{{{ process.desc }}}</p>
-            </div>
-            <# }); #>
-        </div>
-        <?php
-	}     
+    // protected function content_template() {
+    //     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-3 g-md-4 g-lg-5 justify-content-center increment">
+    //         <# _.each( settings.work_process, function( process ) { #>
+    //         <div class="box">
+    //             <div class="circle"></div>
+    //             <h6 class="py-md-3 all-heading-color">{{{ process.title }}}</h6>
+    //             <p>{{{ process.desc }}}</p>
+    //         </div>
+    //         <# }); #>
+    //     </div>
+	// }     
 }

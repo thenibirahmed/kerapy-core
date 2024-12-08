@@ -5,6 +5,7 @@ namespace Kerapy\Core\ElementorWidgets;
 use Elementor\WP_Query;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Image_Size;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -71,7 +72,7 @@ class Teamsection extends Widget_Base{
 				],
 				'default' => [
 					[
-						'image' => esc_html__( 'Image', 'kerapy-core' ),
+						// 'image' => esc_html__( 'Image', 'kerapy-core' ),
 						'author' => esc_html__( 'Author Name.', 'kerapy-core' ),
 						'desc' => esc_html__( 'Designation', 'kerapy-core' ),
 					]
@@ -81,33 +82,184 @@ class Teamsection extends Widget_Base{
 		);
 
         $this->end_controls_section();
-
+        // Start Style Section
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => esc_html__( 'Style', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        
+        // Image Width
+        $this->add_control(
+            'team_img_width',
+            [
+                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 30, 'max' => 1000 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .team-w-img img' => 'max-width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        // Image Height
+        $this->add_control(
+            'team_img_height',
+            [
+                'label' => esc_html__( 'Image Height', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .team-w-img img' => 'max-height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'team_img_border_radius',
+            [
+                'label' => esc_html__( 'Image Border Radius', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 100 ],
+                    '%' => [ 'min' => 0, 'max' => 50 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .team-w-img img' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+			'title-color',
+			[
+				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .team-title ' => 'color: {{VALUE}}',
+				],
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'team_title_typography',
+                'label' => esc_html__( 'Title Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .team-title',
+            ]
+        );
+        $this->add_control(
+			'designation-color',
+			[
+				'label' => esc_html__( 'Designation Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#666666',
+				'selectors' => [
+					'{{WRAPPER}} .team-content' => 'color: {{VALUE}}',
+				],
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'team_designation_typography',
+                'label' => esc_html__( 'Designation Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .team-content',
+            ]
+        );
+        $this->add_control(
+            'gap_elements',
+            [
+                'label' => esc_html__( 'Gap Between Images Title Designation', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 15 ],
+                'selectors' => [
+                    '{{WRAPPER}} .team-all-card' => 'gap: {{SIZE}}{{UNIT}};', 
+                ],
+            ]
+        );
+        $this->add_control(
+            'team_title_alignment',
+            [
+                'label' => esc_html__( 'Title Alignment', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center', 
+                'selectors' => [
+                    '{{WRAPPER}} .team-all-card' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name' => 'image_size', 
+                'default' => 'large',
+                'label' => esc_html__( 'Image Size', 'kerapy-core' ),
+                'description' => esc_html__( 'Set the size of the image.', 'kerapy-core' ),
+            ]
+        );
+        $this->end_controls_section();
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
+        Group_Control_Image_Size::print_attachment_image_html( $settings );
 		$list = $settings['team_list'];
 		?>
-        <div class="row gx-3 gy-4 justify-content-center">
+        <div class="row gx-5 gx-lg-5 gy-5 gy-lg-5 justify-content-center">
 			<?php 
 				foreach($list as $item){
 			?>
             <div class="col-12 col-sm-6 col-md-4">
-                <div class="p-2 p-md-3 p-lg-4 text-center d-flex flex-column align-items-center justify-content-center w-full">
-                    <?php  
-                        $id = $item['image']['id']; 
-                        $url = $item['image']['url'];
-                        if($id){
-                            echo wp_get_attachment_image( $id, 'medium_large', false, array(
-                                'class' => 'img-fluid team-img'
-                            ));
-                        }else{
-                            echo '<img class="img-fluid team-img" src="'.$url.'">';
-                        } 
-                    ?> 
-                    <h5 class="mt-3 all-heading-color">
+                <div class="w-full team-all-card bg-white">
+                    <div class="team-w-img pb-2">
+                        <?php  
+                            $id = $item['image']['id']; 
+                            $url = $item['image']['url'];
+                            if($id){
+                                echo Group_Control_Image_Size::get_attachment_image_html($settings, 'image_size', $id);
+                                // echo wp_get_attachment_image( $id, 'medium_large', false, array(
+                                //     'class' => 'team-img'
+                                // ));
+                            }else{
+                                echo '<img class="team-img" src="'.$url.'">';
+                            } 
+                        ?> 
+                    </div>
+                    <h5 class="team-title">
 						<?php echo esc_html($item['author']);?>
 					</h5>
-                    <p>
+                    <p class="team-content">
 						<?php echo esc_html($item['disi']); ?>
 					</p>
                 </div>
@@ -116,30 +268,28 @@ class Teamsection extends Widget_Base{
         </div>
 		<?php
     }
-    protected function content_template() {
-        ?>
-        <#
-        var teamList = settings.team_list;
-        #>
-        <div class="row gx-3 gy-4 justify-content-center">
-            <# _.each( teamList, function( item ) { #>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="p-2 p-md-3 p-lg-4 text-center d-flex flex-column align-items-center justify-content-center w-full">
-                        <# if ( item.image.url ) { #>
-                            <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
-                        <# } else { #>
-                            <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
-                        <# } #>
-                        <h5 class="mt-3 all-heading-color">
-                            {{{ item.author }}}
-                        </h5>
-                        <p>
-                            {{{ item.disi }}}
-                        </p>
-                    </div>
-                </div>
-            <# }); #>
-        </div>
-        <?php
-    }
+    // protected function content_template() {
+    //     <#
+    //     var teamList = settings.team_list;
+    //     #>
+    //     <div class="row gx-3 gy-4 justify-content-center">
+    //         <# _.each( teamList, function( item ) { #>
+    //             <div class="col-12 col-sm-6 col-md-4">
+    //                 <div class="p-2 p-md-3 p-lg-4 text-center d-flex flex-column align-items-center justify-content-center w-full">
+    //                     <# if ( item.image.url ) { #>
+    //                         <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
+    //                     <# } else { #>
+    //                         <img class="img-fluid team-img" src="{{ item.image.url }}" alt="{{ item.author }}" />
+    //                     <# } #>
+    //                     <h5 class="mt-3 team-title">
+    //                         {{{ item.author }}}
+    //                     </h5>
+    //                     <p class="team-content">
+    //                         {{{ item.disi }}}
+    //                     </p>
+    //                 </div>
+    //             </div>
+    //         <# }); #>
+    //     </div>
+    // }
 }

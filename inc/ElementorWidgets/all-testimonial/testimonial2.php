@@ -1,5 +1,5 @@
 
-<div class="row testimonial-section mx-auto bg-white p-1 p-md-5">
+<div class="row testimonial-section mx-auto section-bg p-1 p-md-5">
     <div class="col-12 col-md-6">
         <div>
             <div class="tesimonial2-icon pb-1">

@@ -1,12 +1,12 @@
 <div class="row g-4 g-lg-5">
     <?php 
-        $recent_post = new \WP_Query([
+        $blog = new \WP_Query([
             "post_type"     => "post",
             'posts_per_page' => $settings[ 'items_to_display' ]
         ]);
         $count=0;
-        while( $recent_post -> have_posts() ){
-            $recent_post -> the_post();
+        while( $blog -> have_posts() ){
+            $blog -> the_post();
             $count++;
             if($count === 1){
                 ?>
@@ -16,15 +16,15 @@
                         <div class="blogcard1-img">
                             <a  href="<?php the_permalink();?>">
                             <?php the_post_thumbnail( 'medium', array(
-                                'class' => 'w-full blogcard1-img'
+                                'class' => 'w-full blogcard1-img post-img-redius'
                             )); ?>
                             </a>
                         </div>
-                        <div class="card-body blogcard1-content">
+                        <div class="blogcard1-content post-card-gap2">
                             <a href="<?php the_permalink();?>">
-                                <h5 class="text-white"><?php the_title(); ?></h5>
+                                <h5 class="blog-post-title1"><?php the_title(); ?></h5>
                             </a>
-                            <p class="text-white">
+                            <p class="blog-post-meta1">
                             <?php 
                                 $count = 0;
                                 $cats = get_the_category();
@@ -32,7 +32,7 @@
                                     foreach( $cats as $cat){
                                         $count++;
                                         ?>
-                                        <a class="sub-head text-white" href="<?php echo get_category_link($cat->term_id);?>">
+                                        <a class="sub-head blog-post-meta1" href="<?php echo get_category_link($cat->term_id);?>">
                                             <?php echo esc_html($cat->name); ?>
                                         </a> 
                                     <?php   
@@ -42,7 +42,7 @@
                                     }
                                 }
                             ?> 
-                            <span class="sub-head text-white"> | <?php echo get_the_date( 'M d, Y' ); ?></span>
+                            <span class="sub-head blog-post-meta1"> | <?php echo get_the_date( 'M d, Y' ); ?></span>
                             </p> 
                         </div>
                     </div>
@@ -54,16 +54,16 @@
     ?>
     <div class="col-12 col-md-6">
         <?php 
-            while( $recent_post -> have_posts() ){
-                $recent_post -> the_post();
+            while( $blog -> have_posts() ){
+                $blog -> the_post();
                 if($count >= 1){
                     ?>
                     <div class="mb-3 mb-lg-4">
-                        <div class="text-decoration-none text-reset ">
+                        <div class="text-decoration-none text-reset post-card-gap2">
                             <a href="<?php the_permalink();?>">
-                                <h6 class="all-heading-color"><?php the_title(); ?></h6>
+                                <h6 class="blog-post-title2"><?php the_title(); ?></h6>
                             </a>
-                            <p>
+                            <p class="blog-post-meta2">
                                 <?php 
                                 $count = 0;
                                 $cats = get_the_category();
@@ -71,7 +71,7 @@
                                     foreach( $cats as $cat){
                                         $count++;
                                         ?>
-                                        <a class="categori-color" href="<?php echo get_category_link($cat->term_id);?>">
+                                        <a class="blog-post-meta2" href="<?php echo get_category_link($cat->term_id);?>">
                                             <?php echo esc_html($cat->name); ?>
                                         </a> 
                                     <?php   
@@ -81,8 +81,7 @@
                                     }
                                 }
                             ?>
-                            |
-                            <?php echo get_the_date( 'M d, Y' ); ?>
+                            <span class="blog-post-meta2">| <?php echo get_the_date( 'M d, Y' ); ?></span>
                             </p>
                         </div>
                     </div>

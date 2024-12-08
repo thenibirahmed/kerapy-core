@@ -60,6 +60,7 @@ class Heppycustomers extends Widget_Base{
 		);
 
         $this->end_controls_section();
+		// style tab
         $this->start_controls_section(
 			'style_section',
 			[
@@ -68,17 +69,74 @@ class Heppycustomers extends Widget_Base{
 			]
             
 		);
+		$this->add_control(
+			'happy_title_color',
+			[
+				'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .happy_tilte' => 'color: {{VALUE}} !important',
+				],
+                
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'happy_title_typography',
+                'label' => esc_html__( 'Heading Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .happy_tilte',
+            ]
+        );
+		$this->add_control(
+			'happy_desc_color',
+			[
+				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#666666',
+				'selectors' => [
+					'{{WRAPPER}} .happy-customers-desc' => 'color: {{VALUE}} !important',
+				],
+                
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'happy_desc_typography',
+                'label' => esc_html__( 'Description Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .happy-customers-desc',
+            ]
+        );
         $this->add_control(
 			'border-color',
 			[
 				'label' => esc_html__( 'Border Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#5fc4be',
 				'selectors' => [
 					'{{WRAPPER}} .happy-customers-desc ' => 'border-color: {{VALUE}}',
 				],
 			]
 		);
-
+		$this->add_control(
+			'happy_padding_elements',
+			[
+				'label' => esc_html__( 'Padding', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ], 
+				'default' => [
+					'top' => '6',
+					'right' => '0',
+					'bottom' => '6',
+					'left' => '16', 
+					'unit' => 'px', 
+				],
+				'selectors' => [
+					'{{WRAPPER}} .happy-customers-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', // Apply padding on all four sides
+				],
+			]
+		);
         $this->end_controls_section();
 
     }
@@ -88,7 +146,7 @@ class Heppycustomers extends Widget_Base{
         <div class="mb-4 mb-lg-0">
             <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
                 <div class="happy-customers-content d-flex flex-column gap-2">
-                <h3 class="all-heading-color"><?php echo $settings['title']; ?></h3>
+                <h3 class="happy_tilte"><?php echo $settings['title']; ?></h3>
                 <p class="happy-customers-desc"><?php echo $settings['description']; ?></p>
                 </div>
             </div>
@@ -96,15 +154,13 @@ class Heppycustomers extends Widget_Base{
 		<?php
     }
     protected function content_template() {
-        ?>
-        <div class="mb-4 mb-lg-0">
-            <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
-                <div class="happy-customers-content d-flex flex-column gap-2">
-                    <h3 class="all-heading-color">{{{ settings.title }}}</h3>
-                    <p class="happy-customers-desc">{{{ settings.description }}}</p>
-                </div>
-            </div>
-        </div>
-        <?php 
+        // <div class="mb-4 mb-lg-0">
+        //     <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
+        //         <div class="happy-customers-content d-flex flex-column gap-2">
+        //             <h3 class="happy_tilte">{{{ settings.title }}}</h3>
+        //             <p class="happy-customers-desc">{{{ settings.description }}}</p>
+        //         </div>
+        //     </div>
+        // </div>
     }
 }

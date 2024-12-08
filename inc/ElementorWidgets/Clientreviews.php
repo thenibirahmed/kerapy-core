@@ -39,6 +39,24 @@ class Clientreviews extends Widget_Base{
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
+        $this->add_control(
+			'review_number',
+			[
+				'label' => esc_html__( 'Review Number', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( '1050', 'kerapy-core' ),
+				'placeholder' => esc_html__( 'Type your number here', 'kerapy-core' ),
+			]
+		);
+        $this->add_control(
+			'review_text',
+			[
+				'label' => esc_html__( 'Review text', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Reviews From Clients', 'kerapy-core' ),
+				'placeholder' => esc_html__( 'Type your text here', 'kerapy-core' ),
+			]
+		);
 		$this->add_control(
 			'img_list',
 			[
@@ -65,14 +83,73 @@ class Clientreviews extends Widget_Base{
                 'title_field' => '{{{ image.url ? "Image Uploaded" : "No Image" }}}',
 			]
 		);
-        $this->add_control(
-			'content',
+        $this->end_controls_section();
+        // style tab
+        $this->start_controls_section(
+			'style_section',
 			[
-				'label' => esc_html__( 'Review Content', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::WYSIWYG,
-                'default' => '<h6>' . esc_html__( '1050+ Reviews From Clients', 'kerapy-core' ) . '</h6>',
+				'label' => esc_html__( 'Content', 'kerapy-core' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+            
+		);
+		$this->add_control(
+			'review_number_color',
+			[
+				'label' => esc_html__( 'Number Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .review_number' => 'color: {{VALUE}} !important',
+				],
+                
 			]
 		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'number_typography',
+                'label' => esc_html__( 'Number Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .review_number',
+            ]
+        );
+        $this->add_control(
+			'review_text_color',
+			[
+				'label' => esc_html__( 'Review Text Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .review_text' => 'color: {{VALUE}}',
+				],
+                
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'review_text_typography',
+                'label' => esc_html__( 'Review Text Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .review_text',
+            ]
+        );
+        $this->add_control(
+            'review _img_border_radius',
+            [
+                'label' => esc_html__( 'Image Border Radius', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 100,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 100 ],
+                    '%' => [ 'min' => 0, 'max' => 50 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .review-img' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
         $this->end_controls_section();
 
     }
@@ -97,38 +174,36 @@ class Clientreviews extends Widget_Base{
                 ?>
                     <?php } ?>
                 </div>
-                <div class="review-text all-heading-color">
-                    <?php echo wp_kses_post($settings['content']) ; ?>
+                <div class="">
+                    <h6 class=""><span class="review_number"><?php echo esc_html($settings['review_number']);?>+ </span><span class="review_text"><?php echo esc_html($settings['review_text']);?></span></h6>
                 </div>
             </div>
         </div>
 		<?php
     }
-    protected function content_template() {
-        ?>
-        <#
-        var images = settings.img_list;
-        var content = settings.content;
-        #>
-        <div class="client-reviews-section">
-            <div class="d-flex gap-4 align-items-center justify-content-start">
-                <div class="d-flex align-items-center">
-                    <# _.each( images, function( img ) { #>
-                        <# 
-                        var imageUrl = img.image.url;
-                        var imageId = img.image.id;
-                        if ( imageId ) { 
-                            var imageUrl = elementor.imagesManager.getImageUrl( imageId ); 
-                        } 
-                        #>
-                        <img class="img-fluid review-img" src="{{ imageUrl }}" />
-                    <# }); #>
-                </div>
-                <div class="review-text all-heading-color">
-                    {{{ content }}}
-                </div>
-            </div>
-        </div>
-        <?php
-    }
+    // protected function content_template() {
+    //     <#
+    //     var images = settings.img_list;
+    //     var content = settings.content;
+    //     #>
+    //     <div class="client-reviews-section">
+    //         <div class="d-flex gap-4 align-items-center justify-content-start">
+    //             <div class="d-flex align-items-center">
+    //                 <# _.each( images, function( img ) { #>
+    //                     <# 
+    //                     var imageUrl = img.image.url;
+    //                     var imageId = img.image.id;
+    //                     if ( imageId ) { 
+    //                         var imageUrl = elementor.imagesManager.getImageUrl( imageId ); 
+    //                     } 
+    //                     #>
+    //                     <img class="img-fluid review-img" src="{{ imageUrl }}" />
+    //                 <# }); #>
+    //             </div>
+    //             <div class="review-text all-heading-color">
+    //                 {{{ content }}}
+    //             </div>
+    //         </div>
+    //     </div>
+    // }
 }

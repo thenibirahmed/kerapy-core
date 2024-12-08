@@ -86,6 +86,36 @@ class Kerapylist extends \Elementor\Widget_Base{
             
 		);
         $this->add_control(
+			'icon_size',
+			[
+				'label' => esc_html__( 'Icon Size', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 16,
+				],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 200,
+					],
+					'em' => [
+						'min' => 1,
+						'max' => 15,
+					],
+					'%' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .list-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};', 
+					'{{WRAPPER}} .list-icon i' => 'font-size: {{SIZE}}{{UNIT}};', 
+				],
+			]
+		);
+        $this->add_control(
             'icon_color',
             [
                 'label' => esc_html__( 'Icon Color', 'kerapy-core' ),
@@ -94,6 +124,14 @@ class Kerapylist extends \Elementor\Widget_Base{
                     '{{WRAPPER}} .list-icon' => 'color: {{VALUE}};', // Apply color to parent
                     '{{WRAPPER}} .list-icon svg' => 'fill: {{VALUE}};', // Explicitly set fill for SVG
                 ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'list_title_typography',
+                'label' => esc_html__( 'Heading Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .list-title',
             ]
         );
         $this->add_control(
@@ -106,17 +144,36 @@ class Kerapylist extends \Elementor\Widget_Base{
 				],
 			]
 		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'list_content_typography',
+                'label' => esc_html__( 'Description Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .list-description p',
+            ]
+        );
         $this->add_control(
 			'desc_color',
 			[
-				'label' => esc_html__( 'Paragraph Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .list-description ' => 'color: {{VALUE}} ',
+					'{{WRAPPER}} .list-description' => 'color: {{VALUE}} ',
 				],
 			]
 		);
-
+        $this->add_control(
+            'gap_elements',
+            [
+                'label' => esc_html__( 'Gap Between Title and Designation', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 15 ],
+                'selectors' => [
+                    '{{WRAPPER}} .list-content' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
         $this->end_controls_section();
     }
     protected function render() {
@@ -135,11 +192,11 @@ class Kerapylist extends \Elementor\Widget_Base{
                         <?php \Elementor\Icons_Manager::render_icon( $list['icon'], [ 'aria-hidden' => 'true' ] ); ?>
                     </div>
                     <?php } ?>
-                    <div>
+                    <div class="list-content">
                         <?php 
                             if($list['title']){
                         ?>
-                        <h6 class="mb-md-2 list-title">
+                        <h6 class="list-title">
                             <?php echo esc_html($list['title']); ?>
                         </h6>
                         <?php } ?>
@@ -157,36 +214,34 @@ class Kerapylist extends \Elementor\Widget_Base{
         </div>
         <?php
 	}      
-    protected function content_template() {
-        ?>
-        <div class="">
-            <ul class="list-unstyled lh-lg d-flex flex-column gap-2 gap-md-3">
-                <# _.each( settings.choose_list, function( list ) { #>
-                <li class="d-flex gap-2 gap-md-3">
-                    <#
-                        var iconHTML = elementor.helpers.renderIcon( view, list.icon, { 'aria-hidden': true }, 'i' , 'object' );
-                    #>
-                    <# if( list.icon ){ #>
-                    <div class="list-icon ">
-                        {{{ iconHTML.value }}}
-                    </div>
-                    <# } #>
-                    <div>
-                        <# if( list.title ){ #>
-                        <h6 class="mb-md-2 list-title">
-                            {{{ list.title }}}
-                        </h6>
-                        <# } #>
-                        <# if( list.desc ){ #>
-                        <div class="list-description">
-                            <p class="" >{{{ list.desc }}}</p> 
-                        </div>
-                        <# } #>
-                    </div>
-                </li>
-                <# }); #>
-            </ul>
-        </div>
-        <?php
-	}      
+    // protected function content_template() {
+    //     <div class="">
+    //         <ul class="list-unstyled lh-lg d-flex flex-column gap-2 gap-md-3">
+    //             <# _.each( settings.choose_list, function( list ) { #>
+    //             <li class="d-flex gap-2 gap-md-3">
+    //                 <#
+    //                     var iconHTML = elementor.helpers.renderIcon( view, list.icon, { 'aria-hidden': true }, 'i' , 'object' );
+    //                 #>
+    //                 <# if( list.icon ){ #>
+    //                 <div class="list-icon ">
+    //                     {{{ iconHTML.value }}}
+    //                 </div>
+    //                 <# } #>
+    //                 <div>
+    //                     <# if( list.title ){ #>
+    //                     <h6 class="mb-md-2 list-title">
+    //                         {{{ list.title }}}
+    //                     </h6>
+    //                     <# } #>
+    //                     <# if( list.desc ){ #>
+    //                     <div class="list-description">
+    //                         <p class="" >{{{ list.desc }}}</p> 
+    //                     </div>
+    //                     <# } #>
+    //                 </div>
+    //             </li>
+    //             <# }); #>
+    //         </ul>
+    //     </div>
+	// }      
 }

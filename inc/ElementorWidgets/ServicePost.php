@@ -62,6 +62,47 @@ class ServicePost extends Widget_Base{
 		);
         $this->end_controls_section();
 
+        // style tab
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => esc_html__( 'Content', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'service_img_width',
+            [
+                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => '%',
+                    'size' => 100,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 30, 'max' => 1000 ],
+                    '%' => [ 'min' => 0, 'max' => 100 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .service-img img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'post2_gap_elements',
+            [
+                'label' => esc_html__( 'Gap Between Images Author Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 4 ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-card-gap2' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->end_controls_section();
+
     }
     protected function render(){
         $settings = $this->get_settings_for_display();

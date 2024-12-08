@@ -30,19 +30,11 @@ class Counter extends \Elementor\Widget_Base {
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
-        $this->add_control(
-			'item_title',
-			[
-				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Years of Experience' , 'kerapy-core' ),
-                'label_block' => true,
-			]
-		);
+        
         $this->add_control(
 			'max-num-of-count',
 			[
-				'label' => esc_html__( 'Price', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Title', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 1000,
@@ -51,18 +43,18 @@ class Counter extends \Elementor\Widget_Base {
 			]
 		);
         $this->add_control(
-			'item_title2',
+			'item_title',
 			[
-				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Subtitle', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Happy Customers' , 'kerapy-core' ),
+                'default' => esc_html__( 'Years of Experience' , 'kerapy-core' ),
                 'label_block' => true,
 			]
 		);
         $this->add_control(
 			'max-num-of-count2',
 			[
-				'label' => esc_html__( 'Price', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Title', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 1000,
@@ -71,18 +63,18 @@ class Counter extends \Elementor\Widget_Base {
 			]
 		);
         $this->add_control(
-			'item_title3',
+			'item_title2',
 			[
-				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Subtitle', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Certified Therapy' , 'kerapy-core' ),
+                'default' => esc_html__( 'Happy Customers' , 'kerapy-core' ),
                 'label_block' => true,
 			]
 		);
         $this->add_control(
 			'max-num-of-count3',
 			[
-				'label' => esc_html__( 'Price', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Title', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 1000,
@@ -91,26 +83,111 @@ class Counter extends \Elementor\Widget_Base {
 			]
 		);
         $this->add_control(
-			'item_title4',
+			'item_title3',
 			[
-				'label' => esc_html__( 'Item Title', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Subtitle', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__( 'Therapy Sessions' , 'kerapy-core' ),
+                'default' => esc_html__( 'Certified Therapy' , 'kerapy-core' ),
                 'label_block' => true,
 			]
 		);
         $this->add_control(
 			'max-num-of-count4',
 			[
-				'label' => esc_html__( 'Price', 'kerapy-core' ),
+				'label' => esc_html__( 'Counter Title', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
-                'max' => 12000,
+                'max' => 1000,
                 'step' => 0.1,
-                'default' => 400,
+                'default' => 12000,
+			]
+		);
+        $this->add_control(
+			'item_title4',
+			[
+				'label' => esc_html__( 'Counter Subtitle', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__( 'Therapy Sessions' , 'kerapy-core' ),
+                'label_block' => true,
 			]
 		);
         
+      $this->end_controls_section();
+      // Start Style Section
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => esc_html__( 'Style', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+			'title_color',
+			[
+				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#212529',
+				'selectors' => [
+					'{{WRAPPER}} .counter' => 'color: {{VALUE}};',
+				],
+			]
+		);
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+                'label' => __( 'Title Typography', 'kerapy-core' ),
+				'selector' => '{{WRAPPER}} .counter',
+			]
+		);
+        $this->add_control(
+			'subtitle_color',
+			[
+				'label' => esc_html__( 'Subtitle Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#666666 ',
+				'selectors' => [
+					'{{WRAPPER}} .counter-subtitle' => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'subtitle_typography',
+                'label' => __( 'Subtitle Typography', 'kerapy-core' ),
+				'selector' => '{{WRAPPER}} .counter',
+			]
+		);
+        $this->add_control(
+            'counter_padding',
+            [
+                'label' => esc_html__( 'Padding', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'top' => '24',
+                    'right' => '24',
+                    'bottom' => '24',
+                    'left' => '24',
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .counter-sec' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+			'counter_bg_color',
+			[
+				'label' => esc_html__( 'Background Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#ffffff ',
+				'selectors' => [
+					'{{WRAPPER}} .counter-sec' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
       $this->end_controls_section();
     }
     protected function render() {
@@ -119,12 +196,12 @@ class Counter extends \Elementor\Widget_Base {
             <div class="row">
                 <?php if ( !empty($settings['max-num-of-count']) && !empty($settings['item_title']) ) : ?>
                 <div class="col-md-6 ">
-                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                    <div class="text-cente mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count']); ?></div>
-                        <span class="all-heading-color">+</span>
+                        <div class="counter stat-number" ><?php echo esc_html($settings['max-num-of-count']); ?></div>
+                        <span class="counter">+</span>
                     </div>
-                    <p class="pt-3">
+                    <p class="pt-3 counter-subtitle">
                         <?php echo esc_html($settings['item_title']);?>
                     </p>
                     </div>
@@ -193,12 +270,12 @@ class Counter extends \Elementor\Widget_Base {
         <div class="row">
             <# if ( settings['max-num-of-count'] && settings['item_title'] ) { #>
             <div class="col-md-6">
-                <div class="bg-white p-4 text-center mb-4 counter-sec">
+                <div class="text-center mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count'] }}}</div>
-                        <span class="all-heading-color">+</span>
+                        <div class="counter stat-number">{{{ settings['max-num-of-count'] }}}</div>
+                        <span class="counter">+</span>
                     </div>
-                    <p class="pt-3">
+                    <p class="pt-3 counter-subtitle">
                         {{{ settings['item_title'] }}}
                     </p>
                 </div>
