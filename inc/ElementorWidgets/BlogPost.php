@@ -94,7 +94,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'left_title1_color',
 			[
-				'label' => esc_html__( 'Left Title Color', 'kerapy-core' ),
+				'label' => esc_html__( 'large Card Title Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#fff',
 				'selectors' => [
@@ -110,7 +110,7 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'laft_title1_typography',
-                'label' => esc_html__( 'Left Title Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'large Card Title Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-title1',
                 'condition' => [
                     'layout' => 'layout1',
@@ -120,7 +120,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'post_meta_color',
 			[
-				'label' => esc_html__( 'Left Post Meta Color', 'kerapy-core' ),
+				'label' => esc_html__( 'large Card Post Meta Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#fff',
 				'selectors' => [
@@ -135,7 +135,7 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'post_meta_typography',
-                'label' => esc_html__( 'Left Post Meta Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'large Card Post Meta Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-meta1',
                 'condition' => [
                     'layout' => 'layout1',
@@ -146,7 +146,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'right_title1_color',
 			[
-				'label' => esc_html__( 'Right Title Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .blog-post-title2' => 'color: {{VALUE}} ',
@@ -161,7 +161,7 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'right_title1_typography',
-                'label' => esc_html__( 'Right Title Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'Title Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-title2',
                 'condition' => [
                     'layout' => 'layout1',
@@ -171,7 +171,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'right_postmeta_color',
 			[
-				'label' => esc_html__( 'Right Post Meta Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Post Meta Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#666666',
 				'selectors' => [
@@ -186,54 +186,13 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'right_postmeta_typography',
-                'label' => esc_html__( 'Right Post Meta Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'Post Meta Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-meta2',
                 'condition' => [
                     'layout' => 'layout1',
                 ],
             ]
         );
-       
-        $this->add_control(
-            'post1_img_width',
-            [
-                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'range' => [
-                    'px' => [ 'min' => 30, 'max' => 1000 ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team--w-img' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'layout' => 'layout1',
-                ],
-            ]
-        );
-        $this->add_control(
-            'post1_img_height',
-            [
-                'label' => esc_html__( 'Image Height', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team--w-img' => 'height: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'layout' => 'layout1',
-                ],
-            ]
-        );
-        
         // style two
         $this->add_control(
 			'postmeta2_color',
@@ -284,50 +243,6 @@ class BlogPost extends Widget_Base{
                 ],
             ]
             
-        );
-        $this->add_control(
-            'post_img_width',
-            [
-                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'range' => [
-                    'px' => [ 'min' => 30, 'max' => 1000 ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team-w-img' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'layout' => 'layout2',
-                ],
-            ]
-        );
-        $this->add_control(
-            'post_img_height',
-            [
-                'label' => esc_html__( 'Image Height', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ], 
-                'default' => [
-                    'unit' => '%', 
-                    'size' => 100,  
-                ],
-                'range' => [
-                    'px' => [ 'min' => 0, 'max' => 1000 ], 
-                    '%' => [ 'min' => 0, 'max' => 200 ], 
-                    'em' => [ 'min' => 0, 'max' => 100 ], 
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .post-img' => 'height: {{SIZE}}{{UNIT}};', 
-                ],
-                'condition' => [
-                    'layout' => 'layout2', 
-                ],
-            ]
         );
         
         $this->add_control(

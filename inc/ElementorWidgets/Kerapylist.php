@@ -86,6 +86,53 @@ class Kerapylist extends \Elementor\Widget_Base{
             
 		);
         $this->add_control(
+			'text_color',
+			[
+				'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .list-title ' => 'color: {{VALUE}}',
+				],
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'list_title_typography',
+                'label' => esc_html__( 'Heading Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .list-title',
+            ]
+        );
+        $this->add_control(
+			'desc_color',
+			[
+				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .list-description' => 'color: {{VALUE}} ',
+				],
+			]
+		);
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'list_content_typography',
+                'label' => esc_html__( 'Description Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .list-description p',
+            ]
+        );
+        $this->add_control(
+            'icon_color',
+            [
+                'label' => esc_html__( 'Icon Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .list-icon' => 'color: {{VALUE}};', // Apply color to parent
+                    '{{WRAPPER}} .list-icon svg' => 'fill: {{VALUE}};', // Explicitly set fill for SVG
+                ],
+            ]
+        );
+        $this->add_control(
 			'icon_size',
 			[
 				'label' => esc_html__( 'Icon Size', 'kerapy-core' ),
@@ -112,53 +159,6 @@ class Kerapylist extends \Elementor\Widget_Base{
 				'selectors' => [
 					'{{WRAPPER}} .list-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};', 
 					'{{WRAPPER}} .list-icon i' => 'font-size: {{SIZE}}{{UNIT}};', 
-				],
-			]
-		);
-        $this->add_control(
-            'icon_color',
-            [
-                'label' => esc_html__( 'Icon Color', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .list-icon' => 'color: {{VALUE}};', // Apply color to parent
-                    '{{WRAPPER}} .list-icon svg' => 'fill: {{VALUE}};', // Explicitly set fill for SVG
-                ],
-            ]
-        );
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'list_title_typography',
-                'label' => esc_html__( 'Heading Typography', 'kerapy-core' ),
-                'selector' => '{{WRAPPER}} .list-title',
-            ]
-        );
-        $this->add_control(
-			'text_color',
-			[
-				'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .list-title ' => 'color: {{VALUE}}',
-				],
-			]
-		);
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'list_content_typography',
-                'label' => esc_html__( 'Description Typography', 'kerapy-core' ),
-                'selector' => '{{WRAPPER}} .list-description p',
-            ]
-        );
-        $this->add_control(
-			'desc_color',
-			[
-				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .list-description' => 'color: {{VALUE}} ',
 				],
 			]
 		);

@@ -99,7 +99,7 @@ class Counter extends \Elementor\Widget_Base {
                 'min' => 1,
                 'max' => 1000,
                 'step' => 0.1,
-                'default' => 12000,
+                'default' => 1200,
 			]
 		);
         $this->add_control(
@@ -124,7 +124,7 @@ class Counter extends \Elementor\Widget_Base {
         $this->add_control(
 			'title_color',
 			[
-				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '#212529',
 				'selectors' => [
@@ -136,7 +136,7 @@ class Counter extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'title_typography',
-                'label' => __( 'Title Typography', 'kerapy-core' ),
+                'label' => __( 'Heading Typography', 'kerapy-core' ),
 				'selector' => '{{WRAPPER}} .counter',
 			]
 		);
@@ -145,7 +145,7 @@ class Counter extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Subtitle Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'default' => '#666666 ',
+				'default' => '#666666',
 				'selectors' => [
 					'{{WRAPPER}} .counter-subtitle' => 'color: {{VALUE}} !important;',
 				],
@@ -156,7 +156,7 @@ class Counter extends \Elementor\Widget_Base {
 			[
 				'name' => 'subtitle_typography',
                 'label' => __( 'Subtitle Typography', 'kerapy-core' ),
-				'selector' => '{{WRAPPER}} .counter',
+				'selector' => '{{WRAPPER}} .counter-subtitle',
 			]
 		);
         $this->add_control(
@@ -177,12 +177,53 @@ class Counter extends \Elementor\Widget_Base {
                 ],
             ]
         );
+        
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label' => esc_html__('Columns', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '1' => esc_html__('1 Column', 'kerapy-core'),
+                    '2' => esc_html__('2 Columns', 'kerapy-core'),
+                    '3' => esc_html__('3 Columns', 'kerapy-core'),
+                    '4' => esc_html__('4 Columns', 'kerapy-core'),
+                ],
+                'default' => '2',
+                'frontend_available' => true, 
+            ]
+        );
+        $this->add_control(
+            'team_title_alignment',
+            [
+                'label' => esc_html__( 'Content Alignment', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Top', 'kerapy-core' ), 
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'kerapy-core' ), 
+                        'icon' => 'eicon-v-align-middle',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'Bottom', 'kerapy-core' ), 
+                        'icon' => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'default' => 'center',
+                'selectors' => [
+                    '{{WRAPPER}} .counter-sec' => 'display: flex; align-items: {{VALUE}};', 
+                ],
+            ]
+        );
         $this->add_control(
 			'counter_bg_color',
 			[
 				'label' => esc_html__( 'Background Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'default' => '#ffffff ',
+				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .counter-sec' => 'background-color: {{VALUE}};',
 				],
@@ -192,55 +233,57 @@ class Counter extends \Elementor\Widget_Base {
     }
     protected function render() {
       $settings = $this->get_settings_for_display();
+      $columns = !empty($settings['columns']) ? intval($settings['columns']) : 2;
+      $col_class = 'col-md-' . (12 / $columns);
     ?>
             <div class="row">
                 <?php if ( !empty($settings['max-num-of-count']) && !empty($settings['item_title']) ) : ?>
-                <div class="col-md-6 ">
-                    <div class="text-cente mb-4 counter-sec">
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="text-cente  mb-4 counter-sec">
                     <div class="counter-plus d-flex">
                         <div class="counter stat-number" ><?php echo esc_html($settings['max-num-of-count']); ?></div>
                         <span class="counter">+</span>
                     </div>
-                    <p class="pt-3 counter-subtitle">
+                    <p class="pt-3 counter-subtitle text-center">
                         <?php echo esc_html($settings['item_title']);?>
                     </p>
                     </div>
                 </div>
                 <?php endif; ?>
                 <?php if ( !empty($settings['max-num-of-count2']) && !empty($settings['item_title2']) ) : ?>
-                <div class="col-md-6 ">
-                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="text-cente mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count2']); ?></div>
-                        <span class="all-heading-color">+</span>
+                        <div class="counter stat-number" ><?php echo esc_html($settings['max-num-of-count2']); ?></div>
+                        <span class="counter">+</span>
                     </div>
-                    <p class="pt-3">
+                    <p class="pt-3 counter-subtitle text-center">
                         <?php echo esc_html($settings['item_title2']);?>
                     </p>
                     </div>
                 </div>
                 <?php endif; ?>
                 <?php if ( !empty($settings['max-num-of-count3']) && !empty($settings['item_title3']) ) : ?>
-                <div class="col-md-6 ">
-                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="text-cente mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count3']); ?></div>
-                        <span class="all-heading-color">+</span>
+                        <div class="counter stat-number" ><?php echo esc_html($settings['max-num-of-count3']); ?></div>
+                        <span class="counter">+</span>
                     </div>
-                    <p class="pt-3">
+                    <p class="pt-3 counter-subtitle text-center">
                         <?php echo esc_html($settings['item_title3']);?>
                     </p>
                     </div>
                 </div>
                 <?php endif; ?>
                 <?php if ( !empty($settings['max-num-of-count4']) && !empty($settings['item_title4']) ) : ?>
-                <div class="col-md-6 ">
-                    <div class="bg-white p-4 text-cente mb-4 counter-sec">
+                <div class="<?php echo esc_attr($col_class); ?>">
+                    <div class="text-cente mb-4 counter-sec">
                     <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color" ><?php echo esc_html($settings['max-num-of-count4']); ?></div>
-                        <span class="all-heading-color">+</span>
+                        <div class="counter stat-number" ><?php echo esc_html($settings['max-num-of-count4']); ?></div>
+                        <span class="counter">+</span>
                     </div>
-                    <p class="pt-3">
+                    <p class="pt-3 counter-subtitle text-center">
                         <?php echo esc_html($settings['item_title4']);?>
                     </p>
                     </div>
@@ -265,79 +308,77 @@ class Counter extends \Elementor\Widget_Base {
         </script>
     <?php
     }
-    protected function content_template() {
-        ?>
-        <div class="row">
-            <# if ( settings['max-num-of-count'] && settings['item_title'] ) { #>
-            <div class="col-md-6">
-                <div class="text-center mb-4 counter-sec">
-                    <div class="counter-plus d-flex">
-                        <div class="counter stat-number">{{{ settings['max-num-of-count'] }}}</div>
-                        <span class="counter">+</span>
-                    </div>
-                    <p class="pt-3 counter-subtitle">
-                        {{{ settings['item_title'] }}}
-                    </p>
-                </div>
-            </div>
-            <# } #>
-            <# if ( settings['max-num-of-count2'] && settings['item_title2'] ) { #>
-            <div class="col-md-6">
-                <div class="bg-white p-4 text-center mb-4 counter-sec">
-                    <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count2'] }}}</div>
-                        <span class="all-heading-color">+</span>
-                    </div>
-                    <p class="pt-3">
-                        {{{ settings['item_title2'] }}}
-                    </p>
-                </div>
-            </div>
-            <# } #>
-            <# if ( settings['max-num-of-count3'] && settings['item_title3'] ) { #>
-            <div class="col-md-6">
-                <div class="bg-white p-4 text-center mb-4 counter-sec">
-                    <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count3'] }}}</div>
-                        <span class="all-heading-color">+</span>
-                    </div>
-                    <p class="pt-3">
-                        {{{ settings['item_title3'] }}}
-                    </p>
-                </div>
-            </div>
-            <# } #>
-            <# if ( settings['max-num-of-count4'] && settings['item_title4'] ) { #>
-            <div class="col-md-6">
-                <div class="bg-white p-4 text-center mb-4 counter-sec">
-                    <div class="counter-plus d-flex">
-                        <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count4'] }}}</div>
-                        <span class="all-heading-color">+</span>
-                    </div>
-                    <p class="pt-3">
-                        {{{ settings['item_title4'] }}}
-                    </p>
-                </div>
-            </div>
-            <# } #>
-        </div>
-        <script>
-            // Function to animate the counter
-            jQuery(document).ready(function($){
-                $('.stat-number').each(function () {
-                    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
-                    $(this).prop('Counter', 0).animate({
-                        Counter: $(this).text()
-                    }, {
-                        duration: 5000,
-                        step: function (func) {
-                            $(this).text(parseFloat(func).toFixed(size));
-                        }
-                    });
-                });
-            });
-        </script>
-        <?php
-    }
+    // protected function content_template() {
+    //     <div class="row">
+    //         <# if ( settings['max-num-of-count'] && settings['item_title'] ) { #>
+    //         <div class="col-md-6">
+    //             <div class="text-center mb-4 counter-sec">
+    //                 <div class="counter-plus d-flex">
+    //                     <div class="counter stat-number">{{{ settings['max-num-of-count'] }}}</div>
+    //                     <span class="counter">+</span>
+    //                 </div>
+    //                 <p class="pt-3 counter-subtitle">
+    //                     {{{ settings['item_title'] }}}
+    //                 </p>
+    //             </div>
+    //         </div>
+    //         <# } #>
+    //         <# if ( settings['max-num-of-count2'] && settings['item_title2'] ) { #>
+    //         <div class="col-md-6">
+    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
+    //                 <div class="counter-plus d-flex">
+    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count2'] }}}</div>
+    //                     <span class="all-heading-color">+</span>
+    //                 </div>
+    //                 <p class="pt-3">
+    //                     {{{ settings['item_title2'] }}}
+    //                 </p>
+    //             </div>
+    //         </div>
+    //         <# } #>
+    //         <# if ( settings['max-num-of-count3'] && settings['item_title3'] ) { #>
+    //         <div class="col-md-6">
+    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
+    //                 <div class="counter-plus d-flex">
+    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count3'] }}}</div>
+    //                     <span class="all-heading-color">+</span>
+    //                 </div>
+    //                 <p class="pt-3">
+    //                     {{{ settings['item_title3'] }}}
+    //                 </p>
+    //             </div>
+    //         </div>
+    //         <# } #>
+    //         <# if ( settings['max-num-of-count4'] && settings['item_title4'] ) { #>
+    //         <div class="col-md-6">
+    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
+    //                 <div class="counter-plus d-flex">
+    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count4'] }}}</div>
+    //                     <span class="all-heading-color">+</span>
+    //                 </div>
+    //                 <p class="pt-3">
+    //                     {{{ settings['item_title4'] }}}
+    //                 </p>
+    //             </div>
+    //         </div>
+    //         <# } #>
+    //     </div>
+    //     <script>
+    //         // Function to animate the counter
+    //         jQuery(document).ready(function($){
+    //             $('.stat-number').each(function () {
+    //                 var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
+    //                 $(this).prop('Counter', 0).animate({
+    //                     Counter: $(this).text()
+    //                 }, {
+    //                     duration: 5000,
+    //                     step: function (func) {
+    //                         $(this).text(parseFloat(func).toFixed(size));
+    //                     }
+    //                 });
+    //             });
+    //         });
+    //     </script>
+    // }
 }
 ?>

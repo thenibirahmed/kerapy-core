@@ -1,17 +1,17 @@
 <div class="text-decoration-none h-100">
-    <div class="card h-100 border-0">
-        <div class="service-img bg-light">
+    <div class="card h-100 border-0 service-post-gap">
+        <div class="service-img bg-light mb-2 service-img-radius">
             <a href="<?php the_permalink();?>">
                 <?php the_post_thumbnail('medium-large', array(
-                    'class' => 'service-img img-fluid rounded-0'
+                    'class' => 'service-img img-fluid service-img-radius'
                 ));
                 ?>
             </a>
         </div>
-        <div class="p-0">
-            <a href="<?php the_permalink();?>">
-                <h5 class="all-heading-color pt-4"><?php the_title();?></h5>
-            </a>
+        <a href="<?php the_permalink();?>">
+            <h5 class="service-post-title"><?php the_title();?></h5>
+        </a>
+        <div class="service-post-text">
             <?php if(has_excerpt()){ ?>
                 <?php the_excerpt();?>
             <?php } ?>

@@ -125,7 +125,7 @@ class Alltestimonial extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'laft_title1_typography',
-                'label' => esc_html__( 'Left Title Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'Content Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .ts_content',
             ]
         );
@@ -168,20 +168,144 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
+            'quotation_color',
+            [
+                'label' => esc_html__( 'Quotation Icon Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#b8b8b9',
+                'selectors' => [
+                    '{{WRAPPER}} .tesimonial2-icon svg' => 'color: {{VALUE}} !important;',
+                ],
+                'condition' => [
+                    'tmcard' => 'testimonial2',
+                ],
+            ]
+        );
+        $this->add_control(
+			'quotation_font_size',
+			[
+				'label' => esc_html__( 'Quotation Font Size', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 60,
+				],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 200,
+					],
+					'em' => [
+						'min' => 1,
+						'max' => 15,
+					],
+					'%' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .tesimonial2-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};', 
+					'{{WRAPPER}} .tesimonial2-icon i' => 'font-size: {{SIZE}}{{UNIT}};', 
+				],
+                'condition' => [
+                    'tmcard' => 'testimonial2',
+                ],
+			]
+		);
+        $this->add_control(
+            'ts_icon_font_color',
+            [
+                'label' => esc_html__( 'Navigation Button Icon Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#b8b8b9',
+                'selectors' => [
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button span' => 'color: {{VALUE}} !important;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'icon_font_size',
+            [
+                'label' => esc_html__( 'Navigation Button Icon Font Size', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem' ],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button span' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'ts_btn_width',
+            [
+                'label' => esc_html__( 'Navigation Button Width', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],  
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 40,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 50, 
+                        'max' => 1200,
+                        'step' => 1, 
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button' => 'width: {{SIZE}}{{UNIT}};', 
+                ],
+            ]
+        );
+        $this->add_control(
+            'ts_btn_height',
+            [
+                'label' => esc_html__( 'Navigation Button Height', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],  
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 40,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 50, 
+                        'max' => 1200,
+                        'step' => 1, 
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button' => 'height: {{SIZE}}{{UNIT}};', 
+                ],
+            ]
+        );
+        $this->add_control(
             'ts_border_color',
             [
-                'label' => esc_html__( 'Navigation Border Color', 'kerapy-core' ),
+                'label' => esc_html__( 'Navigation Button Border Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#9b9b9b',
+                'default' => '#b8b8b9',
                 'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button' => 'border-color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button' => 'border-color: {{VALUE}} ;',
                 ],
             ]
         );
         $this->add_control(
             'border_width',
             [
-                'label' => esc_html__( 'Navigation Border Width', 'kerapy-core' ),
+                'label' => esc_html__( 'Navigation Button Border Width', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [
@@ -192,14 +316,14 @@ class Alltestimonial extends Widget_Base{
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button' => 'border: {{TOP}}{{UNIT}} solid;', 
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; border-style: solid;',
                 ],
             ]
         );
         $this->add_control(
             'border_radius',
             [
-                'label' => esc_html__( 'Navigation Border Radius', 'kerapy-core' ),
+                'label' => esc_html__( 'Navigation Button Border Radius', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [
@@ -210,62 +334,19 @@ class Alltestimonial extends Widget_Base{
                     'unit' => 'px', 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;', 
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;', 
                 ],
             ]
         );
-        $this->add_control(
-            'ts_btn_width',
-            [
-                'label' => esc_html__( 'Navigation Width', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', '%' ],  
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 40,
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 50, 
-                        'max' => 1200,
-                        'step' => 1, 
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button' => 'width: {{SIZE}}{{UNIT}};', 
-                ],
-            ]
-        );
-        $this->add_control(
-            'ts_btn_height',
-            [
-                'label' => esc_html__( 'Navigation Height', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', '%' ],  
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 40,
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 50, 
-                        'max' => 1200,
-                        'step' => 1, 
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button' => 'height: {{SIZE}}{{UNIT}};', 
-                ],
-            ]
-        );
+        
         $this->add_control(
             'ts_bg_color',
             [
-                'label' => esc_html__( 'Navigation BG Color', 'kerapy-core' ),
+                'label' => esc_html__( 'Navigation Button BG Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#00DCC2',
                 'selectors' => [
-                    '{{WRAPPER}} .testimonial-slider .owl-nav button:hover' => 'background-color: {{VALUE}} !important;',
+                    '{{WRAPPER}} .ts-nav-button .owl-nav button:hover' => 'background-color: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -305,7 +386,7 @@ class Alltestimonial extends Widget_Base{
         $settings = $this->get_settings_for_display();
             if($settings['tmcard'] == 'testimonial1' ){
                 ?>
-                <div class="testimonial-slider">
+                <div class="testimonial-slider ts-nav-button">
                     <div class="section-bg p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
                     <?php
                        foreach($settings['list'] as $item )
@@ -318,7 +399,7 @@ class Alltestimonial extends Widget_Base{
             }
             if($settings['tmcard'] == 'testimonial2' ){
                 ?>
-                    <div class="testimonial-box">
+                    <div class="testimonial-box ts-nav-button">
                         <div class="p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
                         <?php
                             foreach($settings['list'] as $item )

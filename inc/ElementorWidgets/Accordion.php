@@ -73,18 +73,10 @@ class Accordion extends \Elementor\Widget_Base{
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'accordion_title_typography',
-                'label' => esc_html__( 'Title Typography', 'kerapy-core' ),
-                'selector' => '{{WRAPPER}} .accordion-button.accordion-title-bg',
-            ]
-        );
         $this->add_control(
             'accordion_title_color',
             [
-                'label' => esc_html__( 'Title Text Color', 'kerapy-core' ),
+                'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .accordion-button' => 'color: {{VALUE}};',
@@ -94,9 +86,9 @@ class Accordion extends \Elementor\Widget_Base{
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'accordion_content_typography',
-                'label' => esc_html__( 'Content Typography', 'kerapy-core' ),
-                'selector' => '{{WRAPPER}} .accordion-content-ty p',
+                'name' => 'accordion_title_typography',
+                'label' => esc_html__( 'Heading Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .accordion-button.accordion-title-bg',
             ]
         );
         $this->add_control(
@@ -109,29 +101,62 @@ class Accordion extends \Elementor\Widget_Base{
                 ],
             ]
         );
-        $this->add_control(
-            'accordion_bg_color',
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
             [
-                'label' => esc_html__( 'Background Color', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .accordion-title-bg' => 'background: {{VALUE}} !important;',
-                ],
+                'name' => 'accordion_content_typography',
+                'label' => esc_html__( 'Content Typography', 'kerapy-core' ),
+                'selector' => '{{WRAPPER}} .accordion-content-ty p',
             ]
         );
-        
         $this->add_control(
             'accordion_padding',
             [
                 'label' => esc_html__( 'Padding', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
+                'default' => [
+                    'top' => '20',
+                    'right' => '15',
+                    'bottom' => '20',
+                    'left' => '15',
+                    'unit' => 'px',
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .accordion-header button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
                 ],
             ]
         );
-
+        $this->add_control(
+            'post_img_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 100 ],
+                    '%' => [ 'min' => 0, 'max' => 50 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .accordion-radius' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'accordion_bg_color',
+            [
+                'label' => esc_html__( 'Background Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#f8f9fa',
+                'selectors' => [
+                    '{{WRAPPER}} .accordion-title-bg' => 'background: {{VALUE}} !important;',
+                ],
+            ]
+        );
         $this->end_controls_section();
     }
     protected function render() {
@@ -142,8 +167,8 @@ class Accordion extends \Elementor\Widget_Base{
                 <?php 
                     foreach( $settings['accordion'] as $index => $accordion){
                 ?>
-                    <div class="accordion-item border-0 mb-3">
-                        <h2 class="accordion-header">
+                    <div class="accordion-item border-0 mb-3 accordion-radius">
+                        <h2 class="accordion-header ">
                             <button class="accordion-button accordion-title-bg" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse<?php echo esc_html($index);?>" aria-expanded="true" aria-controls="panelsStayOpen-collapse<?php echo esc_html($index);?>">
                             <?php echo esc_html($accordion['title']);?>
                             </button>

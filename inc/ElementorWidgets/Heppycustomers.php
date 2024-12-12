@@ -108,35 +108,37 @@ class Heppycustomers extends Widget_Base{
                 'selector' => '{{WRAPPER}} .happy-customers-desc',
             ]
         );
-        $this->add_control(
+        
+		$this->add_control(
 			'border-color',
 			[
 				'label' => esc_html__( 'Border Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '#5fc4be',
 				'selectors' => [
-					'{{WRAPPER}} .happy-customers-desc ' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .happy-customers-desc' => 'border-color: {{VALUE}} !important',
 				],
 			]
 		);
 		$this->add_control(
-			'happy_padding_elements',
+			'padding',
 			[
 				'label' => esc_html__( 'Padding', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ], 
+				'size_units' => [ 'px', '%', 'em' ],
 				'default' => [
 					'top' => '6',
 					'right' => '0',
 					'bottom' => '6',
-					'left' => '16', 
-					'unit' => 'px', 
+					'left' => '16',
+					'unit' => 'px',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .happy-customers-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', // Apply padding on all four sides
+					'{{WRAPPER}} .happy-customers-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
+		
         $this->end_controls_section();
 
     }
@@ -147,7 +149,7 @@ class Heppycustomers extends Widget_Base{
             <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
                 <div class="happy-customers-content d-flex flex-column gap-2">
                 <h3 class="happy_tilte"><?php echo $settings['title']; ?></h3>
-                <p class="happy-customers-desc"><?php echo $settings['description']; ?></p>
+				<p class="happy-customers-desc"><?php echo $settings['description']; ?></p>	
                 </div>
             </div>
         </div>

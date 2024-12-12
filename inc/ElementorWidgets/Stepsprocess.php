@@ -141,7 +141,7 @@ class Stepsprocess extends \Elementor\Widget_Base{
 			[
 				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#fff',
+                'default' => '#66666',
 				'selectors' => [
 					'{{WRAPPER}} .sp-desc' => 'color: {{VALUE}} ',
 				],

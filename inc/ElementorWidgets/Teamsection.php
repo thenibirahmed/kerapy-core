@@ -51,8 +51,11 @@ class Teamsection extends Widget_Base{
                         'name'	=> 'image',
 						'label'	=> esc_html__( 'Image', 'kerapy-core' ),
 						'type' => \Elementor\Controls_Manager::MEDIA,
+                        'dynamic' => [
+                            'active' => true,
+                        ],
                         'default' => [
-                        'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
                         ],
                     ],
                     [
@@ -72,7 +75,7 @@ class Teamsection extends Widget_Base{
 				],
 				'default' => [
 					[
-						// 'image' => esc_html__( 'Image', 'kerapy-core' ),
+						'image' => esc_html__( 'Image', 'kerapy-core' ),
 						'author' => esc_html__( 'Author Name.', 'kerapy-core' ),
 						'desc' => esc_html__( 'Designation', 'kerapy-core' ),
 					]
@@ -90,66 +93,11 @@ class Teamsection extends Widget_Base{
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-        
-        // Image Width
-        $this->add_control(
-            'team_img_width',
-            [
-                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'range' => [
-                    'px' => [ 'min' => 30, 'max' => 1000 ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team-w-img img' => 'max-width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-        
-        // Image Height
-        $this->add_control(
-            'team_img_height',
-            [
-                'label' => esc_html__( 'Image Height', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team-w-img img' => 'max-height: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'team_img_border_radius',
-            [
-                'label' => esc_html__( 'Image Border Radius', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%', 'em' ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 0,
-                ],
-                'range' => [
-                    'px' => [ 'min' => 0, 'max' => 100 ],
-                    '%' => [ 'min' => 0, 'max' => 50 ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .team-w-img img' => 'border-radius: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
+       
         $this->add_control(
 			'title-color',
 			[
-				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
+				'label' => esc_html__( 'Author Name Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .team-title ' => 'color: {{VALUE}}',
@@ -160,7 +108,7 @@ class Teamsection extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'team_title_typography',
-                'label' => esc_html__( 'Title Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'Author Name Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .team-title',
             ]
         );
@@ -184,9 +132,28 @@ class Teamsection extends Widget_Base{
             ]
         );
         $this->add_control(
+            'team_img_border_radius',
+            [
+                'label' => esc_html__( 'Image Border Radius', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 100 ],
+                    '%' => [ 'min' => 0, 'max' => 50 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .team-w-img img' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_control(
             'gap_elements',
             [
-                'label' => esc_html__( 'Gap Between Images Title Designation', 'kerapy-core' ),
+                'label' => esc_html__( 'Gap Between Images Name and Designation', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [ 'unit' => 'px', 'size' => 15 ],
@@ -198,7 +165,7 @@ class Teamsection extends Widget_Base{
         $this->add_control(
             'team_title_alignment',
             [
-                'label' => esc_html__( 'Title Alignment', 'kerapy-core' ),
+                'label' => esc_html__( 'Content Alignment', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -233,7 +200,6 @@ class Teamsection extends Widget_Base{
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
-        Group_Control_Image_Size::print_attachment_image_html( $settings );
 		$list = $settings['team_list'];
 		?>
         <div class="row gx-5 gx-lg-5 gy-5 gy-lg-5 justify-content-center">
@@ -247,14 +213,12 @@ class Teamsection extends Widget_Base{
                             $id = $item['image']['id']; 
                             $url = $item['image']['url'];
                             if($id){
-                                echo Group_Control_Image_Size::get_attachment_image_html($settings, 'image_size', $id);
-                                // echo wp_get_attachment_image( $id, 'medium_large', false, array(
-                                //     'class' => 'team-img'
-                                // ));
+                                $image_url = Group_Control_Image_Size::get_attachment_image_src( $id, 'image_size', $settings );
                             }else{
                                 echo '<img class="team-img" src="'.$url.'">';
                             } 
                         ?> 
+                    <img src="<?php echo esc_url($image_url); ?>" alt="">
                     </div>
                     <h5 class="team-title">
 						<?php echo esc_html($item['author']);?>

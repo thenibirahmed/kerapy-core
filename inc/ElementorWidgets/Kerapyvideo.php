@@ -59,6 +59,33 @@ class Kerapyvideo extends \Elementor\Widget_Base {
 		);
         
         $this->end_controls_section(); 
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => esc_html__( 'Style', 'kerapy-core' ),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'aspect_ratio',
+            [
+                'label' => esc_html__( 'Aspect Ratio', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '1/1',
+                'options' => [
+                    '1/1' => esc_html__( '1:1', 'kerapy-core' ),
+                    '3/2'  => esc_html__( '3:2', 'kerapy-core' ),
+                    '4/3'  => esc_html__( '1:1', 'kerapy-core' ),
+                    '16/9' => esc_html__( '16:9', 'kerapy-core' ),
+                    '21/9' => esc_html__( '21:9', 'kerapy-core' ),
+                    '9/16' => esc_html__( '9:16', 'kerapy-core' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .video-img' => 'aspect-ratio: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_section(); 
     }
 
     protected function render() {
@@ -78,7 +105,7 @@ class Kerapyvideo extends \Elementor\Widget_Base {
                         <?php 
                             // Display the image using the attachment ID
                             echo wp_get_attachment_image( $img_id, 'medium_large', false, array(
-                                'class' => 'img-fluid video-img'
+                                'class' => 'img-fluid video-img '
                             ));
                         ?>
                         <a href="<?php echo esc_url($video_url); ?>" class="play-btn" target="_blank">

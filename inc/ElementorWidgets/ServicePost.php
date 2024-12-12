@@ -5,6 +5,7 @@ namespace Kerapy\Core\ElementorWidgets;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\WP_Query;
+use Elementor\Group_Control_Image_Size;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -60,6 +61,17 @@ class ServicePost extends Widget_Base{
 				'default' => 3,
 			]
 		);
+        $this->add_control(
+			'slider_items_to_display',
+			[
+				'label' => esc_html__( 'Slider Items to display', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => 3,
+                'condition' => [
+                    'tmcard' => 'servicepost1',
+                ],
+			]
+		);
         $this->end_controls_section();
 
         // style tab
@@ -71,34 +83,79 @@ class ServicePost extends Widget_Base{
             ]
         );
         $this->add_control(
-            'service_img_width',
+            'heading_color',
             [
-                'label' => esc_html__( 'Image Width', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
+                'label' => esc_html__( 'Heading Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .service-post-title' => 'color: {{VALUE}} !important;',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+                'label' => __( 'Heading Typography', 'kerapy-core' ),
+				'selector' => '{{WRAPPER}} .service-post-title',
+			]
+		);
+        $this->add_control(
+            'excerpt_color',
+            [
+                'label' => esc_html__( 'Content Color', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#666666',
+                'selectors' => [
+                    '{{WRAPPER}} .service-post-text p' => 'color: {{VALUE}} !important;',
+                ],
+            ]
+        );
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'excerpt_typography',
+                'label' => __( 'Content Typography', 'kerapy-core' ),
+				'selector' => '{{WRAPPER}} .service-post-text p',
+			]
+		);
+        $this->add_control(
+            'service_border_radius',
+            [
+                'label' => esc_html__( 'Image Border Radius', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'range' => [
-                    'px' => [ 'min' => 30, 'max' => 1000 ],
-                    '%' => [ 'min' => 0, 'max' => 100 ],
+                    'top' => 0,
+                    'right' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .service-img img' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .service-img-radius' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
         $this->add_control(
             'post2_gap_elements',
             [
-                'label' => esc_html__( 'Gap Between Images Author Title', 'kerapy-core' ),
+                'label' => esc_html__( 'Gap Between Image Heading & Text', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', '%' ],
                 'default' => [ 'unit' => 'px', 'size' => 4 ],
                 'selectors' => [
-                    '{{WRAPPER}} .post-card-gap2' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .service-post-gap' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
                 ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Image_Size::get_type(),
+            [
+                'name' => 'image_size', 
+                'label' => esc_html__( 'Image Size', 'kerapy-core' ),
+                'description' => esc_html__( 'Choose the size of the image.', 'kerapy-core' ),
+                'default' => 'large', // Default image size
             ]
         );
         $this->end_controls_section();
@@ -115,7 +172,7 @@ class ServicePost extends Widget_Base{
         if( $serices -> have_posts() ) {
             if($settings['tmcard'] == 'servicepost1' ){
                 ?>
-                    <div class="row service-carousel owl-carousel">
+                    <div class="row service-carousel owl-carousel pb-4">
                         <?php
                             while($serices -> have_posts()) : $serices -> the_post();
                             include( "all-services/{$settings['tmcard']}.php" );
@@ -153,13 +210,13 @@ class ServicePost extends Widget_Base{
                 dots: true,
                 responsive:{
                     0:{
-                        items:1
+                        items:<?php echo $settings[ 'slider_items_to_display' ];?>
                     },
                     600:{
-                        items:2
+                        items:<?php echo $settings[ 'slider_items_to_display' ];?>
                     },
                     1000:{
-                        items:3
+                        items:<?php echo $settings[ 'slider_items_to_display' ];?>
                     }
                 }
             });

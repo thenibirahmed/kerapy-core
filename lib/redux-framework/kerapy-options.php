@@ -257,6 +257,22 @@ Redux::set_section(
 	)
 );
 Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-img-width',
+	'type'     => 'text',
+	'title'    => esc_html__('Logo Width', 'kerapy-core'),
+	'default'  => '120' ,
+	'validate' => array( 'numeric', 'not_empty' ),
+	'description' => __( 'Enter a numeric value for image width in pixels (px).', 'kerapy-core' ),
+) );
+Redux::set_field( $opt_name, 'header_opt', array(
+	'id'       => 'h-img-height',
+	'type'     => 'text',
+	'title'    => esc_html__('Logo Height', 'kerapy-core'),
+	'default'  => 'auto' ,
+	'validate' => array( 'numeric', 'not_empty' ),
+	'description' => __( 'Enter a numeric value for image height in pixels (px).', 'kerapy-core' ),
+) );
+Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-btn-text',
 	'type'     => 'text',
 	'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
@@ -311,8 +327,8 @@ Redux::set_field( $opt_name, 'header_opt', array(
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'btn-hover',
     'type'     => 'color',
-    'title'    => esc_html__('Button Hover Color', 'kerapy-core'), 
-    'default'  => '#212529',
+    'title'    => esc_html__('Button Hover Text Color', 'kerapy-core'), 
+    'default'  => '#fff',
     'validate' => 'color',
 ) );
 

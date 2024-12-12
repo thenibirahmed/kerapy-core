@@ -9,7 +9,7 @@
     <div class="col">
         <a href="blog_single.html" class="text-decoration-none">
             <div class="card h-100 border-0 postcard post-card-gap2">
-                <div class="blog-card2 bg-light pb-2">
+                <div class="blog-card2 bg-light mb-2 post-img-redius">
                     <a href="<?php the_permalink(); ?>" class="">
                         <div class=""></div>
                         <?php the_post_thumbnail('medium_large', array(

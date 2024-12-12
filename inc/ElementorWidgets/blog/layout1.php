@@ -11,7 +11,7 @@
             if($count === 1){
                 ?>
                 <div class="col-12 col-md-6">
-                    <div class="overflow-hidden blogcard1-img">
+                    <div class="overflow-hidden blogcard1-img post-img-redius">
                         <div class="liniar"></div>
                         <div class="blogcard1-img">
                             <a  href="<?php the_permalink();?>">

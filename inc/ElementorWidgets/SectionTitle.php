@@ -177,14 +177,6 @@ class SectionTitle extends \Elementor\Widget_Base{
 						'min' => 30,
 						'max' => 1000,
 					],
-					'%' => [
-						'min' => 20,
-						'max' => 100,
-					],
-					'em' => [
-						'min' => 10,
-						'max' => 50,
-					],
 				],
 				'selectors' => [
 					'{{WRAPPER}} .divider' => 'width: {{SIZE}}{{UNIT}};',
@@ -193,8 +185,52 @@ class SectionTitle extends \Elementor\Widget_Base{
 		);
 	
 		// Height Control
-		
-		
+		$this->add_control(
+			'widget_height',
+			[
+				'label' => esc_html__( 'Height', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 2,  
+				],
+				'range' => [
+					'px' => [
+						'min' => 2,
+						'max' => 1000,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .divider' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+            'sec_title_alignment',
+            [
+                'label' => esc_html__( 'Section Alignment', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'kerapy-core' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'center', 
+                'selectors' => [
+                    '{{WRAPPER}} .section-alignment' => 'justify-content: {{VALUE}};',
+                ],
+            ]
+        );
 		$this->end_controls_section();
 	}
 	
@@ -202,10 +238,7 @@ class SectionTitle extends \Elementor\Widget_Base{
 		$settings = $this->get_settings_for_display();
 		?>
 		<?php if($settings['seccard'] == 'section1' ){ ?>
-		 <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
-			<!-- <div class="sectionicon">
-				<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-			</div> -->
+		 <div class="section-alignment gap-2">
 			<div class="sectionicon">
 				<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 			</div>
@@ -216,7 +249,7 @@ class SectionTitle extends \Elementor\Widget_Base{
 		</div>
 		<?php } ?>
 		<?php if($settings['seccard'] == 'section2' ){ ?>
-			<div class="d-flex align-items-center gap-2">
+			<div class="section-alignment gap-2">
 				<div class="sectionicon">
 					<?php \Elementor\Icons_Manager::render_icon( $settings['sec_icon'], [ 'aria-hidden' => 'true' ] ); ?>
 				</div>
@@ -234,67 +267,65 @@ class SectionTitle extends \Elementor\Widget_Base{
 		<?php } ?>
 		<?php
 	}      
-    protected function content_template() {
-		?>
-		<#
-		var sectionStyle = settings.seccard;
-		var icon = settings.sec_icon;
-		var title = settings.section_title;
-		#>
+    // protected function content_template() {
+	// 	<#
+	// 	var sectionStyle = settings.seccard;
+	// 	var icon = settings.sec_icon;
+	// 	var title = settings.section_title;
+	// 	#>
 	
-		<# if (sectionStyle === 'section1') { #>
-			<div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
-				<div class="sectionicon">
-					<# 
-					if (icon) {
-						var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-						if (iconHTML.rendered) {
-							print(iconHTML.value);
-						}
-					} 
-					#>
-				</div>
-				<div class="divider"></div>
-				<# if (title) { #>
-					<h6 class="section-title-text mb-0">
-						{{{ title }}}
-					</h6>
-				<# } #>
-			</div>
-		<# } #>
+	// 	<# if (sectionStyle === 'section1') { #>
+	// 		<div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
+	// 			<div class="sectionicon">
+	// 				<# 
+	// 				if (icon) {
+	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
+	// 					if (iconHTML.rendered) {
+	// 						print(iconHTML.value);
+	// 					}
+	// 				} 
+	// 				#>
+	// 			</div>
+	// 			<div class="divider"></div>
+	// 			<# if (title) { #>
+	// 				<h6 class="section-title-text mb-0">
+	// 					{{{ title }}}
+	// 				</h6>
+	// 			<# } #>
+	// 		</div>
+	// 	<# } #>
 	
-		<# if (sectionStyle === 'section2') { #>
-			<div class="d-flex align-items-center gap-2">
-				<div class="sectionicon">
-					<# 
-					if (icon) {
-						var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-						if (iconHTML.rendered) {
-							print(iconHTML.value);
-						}
-					} 
-					#>
-				</div>
-				<div class="divider"></div>
-				<div>
-					<h6 class="section-title-text">
-						{{{ title }}}
-					</h6>
-				</div>
-				<div class="divider"></div>
-				<div class="sectionicon">
-					<# 
-					if (icon) {
-						var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-						if (iconHTML.rendered) {
-							print(iconHTML.value);
-						}
-					} 
-					#>
-				</div>
-			</div>
-		<# } #>
-		<?php
-	}
+	// 	<# if (sectionStyle === 'section2') { #>
+	// 		<div class="d-flex align-items-center gap-2">
+	// 			<div class="sectionicon">
+	// 				<# 
+	// 				if (icon) {
+	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
+	// 					if (iconHTML.rendered) {
+	// 						print(iconHTML.value);
+	// 					}
+	// 				} 
+	// 				#>
+	// 			</div>
+	// 			<div class="divider"></div>
+	// 			<div>
+	// 				<h6 class="section-title-text">
+	// 					{{{ title }}}
+	// 				</h6>
+	// 			</div>
+	// 			<div class="divider"></div>
+	// 			<div class="sectionicon">
+	// 				<# 
+	// 				if (icon) {
+	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
+	// 					if (iconHTML.rendered) {
+	// 						print(iconHTML.value);
+	// 					}
+	// 				} 
+	// 				#>
+	// 			</div>
+	// 		</div>
+	// 	<# } #>
+	// }
 		
 }
