@@ -138,6 +138,27 @@ class Heppycustomers extends Widget_Base{
 				],
 			]
 		);
+		$this->add_control(
+			'widget_width',
+			[
+				'label' => esc_html__( 'Width', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 2,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .happy-customers-desc' => 'border-width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 		
         $this->end_controls_section();
 
@@ -146,23 +167,14 @@ class Heppycustomers extends Widget_Base{
         $settings = $this->get_settings_for_display();
 		?>
         <div class="mb-4 mb-lg-0">
-            <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
+            <div class="">
                 <div class="happy-customers-content d-flex flex-column gap-2">
-                <h3 class="happy_tilte"><?php echo $settings['title']; ?></h3>
-				<p class="happy-customers-desc"><?php echo $settings['description']; ?></p>	
+					<h3 class="happy_tilte"><?php echo $settings['title']; ?></h3>
+					<p class="happy-customers-desc"><?php echo $settings['description']; ?></p>	
                 </div>
             </div>
         </div>
 		<?php
     }
-    protected function content_template() {
-        // <div class="mb-4 mb-lg-0">
-        //     <div class="d-flex flex-column justify-content-center text-center text-md-start gap-md-2">
-        //         <div class="happy-customers-content d-flex flex-column gap-2">
-        //             <h3 class="happy_tilte">{{{ settings.title }}}</h3>
-        //             <p class="happy-customers-desc">{{{ settings.description }}}</p>
-        //         </div>
-        //     </div>
-        // </div>
-    }
+    
 }

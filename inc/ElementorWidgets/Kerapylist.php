@@ -214,34 +214,5 @@ class Kerapylist extends \Elementor\Widget_Base{
         </div>
         <?php
 	}      
-    // protected function content_template() {
-    //     <div class="">
-    //         <ul class="list-unstyled lh-lg d-flex flex-column gap-2 gap-md-3">
-    //             <# _.each( settings.choose_list, function( list ) { #>
-    //             <li class="d-flex gap-2 gap-md-3">
-    //                 <#
-    //                     var iconHTML = elementor.helpers.renderIcon( view, list.icon, { 'aria-hidden': true }, 'i' , 'object' );
-    //                 #>
-    //                 <# if( list.icon ){ #>
-    //                 <div class="list-icon ">
-    //                     {{{ iconHTML.value }}}
-    //                 </div>
-    //                 <# } #>
-    //                 <div>
-    //                     <# if( list.title ){ #>
-    //                     <h6 class="mb-md-2 list-title">
-    //                         {{{ list.title }}}
-    //                     </h6>
-    //                     <# } #>
-    //                     <# if( list.desc ){ #>
-    //                     <div class="list-description">
-    //                         <p class="" >{{{ list.desc }}}</p> 
-    //                     </div>
-    //                     <# } #>
-    //                 </div>
-    //             </li>
-    //             <# }); #>
-    //         </ul>
-    //     </div>
-	// }      
+          
 }

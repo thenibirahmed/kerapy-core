@@ -193,6 +193,7 @@ class Counter extends \Elementor\Widget_Base {
                 'frontend_available' => true, 
             ]
         );
+        
         $this->add_control(
             'team_title_alignment',
             [
@@ -201,15 +202,15 @@ class Counter extends \Elementor\Widget_Base {
                 'options' => [
                     'flex-start' => [
                         'title' => esc_html__( 'Top', 'kerapy-core' ), 
-                        'icon' => 'eicon-v-align-top',
+                        'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
                         'title' => esc_html__( 'Center', 'kerapy-core' ), 
-                        'icon' => 'eicon-v-align-middle',
+                        'icon' => 'eicon-text-align-center',
                     ],
                     'flex-end' => [
                         'title' => esc_html__( 'Bottom', 'kerapy-core' ), 
-                        'icon' => 'eicon-v-align-bottom',
+                        'icon' => 'eicon-text-align-right',
                     ],
                 ],
                 'default' => 'center',
@@ -308,77 +309,6 @@ class Counter extends \Elementor\Widget_Base {
         </script>
     <?php
     }
-    // protected function content_template() {
-    //     <div class="row">
-    //         <# if ( settings['max-num-of-count'] && settings['item_title'] ) { #>
-    //         <div class="col-md-6">
-    //             <div class="text-center mb-4 counter-sec">
-    //                 <div class="counter-plus d-flex">
-    //                     <div class="counter stat-number">{{{ settings['max-num-of-count'] }}}</div>
-    //                     <span class="counter">+</span>
-    //                 </div>
-    //                 <p class="pt-3 counter-subtitle">
-    //                     {{{ settings['item_title'] }}}
-    //                 </p>
-    //             </div>
-    //         </div>
-    //         <# } #>
-    //         <# if ( settings['max-num-of-count2'] && settings['item_title2'] ) { #>
-    //         <div class="col-md-6">
-    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
-    //                 <div class="counter-plus d-flex">
-    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count2'] }}}</div>
-    //                     <span class="all-heading-color">+</span>
-    //                 </div>
-    //                 <p class="pt-3">
-    //                     {{{ settings['item_title2'] }}}
-    //                 </p>
-    //             </div>
-    //         </div>
-    //         <# } #>
-    //         <# if ( settings['max-num-of-count3'] && settings['item_title3'] ) { #>
-    //         <div class="col-md-6">
-    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
-    //                 <div class="counter-plus d-flex">
-    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count3'] }}}</div>
-    //                     <span class="all-heading-color">+</span>
-    //                 </div>
-    //                 <p class="pt-3">
-    //                     {{{ settings['item_title3'] }}}
-    //                 </p>
-    //             </div>
-    //         </div>
-    //         <# } #>
-    //         <# if ( settings['max-num-of-count4'] && settings['item_title4'] ) { #>
-    //         <div class="col-md-6">
-    //             <div class="bg-white p-4 text-center mb-4 counter-sec">
-    //                 <div class="counter-plus d-flex">
-    //                     <div class="counter stat-number all-heading-color">{{{ settings['max-num-of-count4'] }}}</div>
-    //                     <span class="all-heading-color">+</span>
-    //                 </div>
-    //                 <p class="pt-3">
-    //                     {{{ settings['item_title4'] }}}
-    //                 </p>
-    //             </div>
-    //         </div>
-    //         <# } #>
-    //     </div>
-    //     <script>
-    //         // Function to animate the counter
-    //         jQuery(document).ready(function($){
-    //             $('.stat-number').each(function () {
-    //                 var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
-    //                 $(this).prop('Counter', 0).animate({
-    //                     Counter: $(this).text()
-    //                 }, {
-    //                     duration: 5000,
-    //                     step: function (func) {
-    //                         $(this).text(parseFloat(func).toFixed(size));
-    //                     }
-    //                 });
-    //             });
-    //         });
-    //     </script>
-    // }
+    
 }
 ?>

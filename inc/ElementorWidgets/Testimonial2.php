@@ -5,18 +5,19 @@ namespace Kerapy\Core\ElementorWidgets;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\WP_Query;
+use Elementor\Group_Control_Image_Size;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 
-class Alltestimonial extends Widget_Base{
+class Testimonial2 extends Widget_Base{
 
     public function get_name(){
-        return 'kp-testimonial';
+        return 'kp-testimonial2';
     }
 
     public function get_title(){
-        return 'Kerapy Testimonials';
+        return 'Kerapy Testimonial Two';
     }
 
     public function get_icon(){
@@ -41,26 +42,14 @@ class Alltestimonial extends Widget_Base{
 			]
 		);
         $this->add_control(
-			'tmcard',
-			[
-				'label' => esc_html__( 'Testimonial Card Style', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'testimonial1',
-				'options' => [
-					'testimonial1' => esc_html__( 'Style One', 'kerapy-core' ),
-					'testimonial2' => esc_html__( 'Style Two', 'kerapy-core' ),
-				],
-			]
-		);
-        $this->add_control(
-			'list',
-			[
-				'label' => esc_html__( 'Repeater List', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::REPEATER,
-				'fields' => [
+            'list',
+            [
+                'label' => esc_html__('Repeater List', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => [
                     [
-                        'name' => 'img',
-                        'label' => esc_html__( 'Choose Image', 'kerapy-core' ),
+                        'name' => 'image',
+                        'label' => esc_html__('Choose Image', 'kerapy-core'),
                         'type' => \Elementor\Controls_Manager::MEDIA,
                         'default' => [
                             'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -68,37 +57,38 @@ class Alltestimonial extends Widget_Base{
                     ],
                     [
                         'name' => 'content',
-                        'label' => esc_html__( 'Content', 'kerapy-core' ),
+                        'label' => esc_html__('Content', 'kerapy-core'),
                         'type' => \Elementor\Controls_Manager::TEXTAREA,
-                        'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, We were happy that we found the best' , 'kerapy-core' ),
+                        'default' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, We were happy that we found the best', 'kerapy-core'),
                         'rows' => 10,
-                        'placeholder' => esc_html__( 'Type your text here', 'kerapy-core' ),
+                        'placeholder' => esc_html__('Type your text here', 'kerapy-core'),
                     ],
-					[
-						'name' => 'author',
-						'label' => esc_html__( 'Name', 'kerapy-core' ),
-						'type' => \Elementor\Controls_Manager::TEXT,
-						'default' => esc_html__( 'Amelia' , 'kerapy-core' ),
-						'label_block' => true,
-					],
-					[
-						'name' => 'designation',
-						'label' => esc_html__( 'Dasignation', 'kerapy-core' ),
-						'type' => \Elementor\Controls_Manager::TEXT,
-						'default' => esc_html__( 'Co-Founder, Elegant' , 'kerapy-core' ),
-						'label_block' => true,
-					],
-				],
-				'default' => [
-					[
-						'author' => esc_html__( 'Amelia', 'kerapy-core' ),
-						'designation' => esc_html__( 'Co-Founder, Elegant', 'kerapy-core' ),
-						'content' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, We were happy that we found the best', 'kerapy-core' ),
-					],
-				],
-				'title_field' => '{{{ author }}}',
-			]
-		);
+                    [
+                        'name' => 'author',
+                        'label' => esc_html__('Name', 'kerapy-core'),
+                        'type' => \Elementor\Controls_Manager::TEXT,
+                        'default' => esc_html__('Amelia', 'kerapy-core'),
+                        'label_block' => true,
+                    ],
+                    [
+                        'name' => 'designation',
+                        'label' => esc_html__('Designation', 'kerapy-core'),
+                        'type' => \Elementor\Controls_Manager::TEXT,
+                        'default' => esc_html__('Co-Founder, Elegant', 'kerapy-core'),
+                        'label_block' => true,
+                    ],
+                ],
+                'default' => [
+                    [
+                        'author' => esc_html__('Amelia', 'kerapy-core'),
+                        'designation' => esc_html__('Co-Founder, Elegant', 'kerapy-core'),
+                        'content' => esc_html__('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, We were happy that we found the best', 'kerapy-core'),
+                    ],
+                ],
+                'title_field' => '{{{ author }}}',
+            ]
+        );
+        
         $this->end_controls_section();
         // Start Style Section
         $this->start_controls_section(
@@ -110,7 +100,7 @@ class Alltestimonial extends Widget_Base{
         );
         // style one
         $this->add_control(
-            'ts_content_color',
+            'ts_content_color2',
             [
                 'label' => esc_html__( 'Content Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -124,13 +114,13 @@ class Alltestimonial extends Widget_Base{
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'laft_title1_typography',
+                'name' => 'laft_title2_typography',
                 'label' => esc_html__( 'Content Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .ts_content',
             ]
         );
         $this->add_control(
-            'ts_name_color',
+            'ts_name_color2',
             [
                 'label' => esc_html__( 'Name Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -143,13 +133,13 @@ class Alltestimonial extends Widget_Base{
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'ts_name_typography',
+                'name' => 'ts2_name_typography',
                 'label' => esc_html__( 'Name Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .ts_name',
             ]
         );
         $this->add_control(
-            'ts_designation_color',
+            'ts_designation_color2',
             [
                 'label' => esc_html__( 'Designation Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -162,13 +152,13 @@ class Alltestimonial extends Widget_Base{
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'ts_designation_typography',
+                'name' => 'ts2_designation_typography',
                 'label' => esc_html__( 'Designation Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .ts_designation',
             ]
         );
         $this->add_control(
-            'quotation_color',
+            'quotation_color2',
             [
                 'label' => esc_html__( 'Quotation Icon Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -176,13 +166,10 @@ class Alltestimonial extends Widget_Base{
                 'selectors' => [
                     '{{WRAPPER}} .tesimonial2-icon svg' => 'color: {{VALUE}} !important;',
                 ],
-                'condition' => [
-                    'tmcard' => 'testimonial2',
-                ],
             ]
         );
         $this->add_control(
-			'quotation_font_size',
+			'quotation_font_size2',
 			[
 				'label' => esc_html__( 'Quotation Font Size', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
@@ -209,13 +196,10 @@ class Alltestimonial extends Widget_Base{
 					'{{WRAPPER}} .tesimonial2-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};', 
 					'{{WRAPPER}} .tesimonial2-icon i' => 'font-size: {{SIZE}}{{UNIT}};', 
 				],
-                'condition' => [
-                    'tmcard' => 'testimonial2',
-                ],
 			]
 		);
         $this->add_control(
-            'ts_icon_font_color',
+            'ts_icon_font_color2',
             [
                 'label' => esc_html__( 'Navigation Button Icon Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -226,7 +210,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'icon_font_size',
+            'icon_font_size2',
             [
                 'label' => esc_html__( 'Navigation Button Icon Font Size', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
@@ -248,7 +232,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'ts_btn_width',
+            'ts_btn_width2',
             [
                 'label' => esc_html__( 'Navigation Button Width', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
@@ -270,7 +254,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'ts_btn_height',
+            'ts_btn_height2',
             [
                 'label' => esc_html__( 'Navigation Button Height', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
@@ -292,7 +276,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'ts_border_color',
+            'ts_border_color2',
             [
                 'label' => esc_html__( 'Navigation Button Border Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -303,7 +287,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'border_width',
+            'border_width2',
             [
                 'label' => esc_html__( 'Navigation Button Border Width', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
@@ -321,7 +305,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'border_radius',
+            'border_radius2',
             [
                 'label' => esc_html__( 'Navigation Button Border Radius', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
@@ -340,7 +324,7 @@ class Alltestimonial extends Widget_Base{
         );
         
         $this->add_control(
-            'ts_bg_color',
+            'ts_bg_color2',
             [
                 'label' => esc_html__( 'Navigation Button BG Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -351,7 +335,7 @@ class Alltestimonial extends Widget_Base{
             ]
         );
         $this->add_control(
-            'ts_sec_bg_color',
+            'ts_sec_bg_color2',
             [
                 'label' => esc_html__( 'Section BG Color', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
@@ -359,59 +343,90 @@ class Alltestimonial extends Widget_Base{
                 'selectors' => [
                     '{{WRAPPER}} .section-bg' => 'background-color: {{VALUE}} !important;',
                 ],
-                'condition' => [
-                    'tmcard' => 'testimonial1', 
-                ],
             ]
         );
         $this->add_control(
-            'ts_sec_bg_color2',
+			'ts_padding2',
+			[
+				'label' => esc_html__( 'Padding', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+					'top' => '20',
+					'right' => '20',
+					'bottom' => '20',
+					'left' => '20',
+					'unit' => 'px',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .section-bg' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
             [
-                'label' => esc_html__( 'Section BG Color', 'kerapy-core' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .section-bg' => 'background-color: {{VALUE}} !important;',
-                ],
-                'condition' => [
-                    'tmcard' => 'testimonial2',
-                ],
+                'name' => 'ts_image_size', 
+                'default' => 'large',
+                'label' => esc_html__( 'Image Size', 'kerapy-core' ),
+                'description' => esc_html__( 'Set the size of the image.', 'kerapy-core' ),
             ]
         );
-
         $this->end_controls_section();
 
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
-            if($settings['tmcard'] == 'testimonial1' ){
-                ?>
-                <div class="testimonial-slider ts-nav-button">
-                    <div class="section-bg p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
-                    <?php
-                       foreach($settings['list'] as $item )
-                        include( "all-testimonial/{$settings['tmcard']}.php" );
-                    ?>
-                    </div>
-                </div>
-                    
-                <?php   
-            }
-            if($settings['tmcard'] == 'testimonial2' ){
-                ?>
-                    <div class="testimonial-box ts-nav-button">
-                        <div class="p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
+        ?>
+            <div class="testimonial-box ts-nav-button">
+                <div class="owl-testimonial-slider owl-carousel owl-theme">
+                <?php
+                    foreach($settings['list'] as $item ):
+                        ?>
+                        <div class="row testimonial-section mx-auto section-bg ">
+                                <div class="col-12 col-md-6">
+                                    <div>
+                                        <div class="tesimonial2-icon pb-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 20 20"><path fill="currentColor" d="m7 6l1-2H6C3.79 4 2 6.79 2 9v7h7V9H5c0-3 2-3 2-3m7 3c0-3 2-3 2-3l1-2h-2c-2.21 0-4 2.79-4 5v7h7V9z"/></svg>
+                                        </div>
+                                        <h5 class="ts_content">
+                                            <?php echo esc_html($item['content']);?>
+                                        </h5>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="mt-2 mt-md-4 author-name">
+                                                <h6 class="ts_name">
+                                                    <?php echo esc_html($item['author']);?>
+                                                </h6>
+                                                <p class="ts_designation">
+                                                    <?php echo esc_html($item['designation']);?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 pt-2 pt-md-0">
+                                    <?php  
+                                        $id = $item['image']['id']; 
+                                        $url = $item['image']['url'];
+                                        if($id){
+                                            $image_url = Group_Control_Image_Size::get_attachment_image_src( $id, 'ts_image_size', $settings );
+                                            
+                                        }else{
+                                            $image_url = $url;
+                                        }
+                                        
+                                    ?>
+                                    <img class="tesimonial2-img img-fluid" src="<?php echo esc_url($image_url); ?>" alt="">
+                                    
+                                </div>
+                            </div>
                         <?php
-                            foreach($settings['list'] as $item )
-                                include( "all-testimonial/{$settings['tmcard']}.php" );
-                            ?>
+                        endforeach;
+                    ?>
 
-                        </div>
-                    </div>
-                    
-                <?php   
-            }
-
+                </div>
+            </div>
+        <?php   
         ?>
         
         <script>
@@ -419,7 +434,7 @@ class Alltestimonial extends Widget_Base{
                 $(".owl-testimonial-slider").owlCarousel({
                     loop: true,
                     margin: 20,
-                    autoplay: false,
+                    autoplay: true,
                     autoHeight:true,
                     autoplayTimeout: 2500,
                     autoplayHoverPause: true,
@@ -436,83 +451,6 @@ class Alltestimonial extends Widget_Base{
 
         <?php
     }    
-    // protected function content_template() {
-    //     <# if (settings.tmcard === 'testimonial1') { #>
-    //         <div class="testimonial-slider">
-    //             <div class="bg-light p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
-    //                 <# _.each(settings.list, function(item) { #>
-    //                     <div class="text-center text-md-start">
-    //                         <h5 class="text-black-50">
-    //                             {{{ item.content }}}
-    //                         </h5>
-    //                         <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between mt-4">
-    //                             <div class="testi-name">
-    //                                 <h6 class="all-heading-color">
-    //                                     {{{ item.author }}}
-    //                                 </h6>
-    //                                 <p>
-    //                                     {{{ item.designation }}}
-    //                                 </p>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 <# }); #>
-    //             </div>
-    //         </div>
-    //     <# } else if (settings.tmcard === 'testimonial2') { #>
-    //         <div class="testimonial-box">
-    //             <div class="bg-light p-4 mt-4 owl-testimonial-slider owl-carousel owl-theme">
-    //                 <# _.each(settings.list, function(item) { #>
-    //                     <div class="row testimonial-section mx-auto bg-white p-1 p-md-5">
-    //                         <div class="col-12 col-md-6">
-    //                             <div>
-    //                                 <div class="tesimonial2-icon pb-1">
-    //                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m7 6l1-2H6C3.79 4 2 6.79 2 9v7h7V9H5c0-3 2-3 2-3m7 3c0-3 2-3 2-3l1-2h-2c-2.21 0-4 2.79-4 5v7h7V9z"/></svg>
-    //                                 </div>
-    //                                 <h5 class="text-black-50">
-    //                                     {{{ item.content }}}
-    //                                 </h5>
-    //                                 <div class="d-flex justify-content-between">
-    //                                     <div class="mt-2 mt-md-4 author-name">
-    //                                         <h6 class="all-heading-color">
-    //                                             {{{ item.author }}}
-    //                                         </h6>
-    //                                         <p>
-    //                                             {{{ item.designation }}}
-    //                                         </p>
-    //                                     </div>
-    //                                 </div>
-    //                             </div>
-    //                         </div>
-    //                         <div class="col-12 col-md-6 pt-2 pt-md-0">
-    //                             <# if (item.img && item.img.url) { #>
-    //                                 <img class="img-fluid tesimonial2-img" src="{{ item.img.url }}" alt="{{ item.author }}">
-    //                             <# } #>
-    //                         </div>
-    //                     </div>
-    //                 <# }); #>
-    //             </div>
-    //         </div>
-    //     <# } #>
-    //     <script>
-    //         jQuery(document).ready(function($) {
-    //             $(".owl-testimonial-slider").owlCarousel({
-    //                 loop: true,
-    //                 margin: 20,
-    //                 autoplay: false,
-    //                 autoHeight:true,
-    //                 autoplayTimeout: 2500,
-    //                 autoplayHoverPause: true,
-    //                 nav: true,
-    //                 dots: false,
-    //                 responsive: {
-    //                     0: { items: 1 },
-    //                     600: { items: 1 },
-    //                     1000: { items: 1 }
-    //                 }
-    //             });
-    //         });
-    //     </script>
-    // }
+    
       
 }

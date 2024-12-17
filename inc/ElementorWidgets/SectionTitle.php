@@ -112,15 +112,15 @@ class SectionTitle extends \Elementor\Widget_Base{
 				],
 				'range' => [
 					'px' => [
-						'min' => 10,
+						'min' => 0,
 						'max' => 200,
 					],
 					'em' => [
-						'min' => 1,
+						'min' => 0,
 						'max' => 15,
 					],
 					'%' => [
-						'min' => 10,
+						'min' => 0,
 						'max' => 100,
 					],
 				],
@@ -174,7 +174,7 @@ class SectionTitle extends \Elementor\Widget_Base{
 				],
 				'range' => [
 					'px' => [
-						'min' => 30,
+						'min' => 0,
 						'max' => 1000,
 					],
 				],
@@ -197,7 +197,7 @@ class SectionTitle extends \Elementor\Widget_Base{
 				],
 				'range' => [
 					'px' => [
-						'min' => 2,
+						'min' => 0,
 						'max' => 1000,
 					],
 				],
@@ -267,65 +267,6 @@ class SectionTitle extends \Elementor\Widget_Base{
 		<?php } ?>
 		<?php
 	}      
-    // protected function content_template() {
-	// 	<#
-	// 	var sectionStyle = settings.seccard;
-	// 	var icon = settings.sec_icon;
-	// 	var title = settings.section_title;
-	// 	#>
-	
-	// 	<# if (sectionStyle === 'section1') { #>
-	// 		<div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
-	// 			<div class="sectionicon">
-	// 				<# 
-	// 				if (icon) {
-	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-	// 					if (iconHTML.rendered) {
-	// 						print(iconHTML.value);
-	// 					}
-	// 				} 
-	// 				#>
-	// 			</div>
-	// 			<div class="divider"></div>
-	// 			<# if (title) { #>
-	// 				<h6 class="section-title-text mb-0">
-	// 					{{{ title }}}
-	// 				</h6>
-	// 			<# } #>
-	// 		</div>
-	// 	<# } #>
-	
-	// 	<# if (sectionStyle === 'section2') { #>
-	// 		<div class="d-flex align-items-center gap-2">
-	// 			<div class="sectionicon">
-	// 				<# 
-	// 				if (icon) {
-	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-	// 					if (iconHTML.rendered) {
-	// 						print(iconHTML.value);
-	// 					}
-	// 				} 
-	// 				#>
-	// 			</div>
-	// 			<div class="divider"></div>
-	// 			<div>
-	// 				<h6 class="section-title-text">
-	// 					{{{ title }}}
-	// 				</h6>
-	// 			</div>
-	// 			<div class="divider"></div>
-	// 			<div class="sectionicon">
-	// 				<# 
-	// 				if (icon) {
-	// 					var iconHTML = elementor.helpers.renderIcon(view, icon, { 'aria-hidden': true }, 'i', 'object');
-	// 					if (iconHTML.rendered) {
-	// 						print(iconHTML.value);
-	// 					}
-	// 				} 
-	// 				#>
-	// 			</div>
-	// 		</div>
-	// 	<# } #>
-	// }
+    
 		
 }

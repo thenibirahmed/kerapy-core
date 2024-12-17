@@ -234,7 +234,7 @@ final class ElementorInit {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		$widgets = array( 'SectionTitle', 'ServicePost', 'Teamsection', 'Kerapylist', 'Alltestimonial', 'Stepsprocess', 'Accordion', 'BlogPost', 'Counter', 'Heppycustomers', 'Kerapyvideo', 'Clientreviews' );
+		$widgets = array( 'SectionTitle', 'ServicePost', 'Teamsection', 'Kerapylist', 'Testimonial1', 'Testimonial2', 'Stepsprocess', 'Accordion', 'BlogPost', 'Counter', 'Heppycustomers', 'Kerapyvideo', 'Clientreviews' );
 
 		foreach( $widgets as $widget ) {
         

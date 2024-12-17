@@ -5,6 +5,7 @@ namespace Kerapy\Core\ElementorWidgets;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\WP_Query;
+use Elementor\Group_Control_Image_Size;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -94,7 +95,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'left_title1_color',
 			[
-				'label' => esc_html__( 'large Card Title Color', 'kerapy-core' ),
+				'label' => esc_html__( 'large Blog Title Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#fff',
 				'selectors' => [
@@ -110,7 +111,7 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'laft_title1_typography',
-                'label' => esc_html__( 'large Card Title Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'large Blog Title Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-title1',
                 'condition' => [
                     'layout' => 'layout1',
@@ -120,7 +121,7 @@ class BlogPost extends Widget_Base{
         $this->add_control(
 			'post_meta_color',
 			[
-				'label' => esc_html__( 'large Card Post Meta Color', 'kerapy-core' ),
+				'label' => esc_html__( 'large Blog Post Meta Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
                 'default' => '#fff',
 				'selectors' => [
@@ -135,10 +136,22 @@ class BlogPost extends Widget_Base{
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'post_meta_typography',
-                'label' => esc_html__( 'large Card Post Meta Typography', 'kerapy-core' ),
+                'label' => esc_html__( 'large Blog Post Meta Typography', 'kerapy-core' ),
                 'selector' => '{{WRAPPER}} .blog-post-meta1',
                 'condition' => [
                     'layout' => 'layout1',
+                ],
+            ]
+        );
+        $this->add_control(
+            'large_post2_gap_elements',
+            [
+                'label' => esc_html__( 'large Blog Gap Between Images Author Title', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 4 ],
+                'selectors' => [
+                    '{{WRAPPER}} .large-post-card-gap2' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -193,6 +206,7 @@ class BlogPost extends Widget_Base{
                 ],
             ]
         );
+        
         // style two
         $this->add_control(
 			'postmeta2_color',
@@ -274,6 +288,15 @@ class BlogPost extends Widget_Base{
                 'selectors' => [
                     '{{WRAPPER}} .post-card-gap2' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
                 ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name' => 'blog_image_size', 
+                'default' => 'large',
+                'label' => esc_html__( 'Image Size', 'kerapy-core' ),
+                'description' => esc_html__( 'Set the size of the image.', 'kerapy-core' ),
             ]
         );
         $this->end_controls_section();

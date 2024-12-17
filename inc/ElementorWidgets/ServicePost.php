@@ -72,6 +72,24 @@ class ServicePost extends Widget_Base{
                 ],
 			]
 		);
+        $this->add_responsive_control(
+            'gap',
+            [
+                'label' => esc_html__('Column Gap', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '0' => esc_html__('No Gap', 'kerapy-core'),
+                    '2' => esc_html__('Small Gap', 'kerapy-core'),
+                    '4' => esc_html__('Medium Gap', 'kerapy-core'),
+                    '5' => esc_html__('Large Gap', 'kerapy-core'),
+                ],
+                'default' => '4', // Default gap size (Small Gap)
+                'frontend_available' => true,
+                'condition' => [
+                    'tmcard' => 'servicepost2',
+                ],
+            ]
+        );
         $this->end_controls_section();
 
         // style tab
@@ -142,17 +160,36 @@ class ServicePost extends Widget_Base{
             [
                 'label' => esc_html__( 'Gap Between Image Heading & Text', 'kerapy-core' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', '%' ],
+                'size_units' => [ 'px' ],
                 'default' => [ 'unit' => 'px', 'size' => 4 ],
                 'selectors' => [
                     '{{WRAPPER}} .service-post-gap' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label' => esc_html__('Columns', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '1' => esc_html__('1 Column', 'kerapy-core'),
+                    '2' => esc_html__('2 Columns', 'kerapy-core'),
+                    '3' => esc_html__('3 Columns', 'kerapy-core'),
+                    '4' => esc_html__('4 Columns', 'kerapy-core'),
+                ],
+                'default' => '3',
+                'frontend_available' => true, 
+                'condition' => [
+                    'tmcard' => 'servicepost2',
+                ],
+            ]
+        );
+        
         $this->add_group_control(
             \Elementor\Group_Control_Image_Size::get_type(),
             [
-                'name' => 'image_size', 
+                'name' => 'service_image_size', 
                 'label' => esc_html__( 'Image Size', 'kerapy-core' ),
                 'description' => esc_html__( 'Choose the size of the image.', 'kerapy-core' ),
                 'default' => 'large', // Default image size
@@ -163,6 +200,8 @@ class ServicePost extends Widget_Base{
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
+        $columns = !empty($settings['columns']) ? intval($settings['columns']) : 2;
+        $col_class = 'col-md-' . (12 / $columns);
         $args = array(
             'post_type'     => 'service',
             'posts_per_page' => $settings[ 'items_to_display' ]
@@ -184,7 +223,7 @@ class ServicePost extends Widget_Base{
             }
             if($settings['tmcard'] == 'servicepost2' ){
                 ?>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 justify-content-center">
+                    <div class="row justify-content-start <?php echo esc_attr($settings['gap'] === '0' ? 'g-0' : 'g-' . $settings['gap']); ?>">
                         <?php
                             while($serices -> have_posts()) : $serices -> the_post();
                             include( "all-services/{$settings['tmcard']}.php" );

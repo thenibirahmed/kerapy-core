@@ -141,7 +141,7 @@ class Stepsprocess extends \Elementor\Widget_Base{
 			[
 				'label' => esc_html__( 'Description Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#66666',
+                'default' => '#666666',
 				'selectors' => [
 					'{{WRAPPER}} .sp-desc' => 'color: {{VALUE}} ',
 				],
@@ -156,33 +156,95 @@ class Stepsprocess extends \Elementor\Widget_Base{
                 'selector' => '{{WRAPPER}} .sp-desc',
             ]
         );
+		$this->add_control(
+            'circle_gap_elements',
+            [
+                'label' => esc_html__( 'Gap Between Circle Content', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 30 ],
+                'selectors' => [
+                    '{{WRAPPER}} .box_content' => 'padding-top: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+		$this->add_control(
+            'content_gap_elements',
+            [
+                'label' => esc_html__( 'Gap Between Title Content', 'kerapy-core' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [ 'unit' => 'px', 'size' => 4 ],
+                'selectors' => [
+                    '{{WRAPPER}} .box_content' => 'display: flex; flex-direction: column; gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+		$this->add_control(
+			'circle_width',
+			[
+				'label' => esc_html__( 'Circle Width', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 80,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .circle' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+	
+		// Height Control
+		$this->add_control(
+			'circle_height',
+			[
+				'label' => esc_html__( 'Circle Height', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'default' => [
+					'unit' => 'px',
+					'size' => 80,  
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .circle' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
         $this->end_controls_section();
     }
     protected function render() {
 		$settings = $this->get_settings_for_display();
 		?> 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-3 g-md-4 g-lg-5 justify-content-center increment">
+        <div class="d-flex align-items-start w-100 justify-content-start increment sp-seciton">
             <?php 
                 foreach( $settings['work_process'] as $process){
             ?>
             <div class="box">
-                <div class="circle"></div>
-                <h6 class="py-md-3 sp_card_tilte"><?php echo esc_html($process['title']);?></h6>
-                <p class="sp-desc"><?php echo esc_html($process['desc']); ?></p>
+                <div class="circle_divider">
+					<div class="circle"></div>
+				</div>
+                <div class="box_content px-2">
+					<h6 class="sp_card_tilte"><?php echo esc_html($process['title']);?></h6>
+					<p class="sp-desc"><?php echo esc_html($process['desc']); ?></p>
+				</div>
             </div>
             <?php } ?>
         </div>
         <?php
 	}      
-    // protected function content_template() {
-    //     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-3 g-md-4 g-lg-5 justify-content-center increment">
-    //         <# _.each( settings.work_process, function( process ) { #>
-    //         <div class="box">
-    //             <div class="circle"></div>
-    //             <h6 class="py-md-3 all-heading-color">{{{ process.title }}}</h6>
-    //             <p>{{{ process.desc }}}</p>
-    //         </div>
-    //         <# }); #>
-    //     </div>
-	// }     
+        
 }

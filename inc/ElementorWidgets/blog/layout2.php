@@ -9,12 +9,18 @@
     <div class="col">
         <a href="blog_single.html" class="text-decoration-none">
             <div class="card h-100 border-0 postcard post-card-gap2">
-                <div class="blog-card2 bg-light mb-2 post-img-redius">
-                    <a href="<?php the_permalink(); ?>" class="">
-                        <div class=""></div>
-                        <?php the_post_thumbnail('medium_large', array(
-                            'class' => 'blog-card2 img-fluid post-img-redius'
-                        )); ?>
+                <div class="blog-card2 mb-2 post-img-redius <?php echo has_post_thumbnail() ? '' : 'bg-light blog-card2'; ?>">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php
+                        if (has_post_thumbnail()) {
+                            $image_url = \Elementor\Group_Control_Image_Size::get_attachment_image_src(get_post_thumbnail_id(), 'blog_image_size', $settings);
+                            ?>
+                                <img class="blog-card2 img-fluid post-img-redius" src="<?php echo esc_url($image_url); ?>" alt="">
+                            <?php
+                        } else {
+                            echo '<div class="fallback-image w-full blogcard1-img post-img-radius bg-light">No Image Available</div>';
+                        }
+                        ?>
                     </a>
                 </div>
                 <p class="card-text">

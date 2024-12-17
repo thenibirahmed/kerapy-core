@@ -14,13 +14,20 @@
                     <div class="overflow-hidden blogcard1-img post-img-redius">
                         <div class="liniar"></div>
                         <div class="blogcard1-img">
-                            <a  href="<?php the_permalink();?>">
-                            <?php the_post_thumbnail( 'medium', array(
-                                'class' => 'w-full blogcard1-img post-img-redius'
-                            )); ?>
+                            <a href="<?php the_permalink(); ?>">
+                                <?php
+                                if (has_post_thumbnail()) {
+                                    $image_url = \Elementor\Group_Control_Image_Size::get_attachment_image_src(get_post_thumbnail_id(), 'blog_image_size', $settings);
+                                    ?>
+                                        <img class="blogcard1-img post-img-radius" src="<?php echo esc_url($image_url); ?>" alt="">
+                                    <?php
+                                } else {
+                                    echo '<div class="fallback-image w-full blogcard1-img post-img-radius bg-light">No Image Available</div>';
+                                }
+                                ?>
                             </a>
                         </div>
-                        <div class="blogcard1-content post-card-gap2">
+                        <div class="blogcard1-content large-post-card-gap2">
                             <a href="<?php the_permalink();?>">
                                 <h5 class="blog-post-title1"><?php the_title(); ?></h5>
                             </a>

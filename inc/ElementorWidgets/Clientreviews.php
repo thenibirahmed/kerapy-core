@@ -181,29 +181,5 @@ class Clientreviews extends Widget_Base{
         </div>
 		<?php
     }
-    // protected function content_template() {
-    //     <#
-    //     var images = settings.img_list;
-    //     var content = settings.content;
-    //     #>
-    //     <div class="client-reviews-section">
-    //         <div class="d-flex gap-4 align-items-center justify-content-start">
-    //             <div class="d-flex align-items-center">
-    //                 <# _.each( images, function( img ) { #>
-    //                     <# 
-    //                     var imageUrl = img.image.url;
-    //                     var imageId = img.image.id;
-    //                     if ( imageId ) { 
-    //                         var imageUrl = elementor.imagesManager.getImageUrl( imageId ); 
-    //                     } 
-    //                     #>
-    //                     <img class="img-fluid review-img" src="{{ imageUrl }}" />
-    //                 <# }); #>
-    //             </div>
-    //             <div class="review-text all-heading-color">
-    //                 {{{ content }}}
-    //             </div>
-    //         </div>
-    //     </div>
-    // }
+    
 }
