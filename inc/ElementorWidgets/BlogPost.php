@@ -80,6 +80,24 @@ class BlogPost extends Widget_Base{
                 'options'     => $options,
             ]
         );
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label' => esc_html__('Columns', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '1' => esc_html__('1 Column', 'kerapy-core'),
+                    '2' => esc_html__('2 Columns', 'kerapy-core'),
+                    '3' => esc_html__('3 Columns', 'kerapy-core'),
+                    '4' => esc_html__('4 Columns', 'kerapy-core'),
+                ],
+                'default' => '3',
+                'frontend_available' => true, 
+                'condition' => [
+                    'layout' => 'layout2',
+                ],
+            ]
+        );
         $this->end_controls_section();
 
         // Start Style Section
@@ -290,6 +308,21 @@ class BlogPost extends Widget_Base{
                 ],
             ]
         );
+        $this->add_responsive_control(
+            'gap',
+            [
+                'label' => esc_html__('Column Gap', 'kerapy-core'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '0' => esc_html__('No Gap', 'kerapy-core'),
+                    '2' => esc_html__('Small Gap', 'kerapy-core'),
+                    '4' => esc_html__('Medium Gap', 'kerapy-core'),
+                    '5' => esc_html__('Large Gap', 'kerapy-core'),
+                ],
+                'default' => '4', // Default gap size (Small Gap)
+                'frontend_available' => true,
+            ]
+        );
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
@@ -304,6 +337,7 @@ class BlogPost extends Widget_Base{
     }
     protected function render(){
         $settings = $this->get_settings_for_display();
+        
         $args = array(
             'post_type'     => 'post',
             'posts_per_page' => $settings[ 'items_to_display' ]

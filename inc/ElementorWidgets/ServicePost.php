@@ -72,19 +72,20 @@ class ServicePost extends Widget_Base{
                 ],
 			]
 		);
+        
         $this->add_responsive_control(
-            'gap',
+            'columns',
             [
-                'label' => esc_html__('Column Gap', 'kerapy-core'),
+                'label' => esc_html__('Columns', 'kerapy-core'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    '0' => esc_html__('No Gap', 'kerapy-core'),
-                    '2' => esc_html__('Small Gap', 'kerapy-core'),
-                    '4' => esc_html__('Medium Gap', 'kerapy-core'),
-                    '5' => esc_html__('Large Gap', 'kerapy-core'),
+                    '1' => esc_html__('1 Column', 'kerapy-core'),
+                    '2' => esc_html__('2 Columns', 'kerapy-core'),
+                    '3' => esc_html__('3 Columns', 'kerapy-core'),
+                    '4' => esc_html__('4 Columns', 'kerapy-core'),
                 ],
-                'default' => '4', // Default gap size (Small Gap)
-                'frontend_available' => true,
+                'default' => '3',
+                'frontend_available' => true, 
                 'condition' => [
                     'tmcard' => 'servicepost2',
                 ],
@@ -168,18 +169,18 @@ class ServicePost extends Widget_Base{
             ]
         );
         $this->add_responsive_control(
-            'columns',
+            'gap',
             [
-                'label' => esc_html__('Columns', 'kerapy-core'),
+                'label' => esc_html__('Column Gap', 'kerapy-core'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    '1' => esc_html__('1 Column', 'kerapy-core'),
-                    '2' => esc_html__('2 Columns', 'kerapy-core'),
-                    '3' => esc_html__('3 Columns', 'kerapy-core'),
-                    '4' => esc_html__('4 Columns', 'kerapy-core'),
+                    '0' => esc_html__('No Gap', 'kerapy-core'),
+                    '2' => esc_html__('Small Gap', 'kerapy-core'),
+                    '4' => esc_html__('Medium Gap', 'kerapy-core'),
+                    '5' => esc_html__('Large Gap', 'kerapy-core'),
                 ],
-                'default' => '3',
-                'frontend_available' => true, 
+                'default' => '4', // Default gap size (Small Gap)
+                'frontend_available' => true,
                 'condition' => [
                     'tmcard' => 'servicepost2',
                 ],

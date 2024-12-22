@@ -112,7 +112,7 @@ class Stepsprocess extends \Elementor\Widget_Base{
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '#0052A8',
 				'selectors' => [
-					'{{WRAPPER}} .box::before' => 'background-color: {{VALUE}} ',
+					'{{WRAPPER}} .circle_divider::after' => 'background-color: {{VALUE}};',
 				],
                 
 			]
@@ -123,7 +123,7 @@ class Stepsprocess extends \Elementor\Widget_Base{
 				'label' => esc_html__( 'Title Color', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .sp_card_tilte' => 'color: {{VALUE}} ',
+					'{{WRAPPER}} .sp_card_tilte' => 'color: {{VALUE}} ; ',
 				],
                 
 			]
@@ -224,12 +224,24 @@ class Stepsprocess extends \Elementor\Widget_Base{
 				],
 			]
 		);
+		$this->add_control(
+			'scrollber_color',
+			[
+				'label' => esc_html__( 'Scrollber Color', 'kerapy-core' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#00DCC2',
+				'selectors' => [
+					'{{WRAPPER}} .sp-seciton::-webkit-scrollbar-thumb' => 'background-color: {{VALUE}} !important; ',
+				],
+                
+			]
+		);
         $this->end_controls_section();
     }
     protected function render() {
 		$settings = $this->get_settings_for_display();
 		?> 
-        <div class="d-flex align-items-start w-100 justify-content-start increment sp-seciton">
+        <div class="d-flex align-items-start w-100 justify-content-start increment sp-seciton pb-4">
             <?php 
                 foreach( $settings['work_process'] as $process){
             ?>

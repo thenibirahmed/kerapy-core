@@ -1,12 +1,13 @@
 <?php 
-
+$columns = !empty($settings['columns']) ? intval($settings['columns']) : 2;
+$col_class = 'col-md-' . (12 / $columns);
 
 ?>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 justify-content-start">
+<div class="row  <?php echo esc_attr($settings['gap'] === '0' ? 'g-0' : 'g-' . $settings['gap']); ?> justify-content-start">
     <?php
         while($blog -> have_posts()) : $blog -> the_post();
      ?>
-    <div class="col">
+    <div class="<?php echo esc_attr($col_class); ?>">
         <a href="blog_single.html" class="text-decoration-none">
             <div class="card h-100 border-0 postcard post-card-gap2">
                 <div class="blog-card2 mb-2 post-img-redius <?php echo has_post_thumbnail() ? '' : 'bg-light blog-card2'; ?>">

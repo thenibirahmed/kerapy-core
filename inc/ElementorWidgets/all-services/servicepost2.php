@@ -1,7 +1,7 @@
 
 <div class="<?php echo esc_attr($col_class); ?>">
     <div class="text-decoration-none h-100">
-        <div class="card h-100 border-0 service-post-gap">
+        <div class="card h-100 border-0 p-4 pb-0 service-post-gap">
             <a href="<?php the_permalink();?>">
                 <h5 class="service-post-title"><?php the_title();?></h5>
             </a>
