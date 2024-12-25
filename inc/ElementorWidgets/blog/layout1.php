@@ -1,9 +1,5 @@
 <div class="row g-4 g-lg-5">
     <?php 
-        $blog = new \WP_Query([
-            "post_type"     => "post",
-            'posts_per_page' => $settings[ 'items_to_display' ]
-        ]);
         $count=0;
         while( $blog -> have_posts() ){
             $blog -> the_post();

@@ -65,11 +65,10 @@ class BlogPost extends Widget_Base{
         $categories = get_categories([
             'hide_empty' => false, 
         ]);
-
+        
         foreach ( $categories as $category ) {
             $options[$category->term_id] = $category->name; 
         }
-
         $this->add_control(
             'categoryid',
             [

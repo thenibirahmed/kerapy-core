@@ -224,18 +224,6 @@ class Stepsprocess extends \Elementor\Widget_Base{
 				],
 			]
 		);
-		$this->add_control(
-			'scrollber_color',
-			[
-				'label' => esc_html__( 'Scrollber Color', 'kerapy-core' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#00DCC2',
-				'selectors' => [
-					'{{WRAPPER}} .sp-seciton::-webkit-scrollbar-thumb' => 'background-color: {{VALUE}} !important; ',
-				],
-                
-			]
-		);
         $this->end_controls_section();
     }
     protected function render() {
