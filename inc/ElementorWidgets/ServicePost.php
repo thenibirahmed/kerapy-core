@@ -64,7 +64,7 @@ class ServicePost extends Widget_Base{
         $this->add_control(
 			'slider_items_to_display',
 			[
-				'label' => esc_html__( 'Slider Items to display', 'kerapy-core' ),
+				'label' => esc_html__( 'Items to Slider', 'kerapy-core' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'default' => 3,
                 'condition' => [
@@ -212,7 +212,7 @@ class ServicePost extends Widget_Base{
         if( $serices -> have_posts() ) {
             if($settings['tmcard'] == 'servicepost1' ){
                 ?>
-                    <div class="row service-carousel owl-carousel pb-4">
+                    <div class="row service-carousel owl-carousel mb-5">
                         <?php
                             while($serices -> have_posts()) : $serices -> the_post();
                             include( "all-services/{$settings['tmcard']}.php" );
@@ -242,7 +242,7 @@ class ServicePost extends Widget_Base{
             $(".service-carousel").owlCarousel({
                 loop: true,
                 margin: 20,
-                autoplay: false,
+                autoplay: true,
                 autoHeight:true,
                 autoplayTimeout: 2000,
                 autoplayHoverPause: true,
