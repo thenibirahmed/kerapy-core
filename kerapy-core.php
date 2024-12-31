@@ -24,6 +24,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 //require_once( 'vendor/autoload.php' );
 
+use Kerapy\Core\CustomPosts;
 use Kerapy\Core\ElementorInit;
 
 final class Kerapy_Core {
@@ -41,9 +42,10 @@ final class Kerapy_Core {
 
     public function __construct() {
         $this->define_constants();
-        add_action( 'plugins_loaded', array( $this, 'init' ) );
+        add_action( 'plugins_loaded', array( $this, 'initialize' ) );
         add_action( 'after_setup_theme', array($this, 'crb_load') );
         add_action( 'widgets_init', array($this, 'load_widgets') );
+        add_action( 'init', array($this, 'init_plugin') );
     }
 
     private function define_constants() {
@@ -58,7 +60,7 @@ final class Kerapy_Core {
 
         if ( class_exists( '\Carbon_Fields\Carbon_Fields' ) ) {
             \Carbon_Fields\Carbon_Fields::boot();
-            require_once( KERAPY_CORE_PATH . '/inc/CarbonFields.php' );
+            new Kerapy\Core\KerapyCarbonFields();
         } else {
             add_action( 'admin_notices', function() {
                 echo '<div class="notice notice-error"><p>' . esc_html__( 'Carbon Fields is not loaded. Please install it via Composer.', 'kerapy-core' ) . '</p></div>';
@@ -66,7 +68,7 @@ final class Kerapy_Core {
         }
     }
 
-    public function init() {
+    public function initialize() {
         do_action( 'kerapy_core_loaded' );
         
         ElementorInit::instance();
@@ -76,8 +78,13 @@ final class Kerapy_Core {
             require_once( KERAPY_CORE_PATH . '/lib/redux-framework/kerapy-options.php' );
         }
 
-        require_once( KERAPY_CORE_PATH . '/lib/tgm/kerapy-tgm.php' );
-        require_once( KERAPY_CORE_PATH . '/inc/custom-posts.php' );
+        // require_once( KERAPY_CORE_PATH . '/lib/tgm/kerapy-tgm.php' );
+    }
+
+    public function init_plugin() {
+        load_plugin_textdomain( 'kerapy-core', false, plugin_dir_path( KERAPY_CORE_FILE ) . '/languages' );
+
+        new CustomPosts();
     }
 
     public function load_widgets() {
