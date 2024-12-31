@@ -228,7 +228,27 @@ Redux::set_args( $opt_name, $args );
  */
 global $kerapy_theme_options;
 
- 
+function populate_kerapy_custom_templates() {
+    $options = [
+        'default' => __('Default', 'kerapy-core'),
+    ];
+
+    $posts = get_posts([
+        'post_type'      => 'kerapy-templates',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+    ]);
+
+    foreach ($posts as $post) {
+        $options[$post->ID] = $post->post_title;
+    }
+
+    return $options;
+}
+
+$options = populate_kerapy_custom_templates();
+
 // header options settings
 Redux::set_section(
 	$opt_name,
@@ -238,21 +258,19 @@ Redux::set_section(
 		'desc'             => esc_html__( 'These are header general settings.', 'kerapy-core' ),
 		'icon'             => 'el el-road',
 		'fields'           => array(
-			array(
-				'id'       => 'header_layout',
+			[
+				'id'       => 'kerapy-header-template-select',
 				'type'     => 'select',
-				'title'    => esc_html__( 'Header Layout', 'kerapy-core' ),
-				'options'  => array(
-					'layout1' => 'Layout 1',
-					'customlayout' => 'Custom Template',
-				),
-			),
-			array(
+				'title'    => __('Select Header Template', 'kerapy-core'),
+				'options'  => $options,
+				'default'  => 'default',
+			],
+			[
 				'id'       => 'kerapy-logo',
 				'type'     => 'media',
 				'title'    => esc_html__( 'Site Logo', 'kerapy-core' ),
 				'url'			=> false
-			),
+			],
 		),
 	)
 );
@@ -450,15 +468,13 @@ Redux::set_section(
 		'desc'             => esc_html__( 'These are footer settings.', 'kerapy-core' ),
 		'icon'             => 'el el-th-list',
 		'fields'           => array(
-			array(
-				'id'       => 'footer_layout',
+			[
+				'id'       => 'kerapy-footer-template-select',
 				'type'     => 'select',
-				'title'    => esc_html__( 'Footer Layout', 'kerapy-core' ),
-				'options'  => array(
-					'layout1' => 'Layout 1',
-					'customlayout' => 'Custom ',
-				),
-			),
+				'title'    => __('Select Footer Template', 'kerapy-core'),
+				'options'  => $options,
+				'default'  => 'default',
+			],
 			array(
 				'id'       => 'footer_bg_color',
 				'type'     => 'color',
