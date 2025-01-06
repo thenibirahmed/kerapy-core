@@ -466,6 +466,12 @@ Redux::set_section(
 				'default'  => '#00DCC2',
 			],
 			[
+				'id'       => 'kerapy_woo_button_text_color',
+				'title'    => esc_html__('Global Button Text Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#2A2A2A',
+			],
+			[
 				'id'       => 'kerapy_woo_sale_badge_color',
 				'title'    => esc_html__('Sale Badge Button Color', 'kerapy-core'),
 				'type'     => 'color',
