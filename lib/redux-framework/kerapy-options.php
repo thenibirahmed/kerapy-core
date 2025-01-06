@@ -274,6 +274,7 @@ Redux::set_section(
 		),
 	)
 );
+
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-img-width',
 	'type'     => 'text',
@@ -282,6 +283,7 @@ Redux::set_field( $opt_name, 'header_opt', array(
 	'validate' => array( 'numeric', 'not_empty' ),
 	'description' => __( 'Enter a numeric value for image width in pixels (px).', 'kerapy-core' ),
 ) );
+
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-img-height',
 	'type'     => 'text',
@@ -290,12 +292,14 @@ Redux::set_field( $opt_name, 'header_opt', array(
 	'validate' => array( 'numeric', 'not_empty' ),
 	'description' => __( 'Enter a numeric value for image height in pixels (px).', 'kerapy-core' ),
 ) );
+
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-btn-text',
 	'type'     => 'text',
 	'title'    => esc_html__( 'Button Text', 'kerapy-core' ),
 	'default'  => 'Contact Us',
 ) );
+
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-btn-link',
 	'type'     => 'text',
@@ -316,6 +320,7 @@ Redux::set_field($opt_name, 'header_opt', array(
         'border-left'   => '1px',    
     ),
 ));
+
 Redux::set_field( $opt_name, 'header_opt', array(
 	'id'       => 'h-btn-radius',
 	'type'     => 'text',
@@ -324,6 +329,7 @@ Redux::set_field( $opt_name, 'header_opt', array(
 	'validate' => array( 'numeric', 'not_empty' ),
 	'description' => __( 'Enter a numeric value for border radius in pixels (px).', 'kerapy-core' ),
 ) );
+
 Redux::set_field( $opt_name, 'header_opt', array(
     'id'          => 'h-btn-typography',
     'type'        => 'typography', 
@@ -359,7 +365,6 @@ Redux::set_field( $opt_name, 'header_opt', array(
 		'hover'    => '#212529',  
 	)
 ) );
-
 
 // blog options settings
 Redux::set_section(
@@ -429,6 +434,124 @@ Redux::set_section(
 	)
 );
 
+Redux::set_section(
+	$opt_name,
+	array(
+		'title'            => esc_html__( 'Woocommerce Settings', 'kerapy-core' ),
+		'id'               => 'kerapy_woo_opt_main',
+		'desc'             => esc_html__( 'These are site woocommerce settings.', 'kerapy-core' ),
+		'icon'             => 'el el-shopping-cart',
+	)
+);
+
+Redux::set_section(
+	$opt_name,
+	array(
+		'subsection'     => true,
+		'title'            => esc_html__( 'Shop Page', 'kerapy-core' ),
+		'id'               => 'woo_opt_shop',
+		'desc'             => esc_html__( 'These are site shop page settings.', 'kerapy-core' ),
+		'fields'           => [
+			[
+				'id'       => 'kerapy_woo_header_size',
+				'title'    => esc_html__('Header Size', 'kerapy-core'),
+				'type'     => 'text',
+				'default'  => '24px',
+				'desc'     => esc_html__('Enter a numeric value for header size with unit (ie pixels)', 'kerapy-core'),
+			],
+			[
+				'id'       => 'kerapy_woo_button_color',
+				'title'    => esc_html__('Global Button Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_sale_badge_color',
+				'title'    => esc_html__('Sale Badge Button Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_price_color',
+				'title'    => esc_html__('Price Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_title_color',
+				'title'    => esc_html__('Title Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_notice_color',
+				'title'    => esc_html__('Notice Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+		]
+	)
+);
+
+Redux::set_section(
+	$opt_name,
+	array(
+		'subsection'     => true,
+		'title'            => esc_html__( 'Single Product Page', 'kerapy-core' ),
+		'id'               => 'woo_opt_single_prodct',
+		'desc'             => esc_html__( 'These are site single page settings.', 'kerapy-core' ),
+		'fields'           => [
+			[
+				'id'       => 'kerapy_woo_single_button_color',
+				'title'    => esc_html__('Single Button Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_single_title_color',
+				'title'    => esc_html__('Single Title Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_single_sub_title_color',
+				'title'    => esc_html__('Single Subtitle Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+		]
+	)
+);
+
+Redux::set_section(
+	$opt_name,
+	array(
+		'subsection'     => true,
+		'title'            => esc_html__( 'Cart & Checkout Page', 'kerapy-core' ),
+		'id'               => 'woo_opt_cart_and_checkout_product',
+		'desc'             => esc_html__( 'These are site cart and checkout page settings.', 'kerapy-core' ),
+		'fields'           => [
+			[
+				'id'       => 'kerapy_woo_cart_title_color',
+				'title'    => esc_html__('Cart Title Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_cart_checkout_button_color',
+				'title'    => esc_html__('Checkout Button Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+			[
+				'id'       => 'kerapy_woo_cart_placeorder_button_color',
+				'title'    => esc_html__('Place Order Button Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#00DCC2',
+			],
+		]
+	)
+);
 
 // styles settings
 Redux::set_section(
@@ -486,6 +609,7 @@ Redux::set_section(
 		),
 	)
 );
+
 Redux::set_field( $opt_name, 'footer_opt', array(
     'id'          => 'footer-title-typography',
     'type'        => 'typography', 
@@ -503,6 +627,8 @@ Redux::set_field( $opt_name, 'footer_opt', array(
         'line-height' => '24px'
     ),
 ) );
+
+
 Redux::set_field( $opt_name, 'footer_opt', array(
     'id'          => 'footer-content-typography',
     'type'        => 'typography', 
@@ -527,26 +653,22 @@ $menu_options = array();
 foreach ($menus as $menu) {
     $menu_options[$menu->term_id] = $menu->name;
 }
-Redux::set_field( $opt_name, 'footer_opt', array(
-		'id'       => 'footer_menu',
-		'type'     => 'select',
-		'title'    => esc_html__('Footer Bottom Menu', 'kerapy-core'),
-		'subtitle' => esc_html__('Choose a footer menu from the list.', 'kerapy-core'),
-		'options'  => $menu_options,
-		'default'  => key($menu_options), // Set the first menu as default if available
-	)
+	Redux::set_field( $opt_name, 'footer_opt', array(
+			'id'       => 'footer_menu',
+			'type'     => 'select',
+			'title'    => esc_html__('Footer Bottom Menu', 'kerapy-core'),
+			'subtitle' => esc_html__('Choose a footer menu from the list.', 'kerapy-core'),
+			'options'  => $menu_options,
+			'default'  => key($menu_options), // Set the first menu as default if available
+		)
+	 );
+	Redux::set_field( $opt_name, 'footer_opt', array(
+		'id'       => 'footer_right_copyright',
+		'type'     => 'text',
+		'title'    => esc_html__('Footer Copyright Text', 'kerapy-core'),
+		'default'  => '2024 Elegance In Code. All right reserved.',
+	),
  );
-Redux::set_field( $opt_name, 'footer_opt', array(
-	'id'       => 'footer_right_copyright',
-	'type'     => 'text',
-	'title'    => esc_html__('Footer Copyright Text', 'kerapy-core'),
-	'default'  => '2024 Elegance In Code. All right reserved.',
-),
- );
-
-
-
-
 
 
 // maintenance mode settings
@@ -642,9 +764,3 @@ Redux::set_section(
 		),
 	)
 );
-
-
-
-
-
-
