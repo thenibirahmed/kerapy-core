@@ -84,13 +84,13 @@ final class Kerapy_Core {
         return array(
             array(
                 'import_file_name'             => esc_html__( 'Kerapy Demo Import', 'kerapy-core' ),
-                'local_import_file'            => KERAPY_CORE_URL . '/demo/kerapy-content.xml',
-                'local_import_widget_file'     => KERAPY_CORE_URL . '/demo/kerapy-widgets.wie',
-                'local_import_customizer_file' => KERAPY_CORE_URL . '/demo/kerapy-customizer.dat',
-                'local_import_redux'           => [
-                    'file_path'   => KERAPY_CORE_URL . 'demo/kerapy-options.json',
-                    'option_name' => 'redux_option_name',
-                ],
+                'local_import_file'            => KERAPY_CORE_PATH . '/demo/kerapy-content.xml',
+                'local_import_widget_file'     => KERAPY_CORE_PATH . '/demo/kerapy-widgets.wie',
+                'local_import_customizer_file' => KERAPY_CORE_PATH . '/demo/kerapy-customizer.dat',
+                // 'local_import_redux'           => [
+                //     'file_path'   => KERAPY_CORE_URL . '/demo/kerapy-options.json',
+                //     'option_name' => 'kerapy_option',
+                // ],
             ),
         );
     }
