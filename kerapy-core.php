@@ -46,6 +46,7 @@ final class Kerapy_Core {
         add_action( 'after_setup_theme', array($this, 'crb_load') );
         add_action( 'widgets_init', array($this, 'load_widgets') );
         add_action( 'init', array($this, 'init_plugin') );
+        add_filter( 'ocdi/import_files', array($this, 'kerapy_import_files'));
     }
 
     private function define_constants() {
@@ -77,6 +78,21 @@ final class Kerapy_Core {
             require_once( KERAPY_CORE_PATH . '/lib/redux-framework/redux-core/framework.php' );
             require_once( KERAPY_CORE_PATH . '/lib/redux-framework/kerapy-options.php' );
         }
+    }
+
+    public function kerapy_import_files() {
+        return array(
+            array(
+                'import_file_name'             => esc_html__( 'Kerapy Demo Import', 'kerapy-core' ),
+                'local_import_file'            => KERAPY_CORE_URL . '/demo/kerapy-content.xml',
+                'local_import_widget_file'     => KERAPY_CORE_URL . '/demo/kerapy-widgets.wie',
+                'local_import_customizer_file' => KERAPY_CORE_URL . '/demo/kerapy-customizer.dat',
+                'local_import_redux'           => [
+                    'file_path'   => KERAPY_CORE_URL . 'demo/kerapy-options.json',
+                    'option_name' => 'redux_option_name',
+                ],
+            ),
+        );
     }
 
     public function init_plugin() {
