@@ -437,7 +437,7 @@ Redux::set_section(
 Redux::set_section(
 	$opt_name,
 	array(
-		'title'            => esc_html__( 'Woocommerce Settings', 'kerapy-core' ),
+		'title'            => esc_html__( 'Woocommerce', 'kerapy-core' ),
 		'id'               => 'kerapy_woo_opt_main',
 		'desc'             => esc_html__( 'These are site woocommerce settings.', 'kerapy-core' ),
 		'icon'             => 'el el-shopping-cart',
