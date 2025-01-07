@@ -478,16 +478,22 @@ Redux::set_section(
 				'default'  => '#00DCC2',
 			],
 			[
+				'id'       => 'kerapy_woo_sale_badge_text_color',
+				'title'    => esc_html__('Sale Badge Button Text Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#ffff',
+			],
+			[
 				'id'       => 'kerapy_woo_price_color',
 				'title'    => esc_html__('Price Color', 'kerapy-core'),
 				'type'     => 'color',
-				'default'  => '#00DCC2',
+				'default'  => '#666666',
 			],
 			[
 				'id'       => 'kerapy_woo_title_color',
 				'title'    => esc_html__('Title Color', 'kerapy-core'),
 				'type'     => 'color',
-				'default'  => '#00DCC2',
+				'default'  => '#000',
 			],
 			[
 				'id'       => 'kerapy_woo_notice_color',
@@ -514,16 +520,22 @@ Redux::set_section(
 				'default'  => '#00DCC2',
 			],
 			[
+				'id'       => 'kerapy_woo_single_button_text_color',
+				'title'    => esc_html__('Single Button Text Color', 'kerapy-core'),
+				'type'     => 'color',
+				'default'  => '#2A2A2A',
+			],
+			[
 				'id'       => 'kerapy_woo_single_title_color',
 				'title'    => esc_html__('Single Title Color', 'kerapy-core'),
 				'type'     => 'color',
-				'default'  => '#00DCC2',
+				'default'  => '#2a2a2a',
 			],
 			[
 				'id'       => 'kerapy_woo_single_sub_title_color',
 				'title'    => esc_html__('Single Subtitle Color', 'kerapy-core'),
 				'type'     => 'color',
-				'default'  => '#00DCC2',
+				'default'  => '#666666',
 			],
 		]
 	)
@@ -538,22 +550,16 @@ Redux::set_section(
 		'desc'             => esc_html__( 'These are site cart and checkout page settings.', 'kerapy-core' ),
 		'fields'           => [
 			[
-				'id'       => 'kerapy_woo_cart_title_color',
-				'title'    => esc_html__('Cart Title Color', 'kerapy-core'),
-				'type'     => 'color',
-				'default'  => '#00DCC2',
-			],
-			[
 				'id'       => 'kerapy_woo_cart_checkout_button_color',
 				'title'    => esc_html__('Checkout Button Color', 'kerapy-core'),
 				'type'     => 'color',
 				'default'  => '#00DCC2',
 			],
 			[
-				'id'       => 'kerapy_woo_cart_placeorder_button_color',
-				'title'    => esc_html__('Place Order Button Color', 'kerapy-core'),
+				'id'       => 'kerapy_woo_cart_checkout_button_text_color',
+				'title'    => esc_html__('Checkout Button Text Color', 'kerapy-core'),
 				'type'     => 'color',
-				'default'  => '#00DCC2',
+				'default'  => '#2a2a2a',
 			],
 		]
 	)
