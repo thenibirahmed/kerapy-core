@@ -4,7 +4,7 @@
  * Plugin Name: Kerapy Core
  * Plugin URI: https://kerapy.com
  * Description: This is a core plugin for Kerapy theme.
- * Version: 1.0
+ * Version: 1.0.2
  * Author: Kerapy & ElectronThemes
  * Author URI: https://kerapy.com
  * License: GPL2
